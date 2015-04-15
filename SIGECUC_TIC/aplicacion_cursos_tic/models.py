@@ -72,7 +72,8 @@ class LeaderTeacher(models.Model):
 
 
 class AreaFormacion(models.Model):
-    descripcion = models.TextField()
+	nombre = models.CharField(max_length=30)
+	descripcion = models.TextField()
 
 
 class ActividadEvaluacion(models.Model):
