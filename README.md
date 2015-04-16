@@ -11,6 +11,9 @@ sudo pip install Django==1.7
 #Instalar Base de datos postgress
 sudo apt-get install postgresql postgresql-contrib
 
+#Instalar el controlador de python para postgres
+sudo apt-get install python-psycopg2
+
 #Info base de datos para la aplicación
 nombre db: sigecuc-tic
 usuario: sigecuc-tic
