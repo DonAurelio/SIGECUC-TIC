@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'SIGECUC_TIC.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sigecuc-tic',                      # Or path to database file if using sqlite3.
+        'NAME': 'sigecuc-ticDB',                      # Or path to database file if using sqlite3.
         'USER': 'sigecuc-tic',                      # Not used with sqlite3.
         'PASSWORD': 'sigecuc-tic',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
