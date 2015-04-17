@@ -17,7 +17,7 @@ def login_page(request):
 			user = authenticate(username=nombre_usuario,password=contrasenia)
 			if user is not None:
 				if user.is_active:
-					login(reques, user)
+					login(request, user)
 					mensaje = "Te has identificado de modo correcto"
 				else:
 					mensaje = "Tu usuario esta inactivo"
