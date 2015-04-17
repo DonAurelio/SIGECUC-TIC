@@ -75,6 +75,11 @@ DATABASES = {
     }
 }
 
+
+#Declaramos la ruta donde quedaran alamcenadas todas las templates del proyecto
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),)
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
