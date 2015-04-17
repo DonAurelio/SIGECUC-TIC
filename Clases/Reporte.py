@@ -1,4 +1,24 @@
+from Observable import Observable
+from ReporteCurso import ReporteCurso
+from ReporteLeaderTeacher import ReporteLeaderTeacher
+
 class Reporte(Observable):
+
+	def __init__(self):
+		self.reporteCurso = ReporteCurso()
+		self.reporteLeaderTeacher = ReporteLeaderTeacher()
+		self.observadores = []
+
+	def registrar(self,observador):
+		if observador not in self.observadores:
+			self.observadores.append(observador)
+
+	def anular(self,observador):
+		self.observadores.remove(observador)
+
+	def notificarTodos(self):
+		for objeto in self.observadores:
+			objeto.update(self,self.reporteCurso,self.reporteLeaderTeacher)
 
 	def getCursoMayorNumeroAsistentes(self,periodo,tipo):
 		if tipo == "mes":
