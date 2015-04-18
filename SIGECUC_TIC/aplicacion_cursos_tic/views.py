@@ -1,17 +1,26 @@
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.views.generic import TemplateView
 from forms import LoginForm
 
 
 # Create your views here.
-#Vista para el sistema de login de un usuario
-def login_page(request):
-	mensaje = None
 
-	if request.method == "POST":
-		form = LoginForm(request.POST)
-		if form.is_valid():
+class home(TemplateView):
+	pass
+
+class Login(TemplateView):
+	template_name = 'login.html'
+	form_login = LoginForm()
+
+	def get(self,request,*args,**kwargs):
+		return render(request,self.template_name,{'form':self.form_login})
+
+	def post(self,request,*args,**kwargs):
+		mensaje = ""
+		self.form_login = LoginForm(request.POST)
+		if self.form_login.is_valid():
 			nombre_usuario = request.POST['nombre_usuario']
 			contrasenia = request.POST['contrasenia']
 			user = authenticate(username=nombre_usuario,password=contrasenia)
@@ -24,9 +33,5 @@ def login_page(request):
 
 			else:
 				mensaje = "Nombre de usuario y/o password incorrectos"
+		return render(request,self.template_name,{'mensaje':mensaje,'form':self.form_login})
 
-	else:
-		form = LoginForm()
-
-	return render_to_response('login.html',{'mensaje':mensaje, 'form':form},
-		context_instance=RequestContext(request))
