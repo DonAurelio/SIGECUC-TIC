@@ -55,9 +55,16 @@ DATABASES = {
 'PORT': '', # Set to empty string for default. Not used with sqlite3.
 }
 }
+
+#Modificacion paths (Aurelio)
+SETTINGS_DIR = os.path.dirname(__file__)
+TEMPLATE_PATH = os.path.join(SETTINGS_DIR, 'templates').replace('\\','/')
+
+
 #Declaramos la ruta donde quedaran alamcenadas todas las templates del proyecto
 TEMPLATE_DIRS = (
-os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),)
+TEMPLATE_PATH,
+)
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 LANGUAGE_CODE = 'en-us'
@@ -68,3 +75,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_URL = '/static/'
+
+#Modificacion paths (Aurelio)
+STATIC_PATH = os.path.join(SETTINGS_DIR,'static')
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
