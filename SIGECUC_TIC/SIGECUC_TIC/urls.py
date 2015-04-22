@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from aplicacion_cursos_tic.views import Login
-from aplicacion_cursos_tic.views import inicio
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/', aplicacion_cursos_tic.views.login),
    
 )
