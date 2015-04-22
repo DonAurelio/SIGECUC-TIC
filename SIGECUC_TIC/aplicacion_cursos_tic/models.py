@@ -2,25 +2,47 @@ from django.db import models
 
 # Create your models here.
 
+
 class Persona(models.Model):
     identificacion = models.CharField(max_length=20, primary_key=True)
     primer_nombre = models.CharField(max_length=30)
-    segundo_nombre = models.CharField(max_length=30, default='')
+    segundo_nombre = models.CharField(max_length=30, default='', blank=True)
     primer_apellido = models.CharField(max_length=40)
     segundo_apellido = models.CharField(max_length=40)
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
     telefono = models.CharField(max_length=15)
     direccion = models.CharField(max_length=40)
-    estado_civil = models.CharField(max_length=20)
+    SOLTERO = 'SO'
+    CASADO = 'CA'
+    VIUDO = 'VIU'
+#Se define una lista desplegable
+    estado = (
+        (SOLTERO, 'Soltero'),
+        (CASADO, 'Casado'),
+        (VIUDO, 'Viudo'),
+    )
+    estado_civil = models.CharField(max_length=20, choices=estado,
+    default=SOLTERO)
+
+    class Meta:
+            ordering = ["primer_nombre"]
+            verbose_name_plural = "Ver Personas"
+
+    def __str__(self):
+        return '%s %s %s %s %s' % (self.identificacion,
+        self.primer_nombre, self.segundo_nombre, self.primer_apellido,
+        self.segundo_apellido)
+
 
 class Administrador(models.Model):
     contrasenia = models.CharField(max_length=40)
     persona = models.OneToOneField(Persona, primary_key=True)
 
-    
+
 class MasterTeacher(models.Model):
     contrasenia = models.CharField(max_length=40)
     persona = models.OneToOneField(Persona, primary_key=True)
+
 
 class HistorialLaboral(models.Model):
     exp_preescolar = models.CharField(max_length=50)
@@ -34,11 +56,13 @@ class HistorialLaboral(models.Model):
     exp_privado = models.CharField(max_length=50)
     exp_total = models.CharField(max_length=50)
 
+
 class HistorialAcademico(models.Model):
     zona_labor_docente = models.CharField(max_length=50)
     caracter_educacion_media = models.CharField(max_length=50)
     etnia_educativa = models.CharField(max_length=50)
     nivel_educativo = models.CharField(max_length=50)
+
 
 class Inscrito(models.Model):
     persona = models.OneToOneField(Persona, primary_key=True)
@@ -46,6 +70,7 @@ class Inscrito(models.Model):
     estado = models.BooleanField(default=True)
     historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
     historial_academico = models.OneToOneField(HistorialAcademico)
+
 
 class LeaderTeacher(models.Model):
     persona = models.OneToOneField(Persona, primary_key=True)
@@ -62,13 +87,16 @@ class LeaderTeacher(models.Model):
     departamento_labora = models.CharField(max_length=30)
     fecha_activacion = models.DateField()
 
+
 class AreaFormacion(models.Model):
     nombre = models.CharField(max_length=30)
     descripcion = models.TextField()
 
+
 class ActividadEvaluacion(models.Model):
     descripcion = models.TextField()
     peso = models.DecimalField(max_digits=3, decimal_places=2)  # ej: 0.75
+
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=50)
@@ -77,17 +105,20 @@ class Curso(models.Model):
     area_formacion = models.ManyToManyField(AreaFormacion)
     actividad_evaluacion = models.ManyToManyField(ActividadEvaluacion)
 
+
 class Cohorte(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     curso = models.ForeignKey(Curso)
     master_teacher = models.ForeignKey(MasterTeacher)
 
+
 class Calificacion(models.Model):
     nota_actividad = models.DecimalField(max_digits=3, decimal_places=2)  # 4.25
     leader_teacher = models.ForeignKey(LeaderTeacher)
     cohorte = models.ForeignKey(Cohorte)
     actividad = models.ForeignKey(ActividadEvaluacion)
+
 
 class LeaderTeacher_Cohorte(models.Model):
     nota_final = models.DecimalField(max_digits=3, decimal_places=2)
