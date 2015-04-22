@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from aplicacion_cursos_tic.views import Login
+from aplicacion_cursos_tic.views import login
+from aplicacion_cursos_tic.views import index
+
 
 
 urlpatterns = patterns('',
@@ -9,7 +11,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', Login.as_view(), name='login'),
-    #url(r'^login/$', 'aplicacion_cursos_tic.views.login_page'),
-    #url(r'^login/$','views.login_page', name="login"),
+    url(r'^login',login),
+    url(r'^index', index),
+   
+   
 )
