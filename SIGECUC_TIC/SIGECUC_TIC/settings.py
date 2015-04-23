@@ -19,21 +19,22 @@ ALLOWED_HOSTS = []
 # Application definition
 INSTALLED_APPS = (
 'django.contrib.admin',
-'django.contrib.auth',
+'django.contrib.auth', #Menejo de autenticacion y autorizacion de usuarios en el sistema
 'django.contrib.contenttypes',
-'django.contrib.sessions',
+'django.contrib.sessions', #Aplicacion Django para el manejo de seciones
 'django.contrib.messages',
 'django.contrib.staticfiles',
-'aplicacion_cursos_tic',
+'aplicacion_cursos_tic', #Aplicacion SIGECUC_TIC
 )
 MIDDLEWARE_CLASSES = (
-'django.contrib.sessions.middleware.SessionMiddleware',
+'django.contrib.sessions.middleware.SessionMiddleware', #Middleware Django para el inicio de sesion
 'django.middleware.common.CommonMiddleware',
 'django.middleware.csrf.CsrfViewMiddleware',
-'django.contrib.auth.middleware.AuthenticationMiddleware',
+'django.contrib.auth.middleware.AuthenticationMiddleware', #Middleware Django para autenticacion de usuarios
 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
 'django.contrib.messages.middleware.MessageMiddleware',
 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 )
 ROOT_URLCONF = 'SIGECUC_TIC.urls'
 WSGI_APPLICATION = 'SIGECUC_TIC.wsgi.application'
@@ -59,11 +60,13 @@ DATABASES = {
 #Modificacion paths (Aurelio)
 SETTINGS_DIR = os.path.dirname(__file__)
 TEMPLATE_PATH = os.path.join(SETTINGS_DIR, 'templates').replace('\\','/')
-
+#Ubicacion de los templates relacionados con las cuentas de los usuarios
+TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
 
 #Declaramos la ruta donde quedaran alamcenadas todas las templates del proyecto
 TEMPLATE_DIRS = (
 TEMPLATE_PATH,
+TEMPLATE_PATH_ACCOUNTS,
 )
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
