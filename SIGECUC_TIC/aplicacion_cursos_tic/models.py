@@ -64,7 +64,7 @@ class MasterTeacher(models.Model):
         return (self.persona.segundo_apellido)
 
     class Meta:
-        verbose_name_plural = "Ver Master Teacher NO BUSCA"
+        verbose_name_plural = "Ver Master Teacher"
 
     def __str__(self):
         return '%s %s %s' % (self.persona.identificacion,
@@ -144,7 +144,7 @@ class LeaderTeacher(models.Model):
     fecha_activacion = models.DateField()
 
     class Meta:
-        verbose_name_plural = "Ver Leader Teacher No busca bien"
+        verbose_name_plural = "Ver Leader Teacher"
 
 
 class AreaFormacion(models.Model):
@@ -209,12 +209,11 @@ class Cohorte(models.Model):
 
     #metodo para que retorne el nombre del Master Teacher
     def nombre_Master_Teacher(self):
-        return '%s %s %s' % (self.master_teacher.persona.identificacion,
-             self.master_teacher.persona.primer_nombre,
-             self.master_teacher.persona.primer_apellido)
+        return '%s %s' % (self.master_teacher.persona.primer_nombre,
+            self.master_teacher.persona.primer_apellido)
 
     class Meta:
-        verbose_name_plural = "Ver Cohortes No busca"
+        verbose_name_plural = "Ver Cohortes"
 
 
 class Calificacion(models.Model):
