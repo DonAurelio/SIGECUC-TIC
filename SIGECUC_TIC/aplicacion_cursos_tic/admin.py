@@ -37,7 +37,10 @@ admin.site.register(Persona, PersonaAdmin)
 class MasterTeacherAdmin(admin.ModelAdmin):
     list_display = ('identificacion', 'primer_nombre', 'segundo_nombre',
     'primer_apellido', 'segundo_apellido')
-    #search_fields = ('identificacion', 'primer_nombre') #verificar no busca
+    #busca deacuerdo a la llave foranea
+    search_fields = ('persona__identificacion', 'persona__primer_nombre',
+        'persona__segundo_nombre', 'persona__primer_apellido',
+        'persona__segundo_apellido')
 admin.site.register(MasterTeacher, MasterTeacherAdmin)
 #admin.site.register(HistorialLaboral)
 admin.site.register(Inscrito)
@@ -49,8 +52,12 @@ class LeaderTeacherAdmin(admin.ModelAdmin):
     'ciudad_nacimiento', 'pais_nacimiento', 'ciudad_residencia',
      'pais_residencia', 'ciudad_labora', 'departamento_labora',
      'fecha_activacion')
-#remporal no busca datos con persona
-    search_fields = ('ciudad_labora', 'departamento_labora')
+
+    search_fields = ('persona__identificacion', 'persona__primer_nombre',
+        'persona__segundo_nombre', 'persona__primer_apellido',
+        'persona__segundo_apellido', 'fecha_nacimiento',
+         'sexo', 'ciudad_residencia', 'pais_residencia',
+         'ciudad_labora', 'departamento_labora', 'fecha_activacion')
 
 admin.site.register(LeaderTeacher, LeaderTeacherAdmin)
 
@@ -81,7 +88,10 @@ admin.site.register(Curso, CursoAdmin)
 class CohorteAdmin(admin.ModelAdmin):
     list_display = ('fecha_inicio', 'fecha_fin', 'nombre_curso',
     'id_Master_Teacher', 'nombre_Master_Teacher')
-    #search_fields = ('nombre', 'estado')
+    #busca deacuerdo a la llave foranea
+    search_fields = ('fecha_inicio', 'fecha_fin', 'curso__nombre',
+    'master_teacher__persona__identificacion',
+    'master_teacher__persona__primer_nombre')
 admin.site.register(Cohorte, CohorteAdmin)
 admin.site.register(Calificacion)
 admin.site.register(LeaderTeacher_Cohorte)
