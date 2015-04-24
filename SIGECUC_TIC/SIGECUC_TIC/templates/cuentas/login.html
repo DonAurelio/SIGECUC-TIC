@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 {% load static %}
+
 <html>
 <head>
 
@@ -10,8 +11,9 @@ www.amitjakhu.com
 --------------------->
 
 <!--META-->
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login Form</title>
+<title>Iniciar Sesion</title>
 
 <!--STYLESHEETS-->
 <link href="{% static "login/css/style.css" %}" rel="stylesheet" type="text/css" />
@@ -48,6 +50,7 @@ $(document).ready(function() {
     <div class="user-icon"></div>
     <div class="pass-icon"></div>
     <!--END SLIDE-IN ICONS-->
+
 
 <!--LOGIN FORM-->
 <form name="login-form" class="login-form" action="" method="post">{% csrf_token %}

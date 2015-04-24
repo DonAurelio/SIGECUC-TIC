@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %} Quienes Somos {% endblock %}
+{% block sub_title %} CIER-SUR {% endblock %}
+{% block first_body %} 
+	Centro de Innovación Educativa Regional de la Región Sur de Colombia (CIER-­‐SUR)	
+	con sede en la Universidad del Valle	 en la ciudad de Cali, Colombia. El CIER-­‐SUR	
+	tiene una unidad	de formación que busca capacitar docentes de educación básica,	
+	media y superior en competencias TIC para la enseñanza. Dentro de esta unidad	
+	se diseñan diferentes cursos de formación que son ofrecidos a los docentes de	
+  	entidades públicas y privadas de la región. La región que atiende el CIER-­‐SUR	
+   	comprende los departamentos de: Valle del Cauca, Cauca, Nariño, Tolima, Huila,	
+	Caquetá, Putumayo y Amazonas.	
+{% endblock %}
+{% block second_body_title %}
+SIGECUC-TIC
+{% endblock %}
+{% block second_body %}
+
+El producto de desarrollo a alcanzar, Sistema de Gestión de Cursos en Competencias TIC (SIGECUC-TIC) será una aplicación que funcionará en un entorno WEB, permitirá la gestión y asignación de docentes a los cursos que se dispongan en el sistema enfocados en competencias TIC para la enseñanza. Esta aplicación dará apoyo a los siguientes procesos:
+
+<h4>Procesos:</h4>
+
+    Gestionar información de usuarios: Crear, modificar, eliminar registros de usuarios. Los datos necesarios para el registro son: Nombre, cédula, email y clave de acceso. 
+
+    Inicio de sesión y autenticación de usuarios.
+
+    Gestionar inscripción de estudiantes en los cursos ofrecidos por el CIER-SUR: Inscribir, modificar y eliminar inscripciones a un curso. El estudiante antes de llevar cabo la inscripción en algún curso, deberá digitar los datos necesarios para la inscripción de estudiante, los cuales  son: datos personales, demográficos, historial académico, historial laboral. 
+
+    Enviar correos electrónicos: el sistema deberá notificar vía correo electrónico a cada estudiante, en qué curso y cohorte quedará ubicado para empezar su formación.
+
+    Gestionar información de formadores: Crear, modificar, eliminar registros de formadores. Los datos necesarios para el registro de formadores son: datos personales, demográficos, historial académico y experiencia laboral.
+
+    Gestionar información de cursos de formación: Crear, modificar y eliminar cursos. Los datos necesarios para la creación de cursos son: nombre, descripción, actividades de evaluación.
+
+    Gestionar información de cohortes de cada curso de formación: Crear, modificar, eliminar registros de cohortes de uno o varios cursos.
+
+    Gestionar información de notas: El sistema debe permitir, a los formadores de formadores, registrar, modificar y eliminar notas de las actividades de evaluación de los cursos de los determinados cohortes a que tenga acceso.
+
+    Asignar el tipo de certificado alcanzado por cada docente según la asistencia y el porcentaje de la nota final.
+
+
+
+<h4>Generar reportes mensuales graficos y en tablas con las siguientes especificaciones:
+Informes con visualizaciones gráficas:</h4>
+
+    Cursos con mayor número de asistentes en el mes (Top 10).
+
+    Número de estudiantes que han llegado en el mes de cada departamento de la región.
+
+    Curso con menos potencial de avance (5 cursos). Qué criterios se usan para medir el potencial de avance de un grupo.
+
+    Porcentaje de estudiantes que aprobaron los cursos de un semestre por departamento.
+
+    Porcentaje de estudiantes que reprobaron los cursos de un semestre por departamento. 
+
+<h4>Informes en forma de texto en tablas:</h4>
+
+    Detalle de notas por estudiantes.
+
+    Histórico de estudiantes que hayan ganado un curso.
+
+    Detalle de estudiantes en un curso por departamentos.
+
+
+El SIGECUC-TIC no podrá administrar pagos electrónicos para la inscripción a los cursos que ofrece el CIER-SUR.
+
+{% endblock %}
