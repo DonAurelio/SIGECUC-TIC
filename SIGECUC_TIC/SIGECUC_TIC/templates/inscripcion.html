@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+ <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	alert("hola");
+
+$("#frm_registre").validate({
+	rules:{
+	identificacion: {
+		required: true,
+
+		},
+	date_birth: {
+		required: true,
+		},
+	exp_nivel_escolar:{
+		required: true,
+		},
+	exp_nivel_primaria:{
+		required: true,
+		},
+	}
+
+
+});
+
+});
+</script>
+</head>
+<body>
+<h1> Inscripcion para el curso</h1> 
+<h3> {{ name_course }} </h3>
+
+<h4>INFORMACIÓN PERSONAL</h4>
+<form action="javascript: fn_registre();" method="post" id="frm_registre">{% csrf_token %} 
+    <p>1. Documento de identificación:</p>
+	<p><input type="text" name="identificacion" id="identificacion"></p> 
+	<p><h4>Escriba su documento de identificación.</h4></p>
+    <p>2. Fecha de nacimiento:</p>
+	<p><input type="text" name="date_birth" id="date_birth"></p> 
+	<p><h4>Ejemplo: 15 de diciembre de 2012</h4></p> 
+    <p>3. Sexo *:</p> 
+	<p>Elija su sexo Marca solo un óvalo</p>
+	<input type="radio" name="sexo" value="masculino"checked>Masculino<br>
+	<input type="radio" name="sexo" value="femenino">Femenino<br>
+<h4>INFORMACIÓN PROFESIONAL</h4>
+	<p>4. De acuerdo con la zona en la que se encuentra la institución educativa en la que desempeña su
+	labor docente, la considera como:</p>	
+	<p><h4>Selecciona todos los que correspondan.</h4></p>
+		<input type="checkbox" name="zona1" value="zona urbana">Zona urbana 
+		<br>
+		<input type="checkbox" name="zona2" value="Zona urbana marginal"> Zona urbana marginal
+		<br>
+		<input type="checkbox" name="zona3" value="Zona rural">Zona rural
+		<br>
+		<input type="checkbox" name="zona4" value="Zona rural de dificil acceso">Zona rural de difícil acceso
+		<br>
+	<p>5. De acuerdo a la modalidad presentada en la institución educativa en la que desempeña su
+	labor docente, la educación media es de carácter: *</p>
+		<p>Marca solo un óvalo.</p>
+	<input type="radio" name="caracter" value="academica"> Académica<br>
+	<input type="radio" name="caracter" value="tecnica"> Técnica<br>
+	<p>6.  Si la modalidad presentada en la institución educativa en la que desempeña su labor docente
+	es de carácter técnica, Elija de las siguientes especialidades la que corresponda *</p>
+	<p><h4>Elija uno o varios énfasis, si su énfasis no se encuentra en el listado, añadalo en la casilla "otro".
+		elecciona todos los que correspondan.</h4></p>
+		<input type="checkbox" name="enfasis" value="Agropecuaria"> Agropecuaria
+		<br>
+		<input type="checkbox" name="enfasis" value="Comercial"> Comercial
+		<br>
+		<input type="checkbox" name="enfasis" value="Finanzas">Finanzas
+		<br>
+		<input type="checkbox" name="enfasis" value="Administracion">Administración
+		<br>
+		<input type="checkbox" name="enfasis" value="Ecologia">Ecología
+		<br>
+		<input type="checkbox" name="enfasis" value="Medio ambiente">Medio ambiente
+		<br>
+		<input type="checkbox" name="enfasis" value="Industrial">Industrial
+		<br>
+		<input type="checkbox" name="enfasis" value="Informatica">Informática
+		<br>
+		<input type="checkbox" name="enfasis" value="Mineria">Minería
+		<br>
+		<input type="checkbox" name="enfasis" value="Salud">Salud
+		<br>
+		<input type="checkbox" name="enfasis" value="Mineria">Minería
+		<br>
+		<input type="checkbox" name="enfasis" value="Recreacion">Recreación
+		<br>
+		<input type="checkbox" name="enfasis" value="Turismo">Turismo
+		<br>
+		<input type="checkbox" name="enfasis" value="Deporte">Deporte
+		<br>
+		<input type="checkbox" name="enfasis" value="otro">Otro: 
+			<input type="text" name="otro_enfasis">
+		<br>
+	<p>7. Entendiendo la etnoeducación como una política para posicionar la educación intercultural en
+	todas las instituciones educativas del país, para que todos los niños, niñas y familias
+	entiendan que las culturas afrocolombiana, indígena y gitana son parte de las raíces de nuestra
+	nacionalidad. La institución en la que usted se desempeña esta clasificada
+	etnoeducativamente orientada hacia la: *</p>
+	<p><h4>Elija ninguna de las anteriores si no reconoce a su institución como etnoeducativa.
+	Selecciona todos los que correspondan</h4></p> 
+		<input type="checkbox" name="etno_educacion" value="Etnia afrocolombiana">Etnia afrocolombiana 
+		<br>
+		<input type="checkbox" name="etno_educacion" value="Etnia indigena">Etnia indígena
+		<br>
+		<input type="checkbox" name="etno_educacion" value="Etnia Rom">Etnia Rom
+		<br>
+		<input type="checkbox" name="etno_educacion" value="Ninguna de las anteriores">Ninguna de las anteriores
+		<br>
+	<p>8. Niveles escolares en los que ha desempeñado su labor académica. *<p/>
+	<p><h4>Elija 1 o más niveles escolares en los que haya desempeñado su labor académica.
+	Selecciona todos los que correspondan.</h4></p>
+		<input type="checkbox" name="nivel_escolar" value="Transicion">Transición (Preescolar 5 años) 
+		<br>
+		<input type="checkbox" name="nivel_escolar" value="Educacion Inicial">Educación Inicial (Primera infancia 3 y 4 años)
+		<br>
+		<input type="checkbox" name="nivel_escolar" value="Educacion basica primaria">Educación básica primaria (1°, 2°, 3°, 5°)
+		<br>
+		<input type="checkbox" name="nivel_escolar" value="Educacion basica secundaria">Educación básica secundaria (6°, 7°, 8°, 9°)
+		<br>
+		<input type="checkbox" name="nivel_escolar" value="Educación media">Educación media (10°, 11°)
+		<br>
+		<input type="checkbox" name="nivel_escolar" value="Nivel superior">Nivel superior (Universidad / Educación Superior)
+		<br>
+		<input type="checkbox" name="nivel_escolar" value="otro">Otro: 
+			<input type="text" name="otro_nivel">
+		<br>
+	<p>9.  Grados Escolares en los que se ha desempeñado. *<p/>
+	<p><h4>Elija 1 o más grados escolares en los que haya desempeñado su labor academica
+	Selecciona todos los que correspondan.</h4></p>
+		<input type="checkbox" name="grados_escolares" value="Transicion">Transición (5 a 6 años)
+		<br>
+		<input type="checkbox" name="grados_escolares" value="Educacion Inicial">Educación inicial (Primera infancia 3 y 5 años)
+		<br>
+		<input type="checkbox" name="grados_escolares" value="1">1°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="2">2°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="3">3°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="4">4°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="5">5°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="6">6°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="7">7°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="8">8°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="9">9°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="10">10°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="11">11°
+		<br>
+		<input type="checkbox" name="grados_escolares" value="otro">Otro: 
+			<input type="text" name="otro_grado">
+		<br>
+	<p>10. Áreas de formación en las que se ha desempeñado *<p/>
+	<p><h4>Elija 1 o más Áreas de formación en las que se ha desempeñado
+	Selecciona todos los que correspondan.</h4></p>
+		<input type="checkbox" name="area_formacion" value="Transicion">Transición (5 a 6 años)
+		<br>
+		<input type="checkbox" name="area_formacion" value="Educacion Inicial">Educación inicial (Primera infancia 3 y 5 años)
+		<br>
+		<input type="checkbox" name="area_formacion" value="Ciencias Naturales y educación ambiental">Ciencias Naturales y educación ambiental.
+		<br>
+		<input type="checkbox" name="area_formacion" value="Ciencias Sociales: historia, geografia y constitucion política">Ciencias Sociales: historia, 			geografía y constitución política.
+		<br>
+		<input type="checkbox" name="area_formacion" value="Educacion Artística">Educación Artística
+		<br>
+		<input type="checkbox" name="area_formacion" value="Educación etica y valores humanos">Educación ética y valores humanos.
+		<br>
+		<input type="checkbox" name="area_formacion" value="Educación fisica recreacion y deportes">Educación física recreación y deportes.
+		<br>
+		<input type="checkbox" name="area_formacion" value="Educacion Religiosa">Educación Religiosa.
+		<br>
+		<input type="checkbox" name="area_formacion" value="Humanidades, lengua castellana e idioma extranjero (ingles)">Humanidades, lengua castellana e 			idioma extranjero (inglés).
+		<br>
+		<input type="checkbox" name="area_formacion" value="Matematicas.">Matemáticas.
+		<br>
+		<input type="checkbox" name="area_formacion" value="Tecnología e Informatica">Tecnología e Informática.
+		<br>
+	<p>11. Nivel maximo de educación alcanzado *<p/>
+	<p><h4>Estudios que ha realizado en el nivel de educación superior
+	Marca solo un óvalo.</h4></p>
+	<input type="radio" name="nivel_maximo" value="Nivel Técnico Profesional (relativo a programas Técnicos Profesionales)">Nivel Técnico Profesional (relativo a 		programas Técnicos Profesionales).<br>
+	<input type="radio" name="nivel_maximo" value="Nivel Tecnológico (relativo a programas tecnológicos)">Nivel Tecnológico (relativo a programas tecnológicos).<br>
+	<input type="radio" name="nivel_maximo" value="Nivel Profesional (relativo a programas profesionales universitarios)">Nivel Profesional (relativo a programas 		profesionales universitarios).<br>
+	<input type="radio" name="nivel_maximo" value="Normalista superior">Normalista superior.<br>
+	<input type="radio" name="nivel_maximo" value="Licenciatura">Licenciatura.<br>
+	<input type="radio" name="nivel_maximo" value="Especializaciones (relativas a programas de Especialización Técnica Profesional,
+	Especialización Tecnológica y Especializaciones Profesionales)">Especializaciones (relativas a programas de Especialización Técnica Profesional,
+	Especialización Tecnológica y Especializaciones Profesionales).<br>
+	<input type="radio" name="nivel_maximo" value="Maestrias">Maestrías.<br>
+	<input type="radio" name="nivel_maximo" value="Doctorados">Doctorados.<br>
+<h4>Años de experiencia docente</h4>
+	<p>Las siguientes preguntas se refieren al numero de años que lleva desempeñando su labor docente. Por 
+	favor responda la pregunta solo con el numero de años: ej. 5, que se refiere a 5 años de experiencia.</p>
+	<p>12. Experiencia docente en el nivel preescolar. *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el nivel
+	preescolar. 0 si no ha ejercido su labor en el nivel preescolar.</h4></p>
+	<p><input type="text" name="exp_nivel_escolar" id="exp_nivel_escolar"></p> 
+
+	<p>13. Experiencia docente en el nivel de básica primaria (1°, 2°, 3°, 5°) *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el nivel básica primaria. 0 si no ha ejercido su labor en el
+	nivel básica primaria.</h4></p>
+	<p><input type="text" name="exp_nivel_primaria" id="exp_nivel_primaria"></p> 
+
+	<p>14. Experiencia docente en el nivel de básica secundaria (6°, 7°, 8°, 9°) *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el nivel básica secundaria. 0 si no ha ejercido su labor en el
+	nivel básica secundaria.</h4></p>
+	<p><input type="text" name="exp_nivel_secundaria"></p> 
+
+	<p>15. Experiencia docente en el nivel de educación media (10°, 11°) *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el nivel de educación media. 0 si no ha ejercido su labor
+	en el nivel de educación media</h4></p>
+	<p><input type="text" name="exp_nivel_media"></p> 
+
+	<p>16. Experiencia docente en el nivel de educación superior *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el nivel de educación superior. 0 si no ha ejercido su labor
+	en el nivel de educación superior.</h4></p>
+	<p><input type="text" name="exp_nivel_superior"></p> 
+
+	<p>17. Experiencia docente en el ámbito rural **</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el ámbito rural. 0 si no ha ejercido su labor en el ámbito
+	rural.</h4></p>
+	<p><input type="text" name="exp_nivel_rural"></p> 
+
+	<p>18. Experiencia docente en el ámbito urbano *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el ámbito urbano. 0 si no ha ejercido su labor en el ámbito
+	urbano.</h4></p>
+	<p><input type="text" name="exp_nivel_urbano"></p> 
+
+	<p>19. Experiencia docente en el sector publico *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el sector publico. 0 si no ha ejercido su labor en el sector
+	publico.</h4></p>
+	<p><input type="text" name="exp_nivel_publico"></p> 
+
+	<p>20. Experiencia docente en el sector privado *</p>
+	<p><h4>Años que lleva ejerciendo la docencia en el sector privado. 0 si no ha ejercido su labor en el sector
+	privado.</h4></p>
+	<p><input type="text" name="exp_nivel_privado"></p> 
+
+	<p>21. Experiencia docente total *</p>
+	<p><h4>Total de años que lleva ejerciendo la labor docente
+	(1 año incluye de 1 - 23 meses)</h4></p>
+	<p><input type="text" name="exp_nivel_total"></p> 
+
+
+
+    <p><input type="submit" value="Enviar"></p> 
+</form> 
+
+
+
+</body>
+</html>
