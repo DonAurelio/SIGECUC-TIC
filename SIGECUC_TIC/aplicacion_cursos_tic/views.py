@@ -35,17 +35,6 @@ def inscripcion(request):
     return render_to_response('inscripcion.html')
 
 
-def get_checkBox(request, count, name):
-    i = 1
-    string_check = ''
-    while i<=count:
-        if request.POST.get and name + str(i) in request.POST and request.POST[name + str(i)] == "on":
-            string_check = string_check + request.POST[name + str(i)]
-            i = i + 1
-        else:
-            i = i + 1
-    return string_check
-
 def registre(request):
     errors = []
     if request.method == 'POST':
@@ -53,8 +42,7 @@ def registre(request):
             errors.append('Por favor introduce la identificacion.')
         if not errors:
             values = [request.POST['identificacion'], request.POST['date_birth'],request.POST['sexo'],request.POST['caracter']]
-            zonas = get_checkBox(request, 4, 'zona')
-            html = "<html><body><h1></h1><h3>conas %s</h3> </body></html>" % zonas
+            html = "<html><body><h1></h1><h3>conas %s</h3> </body></html>" % values[0]
             return HttpResponse(html)
     return render(request, 'inscripcion.html', {'errors': errors,'identificacion': request.POST.get('identificacion', ''),})
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 {% load static %}
+
 <html>
 <head>
 
@@ -10,8 +11,9 @@ www.amitjakhu.com
 --------------------->
 
 <!--META-->
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login Form</title>
+<title>Iniciar Sesion</title>
 
 <!--STYLESHEETS-->
 <link href="{% static "login/css/style.css" %}" rel="stylesheet" type="text/css" />
@@ -39,7 +41,7 @@ $(document).ready(function() {
 
 </head>
 <body>
-{{ message }}
+
 
 <!--WRAPPER-->
 <div id="wrapper">
@@ -49,20 +51,21 @@ $(document).ready(function() {
     <div class="pass-icon"></div>
     <!--END SLIDE-IN ICONS-->
 
+
 <!--LOGIN FORM-->
-<form name="login-form" class="login-form" action="" method="post">
+<form name="login-form" class="login-form" action="" method="post">{% csrf_token %}
 
 	<!--HEADER-->
     <div class="header">
     <!--TITLE--><h1>Iniciar Sesion en SIGECUC TIC</h1><!--END TITLE-->
-    <!--DESCRIPTION--><span>Fill out the form below to login to my super awesome imaginary control panel.</span><!--END DESCRIPTION-->
+    <!--DESCRIPTION--><span>{% if message %} {{ message }} {% endif %}</span><!--END DESCRIPTION-->
     </div>
     <!--END HEADER-->
 	
 	<!--CONTENT-->
     <div class="content">
-	<!--USERNAME--><input name="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
-    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+	<!--USERNAME --> <input name="username" type="text" class="input username" value="Username" onfocus="this.value=''" /> <!-- END USERNAME-->
+    <!--PASSWORD --> <input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /> <!--END PASSWORD-->
     </div>
     <!--END CONTENT-->
     
