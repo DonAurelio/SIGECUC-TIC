@@ -12,7 +12,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index_page_view(request):
-	return render_to_response('index.html')
+	#funcion que lista los cursos activos cuando el estado es 1
+	cursos = Curso.objects.filter(estado='1')
+	context = { 'cursos':cursos }
+	return render_to_response('index.html',context)
 
 def login_page_view(request):
 	message = None
