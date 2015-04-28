@@ -55,7 +55,7 @@ def listar_cursos(request):
 	return render(request, 'listar_cursos.html', { 'cursos': cursos })
 
 
-def send_course(request):
+def enviar_curso(request):
     id_course = request.GET.get('id_course')
     name_course = request.GET.get('name_course')
     return render(request, 'inscripcion.html', {'id_course': id_course, 'name_course': name_course})

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include( admin.site.urls ), name='admin'), 
     url(r'^$', 'aplicacion_cursos_tic.views.index_page_view', name='index'),
     url(r'^index', 'aplicacion_cursos_tic.views.index_page_view', name='index'),
+    url(r'^curso/$', 'aplicacion_cursos_tic.views.enviar_curso',name='env_curso'),
     url(r'^login', 'aplicacion_cursos_tic.views.login_page_view', name='login'),
     url(r'^contact', 'aplicacion_cursos_tic.views.contact_page_view', name='contact'),
     url(r'^information', 'aplicacion_cursos_tic.views.information_page_view', name='information')
