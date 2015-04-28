@@ -3,20 +3,21 @@ from django.shortcuts import render, render_to_response
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from forms import LoginForm
+<<<<<<< HEAD
 from forms import addInscripcionForm
 from .models import Curso
+=======
+
+>>>>>>> 09b5ecde95aa6b77dc821a97611f0d2677750d77
 
 from django.http import HttpResponse
 
 # Create your views here.
 
-def login(request):
-	return render_to_response('login.html')
-
-
-def index(request):
+def index_page_view(request):
 	return render_to_response('index.html')
 
+<<<<<<< HEAD
 def contact(request):
     return render_to_response('contactenos.html')
 
@@ -61,3 +62,33 @@ def add_inscripcion_view(request):
     return render_to_response('add_inscripcion.html', ctx, context_instance= RequestContext(request))
 
 
+=======
+def login_page_view(request):
+	message = None
+	if request.method == "POST":
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			username = request.POST['username']
+			password = request.POST['password']
+			user = authenticate(username=username,password=password)
+			if user is not None:
+				if user.is_active:
+					login(request,user)
+					
+					message = "Te has identificacdo de modo correcto"
+				else: 
+					message = "Tu usuario esta inactivo"
+			else:
+				message = "Nombre de usuario y/o password incorrecto"
+	else:
+		form = LoginForm()
+
+	return render_to_response('login.html',{'message':message,'form':form}, context_instance=RequestContext(request))
+	
+
+def contact_page_view(request):
+	return render_to_response('contact.html')
+
+def information_page_view(request):
+	return render_to_response('information.html')
+>>>>>>> 09b5ecde95aa6b77dc821a97611f0d2677750d77
