@@ -7,6 +7,7 @@ from aplicacion_cursos_tic.forms import LoginForm
 # Create your views here.
 
 def login_page_view(request):
+	
 	message = None
 	if request.method == "POST":
 		form = LoginForm(request.POST)
@@ -27,6 +28,7 @@ def login_page_view(request):
 		form = LoginForm()
 
 	return render_to_response('login.html',{'message':message,'form':form}, context_instance=RequestContext(request))
+	
 
 def index_page_view(request):
 	return render_to_response('index.html')
