@@ -84,3 +84,4 @@ STATIC_PATH = os.path.join(SETTINGS_DIR,'static')
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
+
