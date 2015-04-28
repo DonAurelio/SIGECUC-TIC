@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from forms import LoginForm
+from forms import addInscripcionForm
 from .models import Curso
 
 from django.http import HttpResponse
@@ -15,6 +16,9 @@ def login(request):
 
 def index(request):
 	return render_to_response('index.html')
+
+def contact(request):
+    return render_to_response('contactenos.html')
 
 #==============================================================================
 def listar_cursos(request):
@@ -45,4 +49,15 @@ def registre(request):
             html = "<html><body><h1></h1><h3>conas %s</h3> </body></html>" % values[0]
             return HttpResponse(html)
     return render(request, 'inscripcion.html', {'errors': errors,'identificacion': request.POST.get('identificacion', ''),})
+
+
+def add_inscripcion_view(request):
+    info = "iniciado"
+    if request.method == "POST":
+        form = addInscripcionForm(request.POST)
+    else:
+        form = addInscripcionForm()
+    ctx = {'form':form, 'informacion':info}
+    return render_to_response('add_inscripcion.html', ctx, context_instance= RequestContext(request))
+
 
