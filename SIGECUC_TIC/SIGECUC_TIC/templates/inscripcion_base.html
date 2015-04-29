@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SIGECUC-TIC</title>
+<title>Moderna - Bootstrap 3 flat corporate template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
@@ -26,109 +26,70 @@
 </head>
 <body>
 <div id="wrapper">
-	
+
 	<!-- start header -->
 	{% include "cabecera.html" %}
 	<!-- end header -->
 
-	<section id="featured">
-	<!-- start slider -->
+	<!-- start black section -->
+	<section id="inner-headline">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-	<!-- Slider -->
-        <div id="main-slider" class="flexslider">
-            <ul class="slides">
-              <li>
-                <img src="{% static "index/img/slides/1.jpg" %}" alt="" />
-                <div class="flex-caption">
-                    <h3>Cursos</h3> 
-					<p>Incribete a los cursos ofrecidos por el CIERSUR para formacioón TIC y conviertete en Leader Teacher</p> 
-					<a href="#" class="btn btn-theme">ver mas</a>
-                </div>
-              </li>
-              <li>
-                <img src="{% static "index/img/slides/2.jpg" %}" alt="" />
-                <div class="flex-caption">
-                    <h3>Master Teacher</h3> 
-					<p>Administra tu perfil de usuario, consulta información de cursos, cohortes y calificaciones</p> 
-					<a href="#" class="btn btn-theme">ver mas</a>
-                </div>
-              </li>
-              <li>
-                <img src="{% static "index/img/slides/3.jpg" %}" alt="" />
-                <div class="flex-caption">
-                    <h3>Leader Teacher</h3> 
-					<p>Consulta tu información personal, revisa tus calificaciones y certificados obtenidos en cada curso</p> 
-					<a href="#" class="btn btn-theme">ver mas</a>
-                </div>
-              </li>
-            </ul>
-        </div>
-	<!-- end slider -->
-			</div>
-		</div>
-	</div>	
-	</section>
-
-	<section class="callaction">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="big-cta">
-					<div class="cta-text">
-						<h2><span>{% block title %}{% endblock%}</span> <br>{% block sub_title %} {% endblock %}</h2>
-					</div>
-				</div>
+				<ul class="breadcrumb">
+					<li><a href="#"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+					<li class="active">Nuevo Aspirante</li>
+				</ul>
 			</div>
 		</div>
 	</div>
 	</section>
+	<!-- end black section -->
 
-	<!--Complete body-->
+
 	<section id="content">
+	<div class="map">
+		<!--aqui habia un mapa de google-->
+	</div>
 	<div class="container">
-
-		<!--Fisrt body-->
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="row">
-
-					{% block first_body %}{% endblock %}
-
-				</div>
+				<h4>Get in touch with us by filling <strong>contact form below</strong></h4>
+				<form id="contactform" action="contact/contact.php" method="post" class="validateform" name="send-contact">
+					<div id="sendmessage">
+						 Your message has been sent. Thank you!
+					</div>
+					<div class="row">
+						<div class="col-lg-4 field">
+							<input type="text" name="name" placeholder="* Enter your full name" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
+							<div class="validation">
+							</div>
+						</div>
+						<div class="col-lg-4 field">
+							<input type="text" name="email" placeholder="* Enter your email address" data-rule="email" data-msg="Please enter a valid email" />
+							<div class="validation">
+							</div>
+						</div>
+						<div class="col-lg-4 field">
+							<input type="text" name="subject" placeholder="Enter your subject" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
+							<div class="validation">
+							</div>
+						</div>
+						<div class="col-lg-12 margintop10 field">
+							<textarea rows="12" name="message" class="input-block-level" placeholder="* Your message here..." data-rule="required" data-msg="Please write something"></textarea>
+							<div class="validation">
+							</div>
+							<p>
+								<button class="btn btn-theme margintop10 pull-left" type="submit">Submit message</button>
+								<span class="pull-right margintop20">* Please fill all required form field, thanks!</span>
+							</p>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-
-		<!--Line divide the first body to the second body-->
-		<!-- divider -->
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="solidline">
-				</div>
-			</div>
-		</div>
-		<!-- end divider -->
-
-
-		<!-- Second body-->
-		<div class="row">
-			<div class="col-lg-12">
-				<h4 class="heading">{% block second_body_title %}{% endblock %}</h4>
-				<div class="row">
-					<section id="projects">
-					{% block second_body %}{% endblock %}
-					</section>
-				</div>
-			</div>
-		</div>
-
-		<!-- end second body -->
-
 	</div>
 	</section>
-	<!-- end complete body -->
-
 	<footer>
 	<div class="container">
 		<div class="row">
@@ -218,5 +179,6 @@
 <script src="{% static "index/js/jquery.flexslider.js" %}"></script>
 <script src="{% static "index/js/animate.js" %}"></script>
 <script src="{% static "index/js/custom.js" %}"></script>
+<script src="{% static "index/js/validate.js" %}"></script>
 </body>
 </html>

@@ -11,13 +11,13 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def index_page_view(request):
+def pagina_principal(request):
 	#funcion que lista los cursos activos cuando el estado es 1
 	cursos = Curso.objects.filter(estado='1')
 	context = { 'cursos':cursos }
-	return render_to_response('index.html',context)
+	return render_to_response('inicio.html',context)
 
-def login_page_view(request):
+def pagina_iniciar_sesion(request):
 	message = None
 	if request.method == "POST":
 		form = LoginForm(request.POST)
@@ -40,11 +40,8 @@ def login_page_view(request):
 	return render_to_response('login.html',{'message':message,'form':form}, context_instance=RequestContext(request))
 	
 
-def contact_page_view(request):
-	return render_to_response('contact.html')
-
-def information_page_view(request):
-	return render_to_response('information.html')
+def pagina_informacion(request):
+	return render_to_response('informacion.html')
 
 
 
@@ -55,10 +52,11 @@ def listar_cursos(request):
 	return render(request, 'listar_cursos.html', { 'cursos': cursos })
 
 
-def enviar_curso(request):
+def pagina_inscripcion_curso(request):
     id_course = request.GET.get('id_course')
     name_course = request.GET.get('name_course')
-    return render(request, 'inscripcion.html', {'id_course': id_course, 'name_course': name_course})
+    #return render(request, 'inscripcion.html', {'id_course': id_course, 'name_course': name_course})
+    return render_to_response('inscripcion_base.html')
     #html = "<html><body><h1>id course:</h1><h3>%s<h/3> <h1> Name curso</h1><h2>%s<h/2></body></html>" % (id_course, name_course)
     #return HttpResponse(html)
 

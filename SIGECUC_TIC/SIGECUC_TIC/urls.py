@@ -8,13 +8,14 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     
-    url(r'^admin/', include( admin.site.urls ), name='admin'), 
-    url(r'^$', 'aplicacion_cursos_tic.views.index_page_view', name='index'),
-    url(r'^index', 'aplicacion_cursos_tic.views.index_page_view', name='index'),
-    url(r'^curso/$', 'aplicacion_cursos_tic.views.enviar_curso',name='env_curso'),
-    url(r'^login', 'aplicacion_cursos_tic.views.login_page_view', name='login'),
-    url(r'^contact', 'aplicacion_cursos_tic.views.contact_page_view', name='contact'),
-    url(r'^information', 'aplicacion_cursos_tic.views.information_page_view', name='information')
+     
+    url(r'^$', 'aplicacion_cursos_tic.views.pagina_principal', name='inicio'),
+    url(r'^admin', include( admin.site.urls ), name='admin'),
+    url(r'^inicio', 'aplicacion_cursos_tic.views.pagina_principal', name='inicio'),
+    url(r'^login', 'aplicacion_cursos_tic.views.pagina_iniciar_sesion', name='sesion'),
+    url(r'^informacion', 'aplicacion_cursos_tic.views.pagina_informacion', name='informacion'),
+    url(r'^inscripcion', 'aplicacion_cursos_tic.views.pagina_inscripcion_curso',name='env_curso'),
+    #url(r'^inscripcion', 'aplicacion_cursos_tic.views.enviar_curso',name='env_curso'),
     #url(r'^login', login),
     #url(r'^index', index),
     #url(r'^contactenos', contact),
