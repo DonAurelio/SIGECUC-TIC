@@ -1,4 +1,5 @@
 from django import forms
+from aplicacion_cursos_tic.models import Persona
 from aplicacion_cursos_tic.models import Inscrito
 
 #Clas LoginForm
@@ -8,9 +9,8 @@ class LoginForm(forms.Form):
 	contrasenia = forms.CharField(widget=forms.PasswordInput())
 
 
-class addInscripcionForm(forms.ModelForm):
+class InscripcionPersonaForm(forms.ModelForm):
 	class Meta:
-		model = Inscrito
-		exclude = {'estado',}
+		model = Persona
 
 

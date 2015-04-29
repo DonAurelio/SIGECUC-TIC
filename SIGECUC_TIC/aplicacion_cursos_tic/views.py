@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 
 from forms import LoginForm
-from forms import addInscripcionForm
+from forms import InscripcionPersonaForm
 from .models import Curso
 
 from django.http import HttpResponse
@@ -77,14 +77,16 @@ def registre(request):
     return render(request, 'inscripcion.html', {'errors': errors,'identificacion': request.POST.get('identificacion', ''),})
 
 
-def add_inscripcion_view(request):
+def pagina_inscripcion_persona(request):
     info = "iniciado"
+    id_course = request.GET.get('id_course')
+    name_course = request.GET.get('name_course')
     if request.method == "POST":
-        form = addInscripcionForm(request.POST)
+        form = InscripcionPersonaForm(request.POST)
     else:
-        form = addInscripcionForm()
-    ctx = {'form':form, 'informacion':info}
-    return render_to_response('add_inscripcion.html', ctx, context_instance= RequestContext(request))
+        form = InscripcionPersonaForm()
+    ctx = {'form':form, 'informacion':info, 'id_course':id_course, 'name_course':name_course}
+    return render_to_response('inscripcion.html', ctx, context_instance= RequestContext(request))
 
 
 
