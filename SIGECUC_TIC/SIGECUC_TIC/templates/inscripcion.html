@@ -1,18 +1,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 {% extends "inscripcion_base.html" %}
+{% load static %}
 {% block body %}
 <html>
 <head>
-<!--SCRIPTS-->
-</script>
+<html lang="en">
+<head>
+	<!-- css -->
+	<link href="{% static "index/css/bootstrap.min.css" %}" rel="stylesheet" />
+	<link href="{% static "index/css/fancybox/jquery.fancybox.css" %}" rel="stylesheet">
+	<link href="{% static "index/css/jcarousel.css" %}" rel="stylesheet" />
+	<link href="{% static "index/css/flexslider.css" %}" rel="stylesheet" />
+	<link href="{% static "index/css/style.css" %}" rel="stylesheet" />
+
+	<!-- Theme skin -->
+	<link href="{% static "index/skins/default.css" %}" rel="stylesheet" />
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
 </head>
+
 <body>
 <h1> Inscripcion para el curso</h1> 
 <h3> {{ name_course }} </h3>
 
-<form id='formulario' method='post' action=''>{% csrf_token %}
-{% include "form_snippets.html" %}
-
+<form class='contactform' id="contactform" method='post' action=''>{% csrf_token %}
+<!--{% include "form_snippets.html" %}-->
+{% for field in form %}
+<div>
+{{ field.errors }}
+{{ field.label_tag }}
+{{ field }}
+</div>
+{% endfor %}
 <p><input type="submit" value='confirmar'/></p>
 
 </form>

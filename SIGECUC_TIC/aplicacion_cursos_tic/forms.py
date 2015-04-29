@@ -12,5 +12,4 @@ class LoginForm(forms.Form):
 class InscripcionPersonaForm(forms.ModelForm):
 	class Meta:
 		model = Persona
-
-
+		
