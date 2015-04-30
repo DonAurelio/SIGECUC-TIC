@@ -116,29 +116,29 @@ class CaracterTecnica(models.Model):
 
 class EtniaEducativa(models.Model):
 	etnia_educativa = models.CharField(max_length=50)
-		class Meta:
-			verbose_name_plural = "Ver EtniaEducativa"
+	class Meta:
+		verbose_name_plural = "Ver EtniaEducativa"
 
-		def __str__(self):
-			return '%s' % (self.etnia_educativa)       
+	def __str__(self):
+		return '%s' % (self.etnia_educativa)       
 
 class GradosEscolares(models.Model):
 	grado_escolar = models.CharField(max_length=50)
-		class Meta:
-			verbose_name_plural = "Ver Grados Escolares"
+	class Meta:
+		verbose_name_plural = "Ver Grados Escolares"
 
-		def __str__(self):
-			return '%s' % (self.grado_escolar)  
+	def __str__(self):
+		return '%s' % (self.grado_escolar)  
 
 
 class AreaFormacionDesarrollada(models.Model):
 	area_formacion = models.CharField(max_length=50)
-		class Meta:
-			ordering = ["area_formacion"]
-			verbose_name_plural = "Ver Area Formacion Desarrollada"
+	class Meta:
+		ordering = ["area_formacion"]
+		verbose_name_plural = "Ver Area Formacion Desarrollada"
 
-		def __str__(self):
-			return '%s' % (self.area_formacion) 
+	def __str__(self):
+		return '%s' % (self.area_formacion) 
 
 	
 class HistorialAcademico(models.Model):
