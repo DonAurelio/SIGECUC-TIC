@@ -5,6 +5,8 @@ from django.views.generic import TemplateView
 
 from forms import LoginForm
 from forms import InscripcionPersonaForm
+from forms import HistorialLaboralForm
+from forms import HistorialAcademicoForm
 from .models import Curso
 
 from django.http import HttpResponse
@@ -78,14 +80,21 @@ def registre(request):
 
 
 def pagina_inscripcion_persona(request):
+    #funcion que crea el formulario de inscripcion
     info = "iniciado"
     id_course = request.GET.get('id_course')
     name_course = request.GET.get('name_course')
     if request.method == "POST":
-        form = InscripcionPersonaForm(request.POST)
+        form_persona = InscripcionPersonaForm(request.POST)
+        form_HistorialAcademico = HistorialAcademicoForm(request.POST) 
+        form_HistorialLaboral = HistorialLaboralForm(request.POST)
     else:
-        form = InscripcionPersonaForm()
-    ctx = {'form':form, 'informacion':info, 'id_course':id_course, 'name_course':name_course}
+        form_persona = InscripcionPersonaForm()
+        form_HistorialAcademico = HistorialAcademicoForm(request.POST) 
+        form_HistorialLaboral = HistorialLaboralForm(request.POST)
+
+    ctx = {'form_persona':form_persona, 'form_HistorialLaboral': form_HistorialLaboral, 'form_HistorialAcademico': form_HistorialAcademico,
+     'informacion':info, 'id_course':id_course, 'name_course':name_course}
     return render_to_response('inscripcion.html', ctx, context_instance= RequestContext(request))
 
 

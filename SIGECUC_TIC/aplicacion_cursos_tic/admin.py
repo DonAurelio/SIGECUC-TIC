@@ -4,7 +4,7 @@ from models import Persona
 #from models import Administrador
 from models import MasterTeacher
 from models import HistorialLaboral
-#from models import HistorialAcademico
+from models import HistorialAcademico
 from models import Inscrito
 from models import LeaderTeacher
 from models import AreaFormacion
@@ -42,7 +42,8 @@ class MasterTeacherAdmin(admin.ModelAdmin):
         'persona__segundo_nombre', 'persona__primer_apellido',
         'persona__segundo_apellido')
 admin.site.register(MasterTeacher, MasterTeacherAdmin)
-#admin.site.register(HistorialLaboral)
+admin.site.register(HistorialLaboral)
+admin.site.register(HistorialAcademico)
 admin.site.register(Inscrito)
 
 
