@@ -11,27 +11,6 @@
 @import url('overwrite.css');
 @import url('animate.css');
 
-
-
-/*
-======================================
-0. Modificados
-======================================
-*/
-/*inscripcionfom*/
-.incripcionform {
-  width: 100%;
-  border: 1px solid #f5f5f5;
-  min-height: 40px;
-  padding-left:20px;
-  font-size:13px;
-  padding-right:20px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-
-}
-
 /* ===================================
 1. General
 ==================================== */
@@ -506,7 +485,7 @@ ul.breadcrumb li a:hover {
 ============================= */
 
 /* --- contact form  ---- */
-form#contactform input[type="text"] {
+form#contactform input,select {
   width: 100%;
   border: 1px solid #f5f5f5;
   min-height: 40px;
@@ -519,7 +498,19 @@ form#contactform input[type="text"] {
 
 }
 
+/*
+form#contactform input[type="text"] {
+  width: 100%;
+  border: 1px solid #f5f5f5;
+  min-height: 40px;
+  padding-left:20px;
+  font-size:13px;
+  padding-right:20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 
+}
 
 form#contactform textarea {
 border: 1px solid #f5f5f5;
@@ -537,6 +528,8 @@ border: 1px solid #f5f5f5;
 form#contactform .validation {
 	font-size:11px;
 }
+
+*/
 
 #sendmessage {
 	border:1px solid #e6e6e6;

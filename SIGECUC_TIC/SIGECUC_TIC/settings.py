@@ -62,11 +62,15 @@ SETTINGS_DIR = os.path.dirname(__file__)
 TEMPLATE_PATH = os.path.join(SETTINGS_DIR, 'templates').replace('\\','/')
 #Ubicacion de los templates relacionados con las cuentas de los usuarios
 TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
+TEMPLEATE_PATH_BASE = os.path.join(SETTINGS_DIR, 'templates/base').replace('\\','/')
+TEMPLATE_PATH_INSCRIPCTION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
 
 #Declaramos la ruta donde quedaran alamcenadas todas las templates del proyecto
 TEMPLATE_DIRS = (
 TEMPLATE_PATH,
 TEMPLATE_PATH_ACCOUNTS,
+TEMPLEATE_PATH_BASE,
+TEMPLATE_PATH_INSCRIPCTION,
 )
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
