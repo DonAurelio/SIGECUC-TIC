@@ -12,7 +12,7 @@ class Persona(models.Model):
     email = models.EmailField(blank=True)
     telefono = models.CharField(max_length=15)
     direccion = models.CharField(max_length=40)
-    SOLTERO = 'coltero'
+    SOLTERO = 'soltero'
     CASADO = 'casado'
     VIUDO = 'viudo'
 #Se define una lista desplegable
@@ -23,6 +23,17 @@ class Persona(models.Model):
     )
     estado_civil = models.CharField(max_length=20, choices=estado,
     default=SOLTERO)
+
+    MASCULINO = 'MASCULINO'
+    FEMENINO = 'FEMENINO'
+    tipo_sexo = (
+        (MASCULINO = 'MASCULINO')
+        (FEMENINO = 'FEMENINO')
+
+    )
+    #Falta definir el sexo en el modelo
+    sexo = models.CharField(max_length=20, choices=tipo_sexo,
+    default=MASCULINO)
 
     class Meta:
             ordering = ["primer_nombre"]
