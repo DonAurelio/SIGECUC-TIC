@@ -103,9 +103,25 @@ admin.site.register(Cohorte, CohorteAdmin)
 admin.site.register(Calificacion)
 admin.site.register(LeaderTeacher_Cohorte)
 
-admin.site.register(ZonaInstitucionEducativa)
-admin.site.register(CaracterTecnica)
-admin.site.register(EtniaEducativa)
-admin.site.register(GradosEscolares)
-admin.site.register(AreaFormacionDesarrollada)
+#Recarga la lista de Area_formacion.
+class ZonaInstitucionEducativaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'zona')
+
+admin.site.register(ZonaInstitucionEducativa, ZonaInstitucionEducativaAdmin)
+
+class CaracterTecnicaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'caracter_tecnico')
+admin.site.register(CaracterTecnica, CaracterTecnicaAdmin)
+
+class EtniaEducativaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'etnia_educativa')
+admin.site.register(EtniaEducativa, EtniaEducativaAdmin)
+
+class GradosEscolaresAdmin(admin.ModelAdmin):
+    list_display = ('id', 'grado_escolar')
+admin.site.register(GradosEscolares, GradosEscolaresAdmin)
+
+class AreaFormacionDesarrolladaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'area_formacion')
+admin.site.register(AreaFormacionDesarrollada, AreaFormacionDesarrolladaAdmin)
 
