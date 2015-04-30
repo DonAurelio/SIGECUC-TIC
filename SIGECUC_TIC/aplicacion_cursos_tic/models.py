@@ -27,8 +27,8 @@ class Persona(models.Model):
     MASCULINO = 'MASCULINO'
     FEMENINO = 'FEMENINO'
     tipo_sexo = (
-        (MASCULINO = 'MASCULINO')
-        (FEMENINO = 'FEMENINO')
+        (MASCULINO,'MASCULINO'),
+        (FEMENINO, 'FEMENINO'),
 
     )
     #Falta definir el sexo en el modelo
@@ -95,11 +95,67 @@ class HistorialLaboral(models.Model):
     exp_total = models.CharField(max_length=50)
 
 
+class ZonaInstitucionEducativa(models.Model):
+	zona = models.CharField(max_length=50)
+
+class CaracterTecnica(models.Model):
+	caracter_tecnico = models.CharField(max_length=50) 
+
+class EtniaEducativa(models.Model):
+	etnia_educativa = models.CharField(max_length=50)
+
+class GradosEscolares(models.Model):
+	grado_escolar = models.CharField(max_length=50)
+
+class AreaFormacionDesarrollada(models.Model):
+	area_formacion = models.CharField(max_length=50)
+
+	
 class HistorialAcademico(models.Model):
-    zona_labor_docente = models.CharField(max_length=50)
-    caracter_educacion_media = models.CharField(max_length=50)
-    etnia_educativa = models.CharField(max_length=50)
-    nivel_educativo = models.CharField(max_length=50)
+	
+	ACADEMICA = 'ACADEMICA'
+	TECNICA = 'TECNICA'
+	tipo_caracter_educacion = (
+	(ACADEMICA,'ACADEMICA'),
+	(TECNICA,'TECNICA'),
+
+	)
+
+	caracter_educacion_media = models.CharField(max_length=50,choices=tipo_caracter_educacion)
+
+	NIVEL_TECNICO_PROFECIONAL = 'Nivel Tecnico Profecional (Relativo a programas tecnicos y profecionales)'
+	NIVEL_TECNOLOGICO = 'Nivel Tecnologico (Relativo a programas tecnologicos)'
+	NIVEL_PROFESIONAL = 'Nivel Profesional (Relativo a programas porfecionales universitarios)'
+	NORMALISTA_SUPERIOR = 'Normalista Superior'
+	LICENCIATURA = 'Licenciatura'
+	ESPECIALIZACIONES = """Especializaciones 
+	(Relativas a programas de especializacion tecnica profecional, especializacion tecnologica 
+	y especializaciones profesionales)"""
+	MAESTRIAS = 'Maestrias'
+	DOCTORADOS = 'Doctorados'
+
+	TECNICA = 'TECNICA'
+	tipo_nivel_maximo_educacion = (
+	(NIVEL_TECNICO_PROFECIONAL,'Nivel Tecnico Profecional (Relativo a programas tecnicos y profecionales)'),
+	(NIVEL_TECNOLOGICO,'Nivel Tecnologico (Relativo a programas tecnologicos)'),
+	(NIVEL_PROFESIONAL,'Nivel Profesional (Relativo a programas porfecionales universitarios)'),
+	(NORMALISTA_SUPERIOR,'Normalista Superior'),
+	(LICENCIATURA,'Licenciatura'),
+	(ESPECIALIZACIONES,"""Especializaciones 
+	(Relativas a programas de especializacion tecnica profecional, especializacion tecnologica 
+	y especializaciones profesionales)"""),
+	(MAESTRIAS,'Maestrias'),
+	(DOCTORADOS,'Doctorados'),
+
+	)
+
+	nivel_maximo_educacion = models.CharField(max_length=50,choices=tipo_nivel_maximo_educacion)
+	zona_institucion_educativa = models.ManyToManyField(ZonaInstitucionEducativa)
+	caracter_tecnica = models.ManyToManyField(CaracterTecnica)
+	etnia_educativa = models.ManyToManyField(EtniaEducativa)
+	grado_escolar = models.ManyToManyField(GradosEscolares)
+
+
 
 
 class Inscrito(models.Model):

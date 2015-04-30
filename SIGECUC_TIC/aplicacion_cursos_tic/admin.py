@@ -13,6 +13,12 @@ from models import Curso
 from models import Cohorte
 from models import Calificacion
 from models import LeaderTeacher_Cohorte
+from models import ZonaInstitucionEducativa
+from models import CaracterTecnica
+from models import EtniaEducativa
+from models import GradosEscolares
+from models import AreaFormacionDesarrollada
+
 
 
 #Recarga la lista de persona y se podra ver tres columnas Nombres,y E-mail.
@@ -97,5 +103,9 @@ admin.site.register(Cohorte, CohorteAdmin)
 admin.site.register(Calificacion)
 admin.site.register(LeaderTeacher_Cohorte)
 
-
+admin.site.register(ZonaInstitucionEducativa)
+admin.site.register(CaracterTecnica)
+admin.site.register(EtniaEducativa)
+admin.site.register(GradosEscolares)
+admin.site.register(AreaFormacionDesarrollada)
 
