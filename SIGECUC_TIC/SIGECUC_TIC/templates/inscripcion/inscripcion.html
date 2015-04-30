@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "inscripcion_base.html" %}
+{% load static %}
+
+{% block first_title %} Nuevo Aspirante {% endblock %}
+
+{% block _title %} Formulario de incripcion al curso {% endblock%}
+
+{% block sub_title %} {{ name_course }} {% endblock %}
+
+{% block body %}
+<form id='contactform' method='post' action=''>{% csrf_token %}
+<!--{% include "form_snippets.html" %}-->
+{% for field in form %}
+<div>
+{{ field.errors }}
+{{ field.label_tag }}
+{{ field }}
+</div>
+{% endfor %}
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
+<span class="pull-right margintop20">* Por favor diligencie todos los campos</span>
+</p>
+
+{% endblock%}
+

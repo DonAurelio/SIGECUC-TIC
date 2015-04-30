@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SIGECUC-TIC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="http://bootstraptaste.com" />
+<!-- css -->
+<link href="{% static "index/css/bootstrap.min.css" %}" rel="stylesheet" />
+<link href="{% static "index/css/fancybox/jquery.fancybox.css" %}" rel="stylesheet">
+<link href="{% static "index/css/jcarousel.css" %}" rel="stylesheet" />
+<link href="{% static "index/css/flexslider.css" %}" rel="stylesheet" />
+<link href="{% static "index/css/style.css" %}" rel="stylesheet" />
+
+<!-- Theme skin -->
+<link href="{% static "index/skins/default.css" %}" rel="stylesheet" />
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div id="wrapper">
+	
+	<!-- start header -->
+	{% include "cabecera.html" %}
+	<!-- end header -->
+
+	<!-- start slider -->
+	<section id="featured">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+	<!-- Slider -->
+        <div id="main-slider" class="flexslider">
+            <ul class="slides">
+              <li>
+                <img src="{% static "index/img/slides/1.jpg" %}" alt="" />
+                <div class="flex-caption">
+                    <h3>Cursos</h3> 
+					<p>Incribete a los cursos ofrecidos por el CIERSUR para formacioón TIC y conviertete en Leader Teacher</p> 
+					<a href="#" class="btn btn-theme">ver mas</a>
+                </div>
+              </li>
+              <li>
+                <img src="{% static "index/img/slides/2.jpg" %}" alt="" />
+                <div class="flex-caption">
+                    <h3>Master Teacher</h3> 
+					<p>Administra tu perfil de usuario, consulta información de cursos, cohortes y calificaciones</p> 
+					<a href="#" class="btn btn-theme">ver mas</a>
+                </div>
+              </li>
+              <li>
+                <img src="{% static "index/img/slides/3.jpg" %}" alt="" />
+                <div class="flex-caption">
+                    <h3>Leader Teacher</h3> 
+					<p>Consulta tu información personal, revisa tus calificaciones y certificados obtenidos en cada curso</p> 
+					<a href="#" class="btn btn-theme">ver mas</a>
+                </div>
+              </li>
+            </ul>
+        </div>
+	<!-- end slider -->
+			</div>
+		</div>
+	</div>	
+	</section>
+
+	<section class="callaction">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="big-cta">
+					<div class="cta-text">
+						<h2><span>{% block title %}{% endblock%}</span> <br>{% block sub_title %} {% endblock %}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+
+	<!--Complete body-->
+	<section id="content">
+	<div class="container">
+
+		<!--Fisrt body-->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="row">
+
+					{% block first_body %}{% endblock %}
+
+				</div>
+			</div>
+		</div>
+
+		<!--Line divide the first body to the second body-->
+		<!-- divider -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="solidline">
+				</div>
+			</div>
+		</div>
+		<!-- end divider -->
+
+
+		<!-- Second body-->
+		<div class="row">
+			<div class="col-lg-12">
+				<h4 class="heading">{% block second_body_title %}{% endblock %}</h4>
+				<div class="row">
+					<section id="projects">
+					{% block second_body %}{% endblock %}
+					</section>
+				</div>
+			</div>
+		</div>
+
+		<!-- end second body -->
+
+	</div>
+	</section>
+	<!-- end complete body -->
+
+	<!-- start footer -->
+	{% include "pie_pagina.html" %}
+	<!-- end footer -->
+	
+
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+<!-- javascript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{% static "index/js/jquery.js" %}"></script>
+<script src="{% static "index/js/jquery.easing.1.3.js" %}"></script>
+<script src="{% static "index/js/bootstrap.min.js" %}"></script>
+<script src="{% static "index/js/jquery.fancybox.pack.js" %}"></script>
+<script src="{% static "index/js/jquery.fancybox-media.js" %}"></script>
+<script src="{% static "index/js/google-code-prettify/prettify.js" %}"></script>
+<script src="{% static "index/js/portfolio/jquery.quicksand.js" %}"></script>
+<script src="{% static "index/js/portfolio/setting.js" %}"></script>
+<script src="{% static "index/js/jquery.flexslider.js" %}"></script>
+<script src="{% static "index/js/animate.js" %}"></script>
+<script src="{% static "index/js/custom.js" %}"></script>
+</body>
+</html>
