@@ -6,6 +6,7 @@ from aplicacion_cursos_tic.models import ZonaInstitucionEducativa
 from aplicacion_cursos_tic.models import CaracterTecnica
 from aplicacion_cursos_tic.models import EtniaEducativa
 from aplicacion_cursos_tic.models import GradosEscolares
+from aplicacion_cursos_tic.models import Inscrito
 
 
 #Clas LoginForm
@@ -34,4 +35,7 @@ class HistorialAcademicoForm(forms.ModelForm):
 class HistorialLaboralForm(forms.ModelForm):
 	class Meta:
 		model = HistorialLaboral
+
+
+
 		

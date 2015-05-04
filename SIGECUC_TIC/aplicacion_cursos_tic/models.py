@@ -94,6 +94,12 @@ class HistorialLaboral(models.Model):
 	exp_privado = models.CharField(max_length=50)
 	exp_total = models.CharField(max_length=50)
 
+	class Meta:
+		verbose_name_plural = "Ver Historiales Laborales"
+
+	def __str__(self):
+		return '%s' % (self.id)
+
 
 class ZonaInstitucionEducativa(models.Model):
 	zona = models.CharField(max_length=50)
@@ -153,27 +159,23 @@ class HistorialAcademico(models.Model):
 
 	caracter_educacion_media = models.CharField(max_length=50,choices=tipo_caracter_educacion)
 
-	NIVEL_TECNICO_PROFECIONAL = 'Nivel Tecnico Profecional (Relativo a programas tecnicos y profecionales)'
-	NIVEL_TECNOLOGICO = 'Nivel Tecnologico (Relativo a programas tecnologicos)'
-	NIVEL_PROFESIONAL = 'Nivel Profesional (Relativo a programas porfecionales universitarios)'
+	NIVEL_TECNICO_PROFECIONAL = 'Nivel Tecnico Profecional'
+	NIVEL_TECNOLOGICO = 'Nivel Tecnologico'
+	NIVEL_PROFESIONAL = 'Nivel Profesional'
 	NORMALISTA_SUPERIOR = 'Normalista Superior'
 	LICENCIATURA = 'Licenciatura'
-	ESPECIALIZACIONES = """Especializaciones 
-	(Relativas a programas de especializacion tecnica profecional, especializacion tecnologica 
-	y especializaciones profesionales)"""
+	ESPECIALIZACIONES = 'Especializaciones '
 	MAESTRIAS = 'Maestrias'
 	DOCTORADOS = 'Doctorados'
 
 	TECNICA = 'TECNICA'
 	tipo_nivel_maximo_educacion = (
-	(NIVEL_TECNICO_PROFECIONAL,'Nivel Tecnico Profecional (Relativo a programas tecnicos y profecionales)'),
-	(NIVEL_TECNOLOGICO,'Nivel Tecnologico (Relativo a programas tecnologicos)'),
-	(NIVEL_PROFESIONAL,'Nivel Profesional (Relativo a programas porfecionales universitarios)'),
+	(NIVEL_TECNICO_PROFECIONAL,'Nivel Tecnico Profecional'),
+	(NIVEL_TECNOLOGICO,'Nivel Tecnologico'),
+	(NIVEL_PROFESIONAL,'Nivel Profesional'),
 	(NORMALISTA_SUPERIOR,'Normalista Superior'),
 	(LICENCIATURA,'Licenciatura'),
-	(ESPECIALIZACIONES,"""Especializaciones 
-	(Relativas a programas de especializacion tecnica profecional, especializacion tecnologica 
-	y especializaciones profesionales)"""),
+	(ESPECIALIZACIONES,'Especializaciones'),
 	(MAESTRIAS,'Maestrias'),
 	(DOCTORADOS,'Doctorados'),
 
@@ -186,6 +188,12 @@ class HistorialAcademico(models.Model):
 	grado_escolar = models.ManyToManyField(GradosEscolares)
 	area_formacion_desarrollada = models.ManyToManyField(AreaFormacionDesarrollada)
 
+	class Meta:
+		verbose_name_plural = "Ver Historiales Academicos"
+
+	def __str__(self):
+		return '%s' % (self.id)
+
 
 
 
@@ -195,6 +203,25 @@ class Inscrito(models.Model):
 	estado = models.BooleanField(default=True)
 	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
 	historial_academico = models.OneToOneField(HistorialAcademico)
+#metodo para que retorne la identificacion de persona
+	def identificacion(self):
+		return (self.persona.identificacion)
+
+#metodo para que retorne el primer_nombre de persona
+	def primer_nombre(self):
+		return (self.persona.primer_nombre)
+
+#metodo para que retorne el segundo_nombre de  persona
+	def segundo_nombre(self):
+		return (self.persona.segundo_nombre)
+
+#metodo para que retorne el primer_apellido de  persona
+	def primer_apellido(self):
+		return (self.persona.primer_apellido)
+
+#metodo para que retorne el segundo_apellido de  persona
+	def segundo_apellido(self):
+		return (self.persona.segundo_apellido)
 
 
 class LeaderTeacher(models.Model):
