@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -51,7 +52,7 @@ class Administrador(models.Model):
 
 
 class MasterTeacher(models.Model):
-	user = models.ForeignKey(unique=True)
+	user = models.ForeignKey(User,unique=True)
 	persona = models.OneToOneField(Persona, primary_key=True)
 
 #metodo para que retorne la identificacion de persona
