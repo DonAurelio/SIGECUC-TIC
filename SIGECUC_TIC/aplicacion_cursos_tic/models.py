@@ -195,6 +195,7 @@ class HistorialAcademico(models.Model):
 	caracter_tecnica = models.ManyToManyField(CaracterTecnica)
 	etnia_educativa = models.ManyToManyField(EtniaEducativa)
 	grado_escolar = models.ManyToManyField(GradosEscolares)
+	nivel_Escolar = models.ManyToManyField(NivelEscolar)
 	area_formacion_desarrollada = models.ManyToManyField(AreaFormacionDesarrollada)
 
 	class Meta:

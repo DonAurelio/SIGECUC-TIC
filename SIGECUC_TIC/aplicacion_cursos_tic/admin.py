@@ -17,6 +17,7 @@ from models import ZonaInstitucionEducativa
 from models import CaracterTecnica
 from models import EtniaEducativa
 from models import GradosEscolares
+from models import NivelEscolar
 from models import AreaFormacionDesarrollada
 
 
@@ -139,6 +140,10 @@ admin.site.register(EtniaEducativa, EtniaEducativaAdmin)
 class GradosEscolaresAdmin(admin.ModelAdmin):
     list_display = ('id', 'grado_escolar')
 admin.site.register(GradosEscolares, GradosEscolaresAdmin)
+
+class NivelEscolarAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nivel_escolar')
+admin.site.register(NivelEscolar, NivelEscolarAdmin)
 
 class AreaFormacionDesarrolladaAdmin(admin.ModelAdmin):
     list_display = ('id', 'area_formacion')
