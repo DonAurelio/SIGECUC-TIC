@@ -485,7 +485,7 @@ ul.breadcrumb li a:hover {
 ============================= */
 
 /* --- contact form  ---- */
-form#contactform input,select {
+form#contactform input{
   width: 100%;
   border: 1px solid #f5f5f5;
   min-height: 40px;
@@ -497,6 +497,8 @@ form#contactform input,select {
           box-sizing: border-box;
 
 }
+
+
 
 /*
 form#contactform input[type="text"] {

@@ -19,7 +19,8 @@ from django.http import HttpResponse
 def pagina_principal(request):
 	#funcion que lista los cursos activos cuando el estado es 1
 	cursos = Curso.objects.filter(estado='1')
-	context = { 'cursos':cursos }
+	user = request.user
+	context = { 'cursos':cursos,'user':user}
 	return render_to_response('inicio.html',context)
 
 def pagina_iniciar_sesion(request):
@@ -33,20 +34,28 @@ def pagina_iniciar_sesion(request):
 			if user is not None:
 				if user.is_active:
 					login(request,user)
-					
+					form = LoginForm()
 					message = "Te has identificacdo de modo correcto"
+					return render_to_response('master_teacher.html',{'user':user})
 				else: 
 					message = "Tu usuario esta inactivo"
 			else:
 				message = "Nombre de usuario y/o password incorrecto"
+		else:
+			message = "Formulario no valido" 
 	else:
 		form = LoginForm()
 
 	return render_to_response('login.html',{'message':message,'form':form}, context_instance=RequestContext(request))
 	
+def pagina_cerrar_sesion(request):
+	user = request.user
+	return render_to_response('inicio.html',{'user':user})
+
 
 def pagina_informacion(request):
-	return render_to_response('informacion.html')
+	user = request.user
+	return render_to_response('informacion.html',{'user':user})
 
 
 
@@ -108,7 +117,7 @@ def pagina_inscripcion_persona(request):
             form_HistorialLaboral.save_m2m() #Guarda las relaciones de ManyToMany
             fecha_actual =  datetime.datetime.now()
 
-            inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico)
+            inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico,id_course)
             inscrip.save()
 
             html = "<html><body><h1></h1><h3>Guardado %s</h3> </body></html>"

@@ -34,15 +34,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="inicio.html"><span>Sigecuc</span>tic</a>
+                    <a class="navbar-brand" href="inicio"><span>Sigecuc</span>tic</a>
                 </div>
+
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="inicio.html">inicio</a></li>
-                        <li class="active"><a href="login.html">iniciar sesion</a></li>
-                        <li><a href="informacion.html">mas informacion</a></li>
+                        <li class="active"><a href="inicio">inicio</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="active"><a href="cerra_sesion">cerrar sesion</a></li>
+                        {% else %}
+                        <li class="active"><a href="login">iniciar sesion</a></li>
+                        {% endif %}
+                        
+                        <li><a href="informacion">mas informacion</a></li>
                     </ul>
                 </div>
+
             </div>
         </div>
 	</header>

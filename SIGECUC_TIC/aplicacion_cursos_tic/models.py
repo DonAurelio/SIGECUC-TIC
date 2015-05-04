@@ -51,7 +51,7 @@ class Administrador(models.Model):
 
 
 class MasterTeacher(models.Model):
-	contrasenia = models.CharField(max_length=40)
+	user = models.ForeignKey(unique=True)
 	persona = models.OneToOneField(Persona, primary_key=True)
 
 #metodo para que retorne la identificacion de persona
@@ -128,6 +128,14 @@ class EtniaEducativa(models.Model):
 	def __str__(self):
 		return '%s' % (self.etnia_educativa)       
 
+class NivelEscolar(models.Model):
+	nivel_escolar = models.CharField(max_length=50)
+	class Meta:
+		verbose_name_plural = "Ver Nivel Escolar"
+
+	def __str__(self):
+		return '%s' % (self.nivel_escolar)  
+
 class GradosEscolares(models.Model):
 	grado_escolar = models.CharField(max_length=50)
 	class Meta:
@@ -138,7 +146,7 @@ class GradosEscolares(models.Model):
 
 
 class AreaFormacionDesarrollada(models.Model):
-	area_formacion = models.CharField(max_length=50)
+	area_formacion = models.CharField(max_length=200)
 	class Meta:
 		ordering = ["area_formacion"]
 		verbose_name_plural = "Ver Area Formacion Desarrollada"
@@ -195,33 +203,6 @@ class HistorialAcademico(models.Model):
 		return '%s' % (self.id)
 
 
-
-
-class Inscrito(models.Model):
-	persona = models.OneToOneField(Persona, primary_key=True)
-	fecha_inscripcion = models.DateField(auto_now_add=True)
-	estado = models.BooleanField(default=True)
-	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
-	historial_academico = models.OneToOneField(HistorialAcademico)
-#metodo para que retorne la identificacion de persona
-	def identificacion(self):
-		return (self.persona.identificacion)
-
-#metodo para que retorne el primer_nombre de persona
-	def primer_nombre(self):
-		return (self.persona.primer_nombre)
-
-#metodo para que retorne el segundo_nombre de  persona
-	def segundo_nombre(self):
-		return (self.persona.segundo_nombre)
-
-#metodo para que retorne el primer_apellido de  persona
-	def primer_apellido(self):
-		return (self.persona.primer_apellido)
-
-#metodo para que retorne el segundo_apellido de  persona
-	def segundo_apellido(self):
-		return (self.persona.segundo_apellido)
 
 
 class LeaderTeacher(models.Model):
@@ -322,6 +303,7 @@ class Cohorte(models.Model):
 	fecha_inicio = models.DateField()
 	fecha_fin = models.DateField()
 	curso = models.ForeignKey(Curso)
+	master_teacher = models.ForeignKey(MasterTeacher)
 
 	#metodo para que retorne el nombre del curso
 	def nombre_curso(self):
@@ -353,5 +335,30 @@ class LeaderTeacher_Cohorte(models.Model):
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
 
+class Inscrito(models.Model):
+	persona = models.OneToOneField(Persona, primary_key=True)
+	fecha_inscripcion = models.DateField(auto_now_add=True)
+	estado = models.BooleanField(default=True)
+	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
+	historial_academico = models.OneToOneField(HistorialAcademico)
+	curso = models.OneToOneField(Curso)
 
+#metodo para que retorne la identificacion de persona
+	def identificacion(self):
+		return (self.persona.identificacion)
 
+#metodo para que retorne el primer_nombre de persona
+	def primer_nombre(self):
+		return (self.persona.primer_nombre)
+
+#metodo para que retorne el segundo_nombre de  persona
+	def segundo_nombre(self):
+		return (self.persona.segundo_nombre)
+
+#metodo para que retorne el primer_apellido de  persona
+	def primer_apellido(self):
+		return (self.persona.primer_apellido)
+
+#metodo para que retorne el segundo_apellido de  persona
+	def segundo_apellido(self):
+		return (self.persona.segundo_apellido)
