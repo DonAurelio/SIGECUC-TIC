@@ -308,6 +308,10 @@ class Inscrito(models.Model):
 	def segundo_apellido(self):
 		return (self.persona.segundo_apellido)
 
+	def __str__(self):
+		return '%s %s %s %s' % (self.persona.identificacion, self.persona.primer_nombre, 
+			self.persona.primer_apellido, self.persona.segundo_apellido) 
+
 class LeaderTeacher(models.Model):
 	inscrito = models.OneToOneField(Inscrito, primary_key=True)
 	user = models.ForeignKey(User,unique=True)
