@@ -286,7 +286,7 @@ class Inscrito(models.Model):
 	estado = models.BooleanField(default=True)
 	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
 	historial_academico = models.OneToOneField(HistorialAcademico)
-	curso = models.OneToOneField(Curso)
+	curso = models.ForeignKey(Curso)
 
 	#metodo para que retorne la identificacion de persona
 	def identificacion(self):

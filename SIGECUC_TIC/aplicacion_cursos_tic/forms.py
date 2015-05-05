@@ -21,14 +21,14 @@ class InscripcionPersonaForm(forms.ModelForm):
 		model = Persona
 
 class HistorialAcademicoForm(forms.ModelForm):
-	zona_institucion_educativa = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
-		queryset=ZonaInstitucionEducativa.objects.all())
-	caracter_tecnica = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
-		queryset=CaracterTecnica.objects.all())
-	etnia_educativa = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
-		queryset=EtniaEducativa.objects.all())
-	grado_escolar = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
-		queryset=GradosEscolares.objects.all())
+	#zona_institucion_educativa = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
+		#queryset=ZonaInstitucionEducativa.objects.all())
+	#caracter_tecnica = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
+		#queryset=CaracterTecnica.objects.all())
+	#etnia_educativa = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
+		#queryset=EtniaEducativa.objects.all())
+	#grado_escolar = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
+		#queryset=GradosEscolares.objects.all())
 	class Meta:
 		model = HistorialAcademico
 

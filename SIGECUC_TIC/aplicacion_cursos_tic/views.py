@@ -11,10 +11,10 @@ from .models import Curso
 from .models import Inscrito
 from models import MasterTeacher
 from models import LeaderTeacher
-
 import datetime
 
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -36,14 +36,25 @@ def pagina_iniciar_sesion(request):
 			if user is not None:
 				if user.is_active:
 					login(request,user)
+					tipo_MasterTeacher = 0 
+					tipo_LeaderTeacher = 0
 					user_id = user.id
-					master_teacher = MasterTeacher.objects.filter(user_id=user_id)
-					leader_teacher = LeaderTeacher.objects.filter(user_id=user_id)
-					if master_teacher is not None:
+					try:
+						master_teacher = MasterTeacher.objects.get(user_id=user_id) #Busca solo un objeto
+						tipo_MasterTeacher = 1 #tipo de usuario Mater Teacher
+					except ObjectDoesNotExist:
+						tipo_MasterTeacher = 0
+					try:
+						leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+						tipo_LeaderTeacher = 1 #tipo de usuario Mater Teacher
+					except ObjectDoesNotExist:
+						tipo_LeaderTeacher = 0
+						
+					if tipo_MasterTeacher == 1:
 						message = "Te has identificacdo como MasterTeacher " + str(master_teacher.persona.identificacion)
-					elif leader_teacher is not None:
-						message = "Te has identificacdo como LeaderTeacher"
-				else: 
+					elif tipo_LeaderTeacher == 1:
+						message = "Te has identificacdo como LeaderTeacher "+ str(leader_teacher.inscrito.persona.identificacion)
+				elif tipo_MasterTeacher == 0 and tipo_LeaderTeacher == 0: 
 					message = "Tu usuario esta inactivo"
 			else:
 				message = "Nombre de usuario y/o password incorrecto"

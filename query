@@ -162,6 +162,16 @@ INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
 
 
 
+INSERT INTO aplicacion_cursos_tic_persona VALUES
+    (1, '1143843823', 'Aurelio', 'Antonio', 'Vivas', 'Meza', 'aurelio.vivas@correounivalle.edu.co', '3715781', 'Cr 4 # 38 - 26', 'soltero', 'MASCULINO');
+
+INSERT INTO aplicacion_cursos_tic_persona VALUES
+    (2, 'Maria', 'Paula', 'Antonio', 'Yackeno', 'Gaviria', 'paula@hotmail.com', '3489210', 'Cr 4 # 38 - 26', 'soltero', 'FEMENINO');
+
+
+
+
+
 
 
 
