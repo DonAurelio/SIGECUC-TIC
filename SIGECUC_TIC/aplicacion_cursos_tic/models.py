@@ -46,34 +46,36 @@ class Persona(models.Model):
 		self.segundo_apellido)
 
 
-class Administrador(models.Model):
-	contrasenia = models.CharField(max_length=40)
-	persona = models.OneToOneField(Persona, primary_key=True)
-
-
 class MasterTeacher(models.Model):
-	user = models.ForeignKey(User,unique=True)
 	persona = models.OneToOneField(Persona, primary_key=True)
+	user = models.ForeignKey(User,unique=True)
+	
 
-#metodo para que retorne la identificacion de persona
+	#metodo para que retorne la identificacion de persona
 	def identificacion(self):
 		return (self.persona.identificacion)
 
-#metodo para que retorne el primer_nombre de persona
+	#metodo para que retorne el primer_nombre de persona
 	def primer_nombre(self):
 		return (self.persona.primer_nombre)
 
-#metodo para que retorne el segundo_nombre de  persona
+	#metodo para que retorne el segundo_nombre de  persona
 	def segundo_nombre(self):
 		return (self.persona.segundo_nombre)
 
-#metodo para que retorne el primer_apellido de  persona
+	#metodo para que retorne el primer_apellido de  persona
 	def primer_apellido(self):
 		return (self.persona.primer_apellido)
 
-#metodo para que retorne el segundo_apellido de  persona
+	#metodo para que retorne el segundo_apellido de  persona
 	def segundo_apellido(self):
 		return (self.persona.segundo_apellido)
+
+	def nombre_usuario(self):
+		return (self.user.username)
+
+	def identificacion_usuario(self):
+		return (self.user.id)
 
 	class Meta:
 		verbose_name_plural = "Ver Master Teacher"
@@ -81,6 +83,79 @@ class MasterTeacher(models.Model):
 	def __str__(self):
 		return '%s %s %s' % (self.persona.identificacion,
 			 self.persona.primer_nombre, self.persona.primer_apellido)
+
+
+
+
+class AreaFormacion(models.Model):
+	nombre = models.CharField(max_length=30)
+	descripcion = models.TextField()
+
+	class Meta:
+			ordering = ["nombre"]
+			verbose_name_plural = "Ver Area de formacion"
+
+	def __str__(self):
+		return '%s' % (self.nombre)
+
+
+class ActividadEvaluacion(models.Model):
+	descripcion = models.TextField()
+	peso = models.DecimalField(max_digits=3, decimal_places=2)  # ej: 0.75
+
+	class Meta:
+		ordering = ["descripcion"]
+		verbose_name_plural = "Ver Actividad de evaluacion"
+
+	def __str__(self):
+		return '%s' % (self.descripcion)
+
+
+class Curso(models.Model):
+	nombre = models.CharField(max_length=50)
+	descripcion = models.TextField()
+	ACTIVO = '1'
+	INACTIVO = '0'
+	estado_curso = (
+		(ACTIVO, 'Activo'),
+		(INACTIVO, 'Inactivo'),
+	)
+	estado = models.CharField(max_length=30, choices=estado_curso,
+	default=estado_curso)  # BooleanField?
+	area_formacion = models.ManyToManyField(AreaFormacion)
+	actividad_evaluacion = models.ManyToManyField(ActividadEvaluacion)
+
+	class Meta:
+		ordering = ["nombre"]
+		verbose_name_plural = "Ver Cursos"
+
+	def __str__(self):
+		return '%s' % (self.nombre)
+
+
+class Cohorte(models.Model):
+	fecha_inicio = models.DateField()
+	fecha_fin = models.DateField()
+	curso = models.ForeignKey(Curso)
+	master_teacher = models.ForeignKey(MasterTeacher)
+
+	#metodo para que retorne el nombre del curso
+	def nombre_curso(self):
+		return (self.curso.nombre)
+	master_teacher = models.ForeignKey(MasterTeacher)
+
+	#metodo para que retorne el id del Master Teacher
+	def id_Master_Teacher(self):
+		return (self.master_teacher.persona.identificacion)
+
+	#metodo para que retorne el nombre del Master Teacher
+	def nombre_Master_Teacher(self):
+		return '%s %s' % (self.master_teacher.persona.primer_nombre,
+			self.master_teacher.persona.primer_apellido)
+
+	class Meta:
+		verbose_name_plural = "Ver Cohortes"
+
 
 
 class HistorialLaboral(models.Model):
@@ -205,44 +280,68 @@ class HistorialAcademico(models.Model):
 		return '%s' % (self.id)
 
 
-
-
-class LeaderTeacher(models.Model):
+class Inscrito(models.Model):
 	persona = models.OneToOneField(Persona, primary_key=True)
-	contrasenia = models.CharField(max_length=40)
-	#permiso = models.
-	#viatico = models.
+	fecha_inscripcion = models.DateField(auto_now_add=True)
+	estado = models.BooleanField(default=True)
+	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
+	historial_academico = models.OneToOneField(HistorialAcademico)
+	curso = models.OneToOneField(Curso)
 
 	#metodo para que retorne la identificacion de persona
 	def identificacion(self):
 		return (self.persona.identificacion)
 
-#metodo para que retorne el primer_nombre de persona
+	#metodo para que retorne el primer_nombre de persona
 	def primer_nombre(self):
 		return (self.persona.primer_nombre)
 
-#metodo para que retorne el segundo_nombre de  persona
+	#metodo para que retorne el segundo_nombre de  persona
 	def segundo_nombre(self):
 		return (self.persona.segundo_nombre)
 
-#metodo para que retorne el primer_apellido de  persona
+	#metodo para que retorne el primer_apellido de  persona
 	def primer_apellido(self):
 		return (self.persona.primer_apellido)
 
-#metodo para que retorne el segundo_apellido de  persona
+	#metodo para que retorne el segundo_apellido de  persona
 	def segundo_apellido(self):
 		return (self.persona.segundo_apellido)
 
+class LeaderTeacher(models.Model):
+	inscrito = models.OneToOneField(Inscrito, primary_key=True)
+	user = models.ForeignKey(User,unique=True)
+	#permiso = models.
+	#viatico = models.
+
+	#metodo para que retorne la identificacion de persona
+	def identificacion(self):
+		return (self.inscrito.persona.identificacion)
+
+	#metodo para que retorne el primer_nombre de persona
+	def primer_nombre(self):
+		return (self.inscrito.persona.primer_nombre)
+
+	#metodo para que retorne el segundo_nombre de  persona
+	def segundo_nombre(self):
+		return (self.inscrito.persona.segundo_nombre)
+
+	#metodo para que retorne el primer_apellido de  persona
+	def primer_apellido(self):
+		return (self.inscrito.persona.primer_apellido)
+
+	#metodo para que retorne el segundo_apellido de  persona
+	def segundo_apellido(self):
+		return (self.inscrito.persona.segundo_apellido)
+
+	def nombre_usuario(self):
+		return (self.user.username)
+
+	def identificacion_usuario(self):
+		return (self.user.id)
+	
+	#Se define una lista desplegable
 	fecha_nacimiento = models.DateField()
-#Se define una lista desplegable
-	MASCULINO = 'M'
-	FEMENINO = 'F'
-	sexo_opcion = (
-		(MASCULINO, 'Masculino'),
-		(FEMENINO, 'Femenino'),
-	)
-	sexo = models.CharField(max_length=1, choices=sexo_opcion,
-		 default=MASCULINO)  # {M, F}
 	ciudad_nacimiento = models.CharField(max_length=30)
 	pais_nacimiento = models.CharField(max_length=30)
 	ciudad_residencia = models.CharField(max_length=30)
@@ -255,112 +354,14 @@ class LeaderTeacher(models.Model):
 		verbose_name_plural = "Ver Leader Teacher"
 
 
-class AreaFormacion(models.Model):
-	nombre = models.CharField(max_length=30)
-	descripcion = models.TextField()
-
-	class Meta:
-			ordering = ["nombre"]
-			verbose_name_plural = "Ver Area de formacion"
-
-	def __str__(self):
-		return '%s' % (self.nombre)
-
-
-class ActividadEvaluacion(models.Model):
-	descripcion = models.TextField()
-	peso = models.DecimalField(max_digits=3, decimal_places=2)  # ej: 0.75
-
-	class Meta:
-		ordering = ["descripcion"]
-		verbose_name_plural = "Ver Actividad de evaluacion"
-
-	def __str__(self):
-		return '%s' % (self.descripcion)
-
-
-class Curso(models.Model):
-	nombre = models.CharField(max_length=50)
-	descripcion = models.TextField()
-	ACTIVO = '1'
-	INACTIVO = '0'
-	estado_curso = (
-		(ACTIVO, 'Activo'),
-		(INACTIVO, 'Inactivo'),
-	)
-	estado = models.CharField(max_length=30, choices=estado_curso,
-	default=estado_curso)  # BooleanField?
-	area_formacion = models.ManyToManyField(AreaFormacion)
-	actividad_evaluacion = models.ManyToManyField(ActividadEvaluacion)
-
-	class Meta:
-		ordering = ["nombre"]
-		verbose_name_plural = "Ver Cursos"
-
-	def __str__(self):
-		return '%s' % (self.nombre)
-
-
-class Cohorte(models.Model):
-	fecha_inicio = models.DateField()
-	fecha_fin = models.DateField()
-	curso = models.ForeignKey(Curso)
-	master_teacher = models.ForeignKey(MasterTeacher)
-
-	#metodo para que retorne el nombre del curso
-	def nombre_curso(self):
-		return (self.curso.nombre)
-	master_teacher = models.ForeignKey(MasterTeacher)
-
-	#metodo para que retorne el id del Master Teacher
-	def id_Master_Teacher(self):
-		return (self.master_teacher.persona.identificacion)
-
-	#metodo para que retorne el nombre del Master Teacher
-	def nombre_Master_Teacher(self):
-		return '%s %s' % (self.master_teacher.persona.primer_nombre,
-			self.master_teacher.persona.primer_apellido)
-
-	class Meta:
-		verbose_name_plural = "Ver Cohortes"
-
-
 class Calificacion(models.Model):
 	nota_actividad = models.DecimalField(max_digits=3, decimal_places=2)  # 4.25
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
 	actividad = models.ForeignKey(ActividadEvaluacion)
 
-
 class LeaderTeacher_Cohorte(models.Model):
 	nota_final = models.DecimalField(max_digits=3, decimal_places=2)
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
 
-class Inscrito(models.Model):
-	persona = models.OneToOneField(Persona, primary_key=True)
-	fecha_inscripcion = models.DateField(auto_now_add=True)
-	estado = models.BooleanField(default=True)
-	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
-	historial_academico = models.OneToOneField(HistorialAcademico)
-	curso = models.OneToOneField(Curso)
-
-#metodo para que retorne la identificacion de persona
-	def identificacion(self):
-		return (self.persona.identificacion)
-
-#metodo para que retorne el primer_nombre de persona
-	def primer_nombre(self):
-		return (self.persona.primer_nombre)
-
-#metodo para que retorne el segundo_nombre de  persona
-	def segundo_nombre(self):
-		return (self.persona.segundo_nombre)
-
-#metodo para que retorne el primer_apellido de  persona
-	def primer_apellido(self):
-		return (self.persona.primer_apellido)
-
-#metodo para que retorne el segundo_apellido de  persona
-	def segundo_apellido(self):
-		return (self.persona.segundo_apellido)

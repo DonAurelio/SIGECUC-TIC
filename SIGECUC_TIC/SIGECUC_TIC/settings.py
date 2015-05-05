@@ -101,3 +101,4 @@ STATICFILES_DIRS = (
     STATIC_PATH,
 )
 
+AUTH_PROFILE_MODULE = 'aplicacion_cursos_tic.MasterTeacher'
