@@ -1,20 +1,22 @@
 {% extends "cuenta_base.html" %}
-{% block first_menu_title %}
+{% block primer_menu_titulo %}
 Menu
 {% endblock %}
-{% block first_menu_item %}
+{% block primer_menu_item %}
 <li><i class="icon-angle-right"></i><a href="master_teacher_informacion_personal">Informacion Personal</a><span></span></li>
 
 {% endblock %}
 
-{% block second_menu_title %}
+{% block segundo_menu_titulo %}
 Cohorte Actual
 {% endblock %}
-{% block second_menu_item  %}
+{% block segundo_menu_item  %}
 <li><i class="icon-angle-right"></i><a href="master_teacher_actividades_evaluacion">Actividades de Evaluacion</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="master_teacher_estudiantes">Estudiantes</a><span></span></li>
 {% endblock %}
 
+
+<!-- Contenido -->
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
@@ -26,8 +28,10 @@ Cohorte Actual
 {% endblock %}
 
 {% block primer_boton %}
-{{ nombre_boton }}
+Aceptar
 {% endblock %}
 <!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->
 
 

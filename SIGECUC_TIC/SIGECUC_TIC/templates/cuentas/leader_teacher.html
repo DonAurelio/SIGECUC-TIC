@@ -1,33 +1,35 @@
 {% extends "cuenta_base.html" %}
 
 <!--Menu 1-->
-{% block first_menu_title %}
+{% block primer_menu_titulo %}
 Menu
 {% endblock %}
-{% block first_menu_item %}
+{% block primer_menu_item %}
 <li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_personal">Informacion Personal</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 1-->
 
 <!--Menu 2-->
-{% block second_menu_title %}
+{% block segundo_menu_titulo %}
 Curso Actual
 {% endblock %}
-{% block second_menu_item  %}
+{% block segundo_menu_item  %}
 <li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_curso">Informacion Curso</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="leader_teacher_calificaciones">Calificaciones</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 2 -->
 
 <!--Menu 3-->
-{% block third_menu_title %}
+{% block tercer_menu_titulo %}
 Cursos
 {% endblock %}
-{% block third_menu_item  %}
+{% block tercer_menu_item  %}
 <li><i class="icon-angle-right"></i><a href="leader_teacher_historial_academico">Historial Academico</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="leader_teacher_certificados_obtenidos">Certificados Obtenidos</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 3 -->
+
+<!-- Contenido -->
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
@@ -39,7 +41,8 @@ Cursos
 {% endblock %}
 
 {% block primer_boton %}
-{{ nombre_boton }}
+Aceptar
 {% endblock %}
 <!-- Fin Primer bloque -->
 
+<!-- Fin Contenido -->
