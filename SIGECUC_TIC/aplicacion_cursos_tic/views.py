@@ -102,18 +102,61 @@ def pagina_informacion(request):
 #======================================> MASTER TEACHER VIEWS <===========================================
 def pagina_master_teacher_informacion_personal(request):
 	user = request.user
-	contexto = {'user':user}
-	return render_to_response('master_teacher_informacion_personal.html',contexto)
+	titulo = "Informacion Personal"
+	titulo_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'titulo_boton':titulo_boton}
+	return render_to_response('master_teacher.html',contexto)
 
 def pagina_master_teacher_actividades_evaluacion(request):
 	user = request.user
-	contexto = {'user':user}
-	return render_to_response('master_teacher_actividades_evaluacion.html',contexto)
+	titulo = "Actividades Evaluacion"
+	titulo_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'titulo_boton':titulo_boton}
+	return render_to_response('master_teacher.html',contexto)
 
 def pagina_master_teacher_estudiantes(request):
 	user = request.user
-	contexto = {'user':user}
-	return render_to_response('master_teacher_estudiantes.html',contexto)
+	titulo = "Estudiantes"
+	titulo_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'titulo_boton':titulo_boton}
+	return render_to_response('master_teacher.html',contexto)
+
+#======================================> LEADER TEACHER VIEWS <===========================================
+
+def pagina_leader_teacher_informacion_personal(request):
+	user = request.user
+	titulo = "Informacion Personal"
+	nombre_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'nombre_boton':nombre_boton}
+	return render_to_response('leader_teacher.html',contexto)
+
+def pagina_leader_teacher_informacion_curso(request):
+	user = request.user
+	titulo = "Informacion Curso"
+	nombre_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'nombre_boton':nombre_boton}
+	return render_to_response('leader_teacher.html',contexto)
+
+def pagina_leader_teacher_calificaciones(request):
+	user = request.user
+	titulo = "Calificaciones"
+	nombre_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'nombre_boton':nombre_boton}
+	return render_to_response('leader_teacher.html',contexto)
+
+def pagina_leader_teacher_historial_academico(request):
+	user = request.user
+	titulo = "Historial Academico"
+	nombre_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'nombre_boton':nombre_boton}
+	return render_to_response('leader_teacher.html',contexto)
+
+def pagina_leader_teacher_certificados_obtenidos(request):
+	user = request.user
+	titulo = "Estudiantes"
+	nombre_boton = "Aceptar"
+	contexto = {'user':user,'titulo':titulo,'nombre_boton':nombre_boton}
+	return render_to_response('leader_teacher.html',contexto)
 
 
 

@@ -5,7 +5,7 @@
 Menu
 {% endblock %}
 {% block first_menu_item %}
-<li><i class="icon-angle-right"></i><a href="#">Informacion Personal</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_personal">Informacion Personal</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 1-->
 
@@ -14,8 +14,8 @@ Menu
 Curso Actual
 {% endblock %}
 {% block second_menu_item  %}
-<li><i class="icon-angle-right"></i><a href="#">Informacion Curso</a><span></span></li>
-<li><i class="icon-angle-right"></i><a href="#">Calificaciones</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_curso">Informacion Curso</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_calificaciones">Calificaciones</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 2 -->
 
@@ -24,35 +24,22 @@ Curso Actual
 Cursos
 {% endblock %}
 {% block third_menu_item  %}
-<li><i class="icon-angle-right"></i><a href="#">Historial Cursos</a><span></span></li>
-<li><i class="icon-angle-right"></i><a href="#">Certificados Obtenidos</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_historial_academico">Historial Academico</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_certificados_obtenidos">Certificados Obtenidos</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 3 -->
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
-Titulo 1
+{{ titulo }}
 {% endblock %}
 
 {% block primer_contenido %}
-Contenido 1
+{{ formulario.as_p }}
 {% endblock %}
 
 {% block primer_boton %}
-Boton 1
+{{ nombre_boton }}
 {% endblock %}
 <!-- Fin Primer bloque -->
 
-<!-- Segundo bloque -->
-{% block segundo_titulo %}
-Titulo 2
-{% endblock %}
-
-{% block segundo_bloque %}
-Contenido 2
-{% endblock %}
-
-{% block segundo_boton %}
-Boton 2
-{% endblock %}
-<!-- Fin Segundo bloque -->
