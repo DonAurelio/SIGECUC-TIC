@@ -18,6 +18,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
+#======================================> MENU PRINCIPAL VIEWS <==========================================
+
 def pagina_principal(request):
 	#funcion que lista los cursos activos cuando el estado es 1
 	cursos = Curso.objects.filter(estado='1')
@@ -51,10 +53,11 @@ def pagina_iniciar_sesion(request):
 						tipo_LeaderTeacher = 0
 						
 					if tipo_MasterTeacher == 1:
+						form = LoginForm()
 						#message = "Te has identificacdo como MasterTeacher " + str(master_teacher.persona.identificacion)
-						return render_to_response('master_teacher.html',{'user':user, 'master_teacher':master_teacher})
+						return render_to_response('master_teacher.html',{'user':user})
 					elif tipo_LeaderTeacher == 1:
-						message = "Te has identificacdo como LeaderTeacher "+ str(leader_teacher.inscrito.persona.identificacion)
+						return render_to_response('leader_teacher.html',{'user':user})
 				elif tipo_MasterTeacher == 0 and tipo_LeaderTeacher == 0: 
 					message = "Tu usuario esta inactivo"
 			else:
@@ -67,10 +70,51 @@ def pagina_iniciar_sesion(request):
 	#return render_to_response('login.html',{'message':message})
 	return render_to_response('login.html',{'message':message,'form':form}, context_instance=RequestContext(request))
 
+def pagina_perfil(request):
+	user = request.user
+	tipo_MasterTeacher = 0 
+	tipo_LeaderTeacher = 0
+	user_id = user.id
+	try:
+		master_teacher = MasterTeacher.objects.get(user_id=user_id) #Busca solo un objeto
+		tipo_MasterTeacher = 1 #tipo de usuario Mater Teacher
+	except ObjectDoesNotExist:
+		tipo_MasterTeacher = 0
+	try:
+		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+		tipo_LeaderTeacher = 1 #tipo de usuario Mater Teacher
+	except ObjectDoesNotExist:
+		tipo_LeaderTeacher = 0
+		
+	if tipo_MasterTeacher == 1:
+		form = LoginForm()
+		#message = "Te has identificacdo como MasterTeacher " + str(master_teacher.persona.identificacion)
+		return render_to_response('master_teacher.html',{'user':user})
+	elif tipo_LeaderTeacher == 1:
+		return render_to_response('leader_teacher.html',{'user':user})
+
 
 def pagina_informacion(request):
 	user = request.user
 	return render_to_response('informacion.html',{'user':user})
+
+
+#======================================> MASTER TEACHER VIEWS <===========================================
+def pagina_master_teacher_informacion_personal(request):
+	user = request.user
+	contexto = {'user':user}
+	return render_to_response('master_teacher_informacion_personal.html',contexto)
+
+def pagina_master_teacher_actividades_evaluacion(request):
+	user = request.user
+	contexto = {'user':user}
+	return render_to_response('master_teacher_actividades_evaluacion.html',contexto)
+
+def pagina_master_teacher_estudiantes(request):
+	user = request.user
+	contexto = {'user':user}
+	return render_to_response('master_teacher_estudiantes.html',contexto)
+
 
 
 

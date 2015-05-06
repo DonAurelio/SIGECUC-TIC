@@ -16,7 +16,7 @@
 			<div class="col-lg-12">
 				<ul class="breadcrumb">
 					<li><a href="#"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-					<li class="active">{{ master_teacher.persona.primer_nombre}} </li>
+					<li class="active"> {{ user.username }} </li>
 				</ul>
 			</div>
 		</div>
@@ -75,28 +75,39 @@
 			<div class="col-lg-4">
 				<aside class="right-sidebar">
 
-				<!-- Opciones del menu -->
+				<!-- Menu 1 -->
 				<div class="widget">
-					<h5 class="widgetheading">{% block menu_title %}{% endblock %}</h5>
+					<h5 class="widgetheading">{% block first_menu_title %}{% endblock %}</h5>
 					<ul class="cat">
 						<!-- Items del menu --> 
-						{% block menu_item %}{% endblock %}
+						{% block first_menu_item %}{% endblock %}
 						
 						
 					</ul>
 				</div>
-				<!-- Fin opciones del menu -->
+				<!-- Fin Menu 1 -->
 
-				<!-- Submenu -->
+				<!-- Menu 2 -->
 				<div class="widget">
-					<h5 class="widgetheading">{% block submenu_title %}{% endblock %}</h5>
+					<h5 class="widgetheading">{% block second_menu_title %}{% endblock %}</h5>
 					<ul class="cat">
 						
-						<li><a href="#">{% block submenu_item %}{% endblock %}</a></li>
+						<li><a href="#">{% block second_menu_item %}{% endblock %}</a></li>
 						
 					</ul>
 				</div>
-				<!-- Fin submenu -->
+				<!-- Fin Menu 2 -->
+
+				<!-- Menu 3 -->
+				<div class="widget">
+					<h5 class="widgetheading">{% block third_menu_title %}{% endblock %}</h5>
+					<ul class="cat">
+						
+						<li><a href="#">{% block third_menu_item %}{% endblock %}</a></li>
+						
+					</ul>
+				</div>
+				<!-- Fin Menu 3 -->
 				</aside>
 			</div>
 			<!-- Fin Bloque del Menu -->

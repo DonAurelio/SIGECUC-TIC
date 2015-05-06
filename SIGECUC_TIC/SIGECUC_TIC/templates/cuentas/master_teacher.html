@@ -1,32 +1,28 @@
 {% extends "cuenta_base.html" %}
-{% block menu_title %}
+{% block first_menu_title %}
 Menu
 {% endblock %}
-{% block menu_item %}
-<li><i class="icon-angle-right"></i><a href="#">Informacion Personal</a><span></span></li>
+{% block first_menu_item %}
+<li><i class="icon-angle-right"></i><a href="master_teacher/informacion_personal">Informacion Personal</a><span></span></li>
 
 {% endblock %}
 
-{% block submenu_title %}
-Cohorte
+{% block second_menu_title %}
+Cohorte Actual
 {% endblock %}
-{% block submenu_item  %}
-<li><i class="icon-angle-right"></i><a href="#">Actividades de Evaluacion</a><span></span></li>
-<li><i class="icon-angle-right"></i><a href="#">Estudiantes</a><span></span></li>
-<li><i class="icon-angle-right"></i><a href="#">Calificar Estudiantes</a><span></span></li>
+{% block second_menu_item  %}
+<li><i class="icon-angle-right"></i><a href="master_teacher/actividades_evaluacion">Actividades de Evaluacion</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="master_teacher/estudiantes">Estudiantes</a><span></span></li>
 {% endblock %}
 
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
-{% if form  %}
-	
-{% endif %}
 Titulo 1
 {% endblock %}
 
 {% block primer_contenido %}
-{{ form.as_p }}
+Contenido 1
 {% endblock %}
 
 {% block primer_boton %}
