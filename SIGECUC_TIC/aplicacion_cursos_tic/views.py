@@ -51,7 +51,8 @@ def pagina_iniciar_sesion(request):
 						tipo_LeaderTeacher = 0
 						
 					if tipo_MasterTeacher == 1:
-						message = "Te has identificacdo como MasterTeacher " + str(master_teacher.persona.identificacion)
+						#message = "Te has identificacdo como MasterTeacher " + str(master_teacher.persona.identificacion)
+						return render_to_response('master_teacher.html',{'user':user, 'master_teacher':master_teacher})
 					elif tipo_LeaderTeacher == 1:
 						message = "Te has identificacdo como LeaderTeacher "+ str(leader_teacher.inscrito.persona.identificacion)
 				elif tipo_MasterTeacher == 0 and tipo_LeaderTeacher == 0: 
