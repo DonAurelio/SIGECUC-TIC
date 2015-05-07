@@ -1,0 +1,101 @@
+from django.contrib import admin
+
+#Importando modelos de la aplicacion cursos
+from apps.cursos.models import HistorialLaboral
+from apps.cursos.models import HistorialAcademico
+from apps.cursos.models import Inscrito
+from apps.cursos.models import AreaFormacion
+from apps.cursos.models import ActividadEvaluacion
+from apps.cursos.models import Curso
+from apps.cursos.models import Cohorte
+from apps.cursos.models import Calificacion
+from apps.cursos.models import LeaderTeacher_Cohorte
+from apps.cursos.models import ZonaInstitucionEducativa
+from apps.cursos.models import CaracterTecnica
+from apps.cursos.models import EtniaEducativa
+from apps.cursos.models import GradosEscolares
+from apps.cursos.models import NivelEscolar
+from apps.cursos.models import AreaFormacionDesarrollada
+
+class HistorialLaboralAdmin(admin.ModelAdmin):
+    list_display=('id', 'exp_preescolar', 'exp_primaria', 'exp_total')
+    search_fields =('id','exp_total')
+
+admin.site.register(HistorialLaboral, HistorialLaboralAdmin)
+
+class HistorialAcademicoAdmin(admin.ModelAdmin):
+    list_display=('id', 'caracter_educacion_media')
+    search_fields =('id', 'caracter_educacion_media')
+admin.site.register(HistorialAcademico, HistorialAcademicoAdmin)
+
+class InscritoAdmin(admin.ModelAdmin):
+    #Muestra las columnas de la tabla
+    list_display = ('identificacion', 'primer_nombre', 'segundo_nombre',
+    'primer_apellido', 'segundo_apellido')
+    #criterios de filtro de busqueda
+    search_fields = ('persona__identificacion', 'persona__primer_nombre',
+        'persona__segundo_nombre', 'persona__primer_apellido',
+        'persona__segundo_apellido')
+
+admin.site.register(Inscrito, InscritoAdmin)
+
+#Recarga la lista de Area_formacion.
+class Area_formacionAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'descripcion')
+    search_fields = ('nombre', 'descripcion')
+admin.site.register(AreaFormacion, Area_formacionAdmin)
+
+
+#Recarga la lista de curso.
+class ActividadEvaluacionAdmin(admin.ModelAdmin):
+    list_display = ('descripcion', 'peso')
+    search_fields = ('descripcion', 'peso')
+admin.site.register(ActividadEvaluacion, ActividadEvaluacionAdmin)
+
+
+#Recarga la lista de curso.
+class CursoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'estado', 'descripcion')
+    search_fields = ('nombre', 'estado')
+    filter_horizontal = ('actividad_evaluacion',)
+admin.site.register(Curso, CursoAdmin)
+
+
+#Recarga la lista de cohorte.
+class CohorteAdmin(admin.ModelAdmin):
+    list_display = ('fecha_inicio', 'fecha_fin', 'nombre_curso',
+    'id_Master_Teacher', 'nombre_Master_Teacher')
+    #busca deacuerdo a la llave foranea
+    search_fields = ('fecha_inicio', 'fecha_fin', 'curso__nombre',
+    'master_teacher__persona__identificacion',
+    'master_teacher__persona__primer_nombre')
+admin.site.register(Cohorte, CohorteAdmin)
+admin.site.register(Calificacion)
+admin.site.register(LeaderTeacher_Cohorte)
+
+#Recarga la lista de Area_formacion.
+class ZonaInstitucionEducativaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'zona')
+
+admin.site.register(ZonaInstitucionEducativa, ZonaInstitucionEducativaAdmin)
+
+class CaracterTecnicaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'caracter_tecnico')
+admin.site.register(CaracterTecnica, CaracterTecnicaAdmin)
+
+class EtniaEducativaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'etnia_educativa')
+admin.site.register(EtniaEducativa, EtniaEducativaAdmin)
+
+class GradosEscolaresAdmin(admin.ModelAdmin):
+    list_display = ('id', 'grado_escolar')
+admin.site.register(GradosEscolares, GradosEscolaresAdmin)
+
+class NivelEscolarAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nivel_escolar')
+admin.site.register(NivelEscolar, NivelEscolarAdmin)
+
+class AreaFormacionDesarrolladaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'area_formacion')
+admin.site.register(AreaFormacionDesarrollada, AreaFormacionDesarrolladaAdmin)
+

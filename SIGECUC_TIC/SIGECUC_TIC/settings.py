@@ -24,7 +24,8 @@ INSTALLED_APPS = (
 'django.contrib.sessions', #Aplicacion Django para el manejo de seciones
 'django.contrib.messages',
 'django.contrib.staticfiles',
-'aplicacion_cursos_tic', #Aplicacion SIGECUC_TIC
+'apps.inicio',
+'apps.cursos', #Aplicacion SIGECUC_TIC
 )
 MIDDLEWARE_CLASSES = (
 'django.contrib.sessions.middleware.SessionMiddleware', #Middleware Django para el inicio de sesion
@@ -46,7 +47,7 @@ WSGI_APPLICATION = 'SIGECUC_TIC.wsgi.application'
 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 # }
 #}
-"""
+
 DATABASES = {
 'default': {
 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -69,21 +70,25 @@ DATABASES = {
 'PORT': '5432', # Set to empty string for default. Not used with sqlite3.
 }
 }
-
-#Modificacion paths (Aurelio)
+"""
+#LOCALIZACION DE LOS TEMPLATES DE LAS APLICACIONES
 SETTINGS_DIR = os.path.dirname(__file__)
 TEMPLATE_PATH = os.path.join(SETTINGS_DIR, 'templates').replace('\\','/')
-#Ubicacion de los templates relacionados con las cuentas de los usuarios
-TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
+
+
+TEMPLATE_PATH_INICIO = os.path.join(SETTINGS_DIR, 'templates/inicio').replace('\\','/')
 TEMPLEATE_PATH_BASE = os.path.join(SETTINGS_DIR, 'templates/base').replace('\\','/')
-TEMPLATE_PATH_INSCRIPCTION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
+#TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
+#TEMPLATE_PATH_INSCRIPCTION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
 
 #Declaramos la ruta donde quedaran alamcenadas todas las templates del proyecto
 TEMPLATE_DIRS = (
-TEMPLATE_PATH,
-TEMPLATE_PATH_ACCOUNTS,
 TEMPLEATE_PATH_BASE,
-TEMPLATE_PATH_INSCRIPCTION,
+TEMPLATE_PATH_INICIO,
+#TEMPLATE_PATH,
+#TEMPLATE_PATH_ACCOUNTS,
+
+#TEMPLATE_PATH_INSCRIPCTION,
 )
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -102,4 +107,3 @@ STATICFILES_DIRS = (
     STATIC_PATH,
 )
 
-AUTH_PROFILE_MODULE = 'aplicacion_cursos_tic.MasterTeacher'
