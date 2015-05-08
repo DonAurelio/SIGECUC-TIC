@@ -39,9 +39,10 @@
 
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
+                       
                         <li class="active"><a href="{% url "inicio:principal" %}">inicio</a></li>
                         {% if user.is_authenticated %}
-                        <li class="active"><a href="{% url "inicio:perfil" %}">Perfil</a></li>
+                        <li class="active"><a href="{% url "inicio:perfil" %}"> Perfil {{ user.username }} </a></li>
                         <li class="active"><a href="{% url "inicio:cerrarsesion" %}">cerrar sesion</a></li>
                         {% else %}
                         <li class="active"><a href="{% url "inicio:login" %}">iniciar sesion</a></li>
