@@ -7,14 +7,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
 
-
 #Models de la aplicacion cursos
 from apps.cursos.models import Curso
 
 #Modelos de aplicacion inicio
 from .forms import LoginForm
-from .models import MasterTeacher
-from .models import LeaderTeacher
+from apps.cursos.models import MasterTeacher
+from apps.cursos.models import LeaderTeacher
 
 #Importamos 
 from logica.PerfilFabrica import FabricaPaginaPrincipalUsuario
@@ -31,34 +30,16 @@ def pagina_iniciar_sesion(request):
 
 	if request.method == "POST":
 		form = LoginForm(request.POST)
-		fabriba_pagina_usuario = FabricaPaginaPrincipalUsuario(request,form)
-		pagina_usuario_html = fabriba_pagina_usuario.obtener_pagina_html_usuario()
+		fabriba_pagina_usuario = FabricaPaginaPrincipalUsuario(request)
+		pagina_usuario_html = fabriba_pagina_usuario.obtener_pagina_html_usuario(form)
 		return pagina_usuario_html.obtener_pagina()
 
 	return render_to_response('login.html',{'message':message}, context_instance=RequestContext(request))
 
 def pagina_perfil(request):
-	user = request.user
-	tipo_MasterTeacher = 0 
-	tipo_LeaderTeacher = 0
-	user_id = user.id
-	try:
-		master_teacher = MasterTeacher.objects.get(user_id=user_id) #Busca solo un objeto
-		tipo_MasterTeacher = 1 #tipo de usuario Mater Teacher
-	except ObjectDoesNotExist:
-		tipo_MasterTeacher = 0
-	try:
-		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
-		tipo_LeaderTeacher = 1 #tipo de usuario Mater Teacher
-	except ObjectDoesNotExist:
-		tipo_LeaderTeacher = 0
-		
-	if tipo_MasterTeacher == 1:
-		form = LoginForm()
-		#message = "Te has identificacdo como MasterTeacher " + str(master_teacher.persona.identificacion)
-		return render_to_response('master_teacher.html',{'user':user})
-	elif tipo_LeaderTeacher == 1:
-		return render_to_response('leader_teacher.html',{'user':user})
+	fabriba_pagina_usuario = FabricaPaginaPrincipalUsuario(request)
+	perfil_usuario_html = fabriba_pagina_usuario.obtener_perfil_usuario_html()
+	return perfil_usuario_html.obtener_pagina()
 
 def pagina_informacion(request):
 	user = request.user

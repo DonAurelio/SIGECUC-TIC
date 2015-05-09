@@ -3,8 +3,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
-from apps.inicio.models import MasterTeacher
-from apps.inicio.models import LeaderTeacher
+from apps.cursos.models import MasterTeacher
+from apps.cursos.models import LeaderTeacher
 
 class PerfilHtml:
 
@@ -53,13 +53,13 @@ class ErrorHtml(PerfilHtml):
 #del usuario que esta logeado
 class FabricaPaginaPrincipalUsuario:
 
-	def __init__(self,request,formulario_login):
+	def __init__(self,request):
 		self.request = request
-		self.formulario = formulario_login
+			
 		
-	def obtener_pagina_html_usuario(self):
+	def obtener_pagina_html_usuario(self,formulario):
 		message = ""
-		if self.formulario.is_valid():
+		if formulario.is_valid():
 			username = self.request.POST['username']
 			password = self.request.POST['password']
 			user = authenticate(username=username,password=password)
@@ -109,4 +109,40 @@ class FabricaPaginaPrincipalUsuario:
 		
 		error_html = ErrorHtml(self.request,message)
 		return error_html
+
+	def obtener_perfil_usuario_html(self):
+
+		#Si el usuario tiene permisos de Administrador 
+		#Entonces se redirecciona a la url admin
+		user = self.request.user
+		if user.is_staff:
+			pagina_administrador = AdministradorHtml(self.request)
+			return pagina_administrador
+
+		#Si el usuario es Master Teacher o Leader Teacher
+		tipo_MasterTeacher = 0 
+		tipo_LeaderTeacher = 0
+		user_id = user.id
+
+		#Se verifica que tipo de usuario es 
+		try:
+			master_teacher = MasterTeacher.objects.get(user_id=user_id) #Busca solo un objeto
+			tipo_MasterTeacher = 1 #tipo de usuario Mater Teacher
+		except ObjectDoesNotExist:
+			tipo_MasterTeacher = 0
+		try:
+			leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+			tipo_LeaderTeacher = 1 #tipo de usuario Mater Teacher
+		except ObjectDoesNotExist:
+			tipo_LeaderTeacher = 0
+		
+
+		if tipo_MasterTeacher == 1:
+			pagina_master_teacher = MasterTeacherHtml(self.request,user)				
+			return pagina_master_teacher
+		
+		elif tipo_LeaderTeacher == 1:
+			pagina_leader_teacher = LeaderTeacherHtml(self.request,user)
+			return pagina_leader_teacher
+
 		

@@ -70,11 +70,8 @@ def listar_cursos(request):
 def pagina_inscripcion_curso(request):
 	id_course = request.GET.get('id_course')
 	name_course = request.GET.get('name_course')
-	#return render(request, 'inscripcion.html', {'id_course': id_course, 'name_course': name_course})
 	return render_to_response('inscripcion_base.html')
-	#html = "<html><body><h1>id course:</h1><h3>%s<h/3> <h1> Name curso</h1><h2>%s<h/2></body></html>" % (id_course, name_course)
-	#return HttpResponse(html)
-
+	
 
 def inscripcion(request):
 	return render_to_response('inscripcion.html')
