@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
+from django.core.exceptions import ObjectDoesNotExist
 
 from apps.cursos.models import MasterTeacher
 from apps.cursos.models import LeaderTeacher
@@ -92,11 +93,11 @@ class FabricaPaginaPrincipalUsuario:
 					
 
 					if tipo_MasterTeacher == 1:
-						pagina_master_teacher = MasterTeacherHtml(self.request,user)				
+						pagina_master_teacher = MasterTeacherHtml(self.request)				
 						return pagina_master_teacher
 					
 					elif tipo_LeaderTeacher == 1:
-						pagina_leader_teacher = LeaderTeacherHtml(self.request,user)
+						pagina_leader_teacher = LeaderTeacherHtml(self.request)
 						return pagina_leader_teacher
 				
 				elif tipo_MasterTeacher == 0 and tipo_LeaderTeacher == 0: 
@@ -138,11 +139,11 @@ class FabricaPaginaPrincipalUsuario:
 		
 
 		if tipo_MasterTeacher == 1:
-			pagina_master_teacher = MasterTeacherHtml(self.request,user)				
+			pagina_master_teacher = MasterTeacherHtml(self.request)				
 			return pagina_master_teacher
 		
 		elif tipo_LeaderTeacher == 1:
-			pagina_leader_teacher = LeaderTeacherHtml(self.request,user)
+			pagina_leader_teacher = LeaderTeacherHtml(self.request)
 			return pagina_leader_teacher
 
 		

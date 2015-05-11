@@ -49,6 +49,7 @@ WSGI_APPLICATION = 'SIGECUC_TIC.wsgi.application'
 # }
 #}
 
+"""
 DATABASES = {
 'default': {
 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -59,7 +60,6 @@ DATABASES = {
 'PORT': '', # Set to empty string for default. Not used with sqlite3.
 }
 }
-
 """
 DATABASES = {
 'default': {
@@ -71,12 +71,14 @@ DATABASES = {
 'PORT': '5432', # Set to empty string for default. Not used with sqlite3.
 }
 }
-"""
+
 #LOCALIZACION DE LOS TEMPLATES DE LAS APLICACIONES
 SETTINGS_DIR = os.path.dirname(__file__)
 TEMPLATE_PATH = os.path.join(SETTINGS_DIR, 'templates').replace('\\','/')
 TEMPLATE_PATH_INICIO = os.path.join(SETTINGS_DIR, 'templates/inicio').replace('\\','/')
 TEMPLEATE_PATH_BASE = os.path.join(SETTINGS_DIR, 'templates/base').replace('\\','/')
+TEMPLEATE_PATH_CUENTAS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
+TEMPLEATE_PATH_INSCRIPCION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
 
 #TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
 #TEMPLATE_PATH_INSCRIPCTION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
@@ -86,6 +88,8 @@ TEMPLATE_DIRS = (
 TEMPLATE_PATH,
 TEMPLEATE_PATH_BASE,
 TEMPLATE_PATH_INICIO,
+TEMPLEATE_PATH_CUENTAS,
+TEMPLEATE_PATH_INSCRIPCION,
 
 #TEMPLATE_PATH,
 #TEMPLATE_PATH_ACCOUNTS,

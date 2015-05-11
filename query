@@ -1,171 +1,171 @@
-INSERT INTO aplicacion_cursos_tic_zonainstitucioneducativa VALUES
+INSERT INTO cursos_zonainstitucioneducativa VALUES
     (1, 'Zona urbana');
-INSERT INTO aplicacion_cursos_tic_zonainstitucioneducativa VALUES
+INSERT INTO cursos_zonainstitucioneducativa VALUES
     (2, 'Zona urbana marginal');
-INSERT INTO aplicacion_cursos_tic_zonainstitucioneducativa VALUES
+INSERT INTO cursos_zonainstitucioneducativa VALUES
     (3, 'Zona rural');
-INSERT INTO aplicacion_cursos_tic_zonainstitucioneducativa VALUES
+INSERT INTO cursos_zonainstitucioneducativa VALUES
     (4, 'Zona rural de dificil acceso');
 
 
 
 
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (1, 'Agropecuaria');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (2, 'Comercial');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (3, 'Promocion social');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (4, 'Finanzas');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (5, 'Administracion');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (6, 'Ecologia');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (7, 'Medio ambiente');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (8, 'Industrial');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (9, 'Informatica');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (10, 'Mineria');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (11, 'Salud');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (12, 'Recreacion');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (13, 'Turismo');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (14, 'Deporte');
 
-INSERT INTO aplicacion_cursos_tic_caractertecnica VALUES
+INSERT INTO cursos_caractertecnica VALUES
     (15, 'Otro');
 
 
 
 
-INSERT INTO aplicacion_cursos_tic_etniaeducativa VALUES
+INSERT INTO cursos_etniaeducativa VALUES
     (1, 'Etnia afrocolombiana');
 
-INSERT INTO aplicacion_cursos_tic_etniaeducativa VALUES
+INSERT INTO cursos_etniaeducativa VALUES
     (2, 'Etnia indigena');
 
-INSERT INTO aplicacion_cursos_tic_etniaeducativa VALUES
+INSERT INTO cursos_etniaeducativa VALUES
     (3, 'Etnia Rom');
 
-INSERT INTO aplicacion_cursos_tic_etniaeducativa VALUES
+INSERT INTO cursos_etniaeducativa VALUES
     (4, 'Ninguna de las anteriores');
 
 
 
 
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (1, 'Transicion');
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (2, 'Educacion Inicial');
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (3, 'Educacion basica primaria');
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (4, 'Educacion basica secundaria');
 
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (5, 'Educacion media');
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (6, 'Nivel superior');
 
-INSERT INTO aplicacion_cursos_tic_nivelescolar VALUES
+INSERT INTO cursos_nivelescolar VALUES
     (7, 'Otro');
 
 
 
 
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (1, 'Transicion');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (2, 'Educacion inicial');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (3, '1');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (4, '2');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (5, '3');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (6, '4');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (7, '5');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (8, '6');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (9, '7');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (10, '8');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (11, '9');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (12, '10');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (13, '11');
-INSERT INTO aplicacion_cursos_tic_gradosescolares VALUES
+INSERT INTO cursos_gradosescolares VALUES
     (14, '12');
 
 
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (1, 'Ciencias Naturales y educacion ambiental');
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (2, 'Ciencias Sociales: historia, geografia y constitucion politica');
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (3, 'Educacion Artistica');
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (4, 'Educacion etica y valores humanos');
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (5, 'Educacion fisica recreacion y deportes');
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (6, 'Educacion Religiosa');
 
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (7, 'Humanidades, lengua castellana e idioma extranjero (ingles)');
 
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (8, 'Matematicas');
 
-INSERT INTO aplicacion_cursos_tic_areaformaciondesarrollada VALUES
+INSERT INTO cursos_areaformaciondesarrollada VALUES
     (9, 'Tecnologia e Informatica');
 
 
 
-INSERT INTO aplicacion_cursos_tic_persona VALUES
+INSERT INTO cursos_persona VALUES
     ('1143843823', 'Aurelio', 'Antonio', 'Vivas', 'Meza', 'aurelio.vivas@correounivalle.edu.co', '3715781', 'Cr 4 # 38 - 26', 'soltero', 'MASCULINO');
 
-INSERT INTO aplicacion_cursos_tic_persona VALUES
+INSERT INTO cursos_persona VALUES
     ('522511', 'Maria', 'Paula', 'Yackeno', 'Gaviria', 'paula@hotmail.com', '3489210', 'Cr 4 # 38 - 26', 'soltero', 'FEMENINO');
 
 
