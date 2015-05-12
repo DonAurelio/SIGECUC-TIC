@@ -1,5 +1,13 @@
-{% load static %}
-{% block body %}
+{% extends "master_teacher.html" %}
+
+<!-- Contenido -->
+
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Informacion Personal
+{% endblock %}
+
+{% block primer_contenido %}
 <form id='contactform' method='post' action=''>{% csrf_token %}
 <!--{% include "form_snippets.html" %}-->
 {% for field in form_personaMasterTeacher %}
@@ -18,10 +26,13 @@
 	{% endif %}
 </div>
 {% endfor %}
-
-<p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Guardar</button>
-<span class="pull-right margintop20">* Por favor diligencie todos los campos</span>
-</p>
-{% endblock%}
+</form>
+{% endblock %}
+
+
+
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->
 

@@ -26,11 +26,16 @@ class AdministradorHtml(PerfilHtml):
 
 class MasterTeacherHtml(PerfilHtml):
 
+	
 	def __init__(self,request):
 		PerfilHtml.__init__(self,request)
 
 	def obtener_pagina(self):
-		return render_to_response('master_teacher.html',{'user':self.user})
+		mensaje =  "Bienvenido a tu cuenta de Master Teacher "
+		mensaje += self.user.username
+		
+
+		return render_to_response('master_teacher.html',{'user':self.user, 'mensaje':mensaje})
 
 class LeaderTeacherHtml(PerfilHtml):
 

@@ -27,11 +27,9 @@ def pagina_master_teacher_informacion_personal(request):
 			direccion = form_personaMasterTeacher.cleaned_data["direccion"]
 			master_teacher.persona.direccion = direccion
 			master_teacher.persona.save()
-			html = "<html><body><h1></h1><h3>Modificado correctamente %s</h3> </body></html>" 
-			return HttpResponse(html)
-		else:
-			html = "<html><body><h1></h1><h3>No es valido </h3> </body></html>"
-			return HttpResponse(html)
+			mensaje = "Su informacion personal ha sido modificada correctamente"
+			return render_to_response('master_teacher.html',{'user':user,'mensaje':mensaje})
+	
 	else:
 		form_personaMasterTeacher = Persona_MasterTeacherForm(request.POST, instance= master_teacher) 
 
