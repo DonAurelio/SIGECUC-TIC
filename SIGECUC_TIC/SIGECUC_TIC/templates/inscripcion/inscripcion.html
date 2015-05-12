@@ -9,8 +9,12 @@
 {% block sub_title %} {{ name_course }} {% endblock %}
 
 {% block body %}
+
 <form id='contactform' method='post' action=''>{% csrf_token %}
-<!--{% include "form_snippets.html" %}-->
+
+<!-- Parte informacion personal -->
+<strong><h3>Informacion Personal</h3></strong>
+{% include "division.html" %}
 {% for field in form_persona %}
 <div class="row">
 	<div class="col-lg-4 field">
@@ -28,34 +32,51 @@
 </div>
 {% endfor %}
 
+
+<!-- Parte historial academico -->
+<strong><h3>Historial Academico</h3></strong>
+{% include "division.html" %}
 {% for field in form_HistorialAcademico %}
-<div>
-{{ field.errors }}
-{{ field.label_tag }}
-{{ field }}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
 </div>
 {% endfor %}
 
+
+<!-- Parte historial laboral -->
+<strong><h3>Historial Laboral</h3></strong>
+{% include "division.html" %}
 {% for field in form_HistorialLaboral %}
-<div>
-{{ field.errors }}
-{{ field.label_tag }}
-{{ field }}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
 </div>
 {% endfor %}
 <p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
 <span class="pull-right margintop20">* Por favor diligencie todos los campos</span>
 </p>
+</form>
 {% endblock%}
 
-<!--
-<div class="row">
-	<div class="col-lg-4 field">
-		<input type="text" name="name" placeholder="* Enter your full name" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
-		<div class="validation">
-		</div>
-	</div>
-	
-</div>
--->

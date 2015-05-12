@@ -37,6 +37,7 @@ class MasterTeacherHtml(PerfilHtml):
 	def obtener_pagina(self):
 		user = self.request.user
 		user_id = user.id
+		
 		master_teacher = MasterTeacher.objects.get(user_id=user_id)
 		master_teacher_id = master_teacher.persona.identificacion
 		cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
