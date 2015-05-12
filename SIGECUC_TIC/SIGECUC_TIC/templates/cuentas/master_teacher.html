@@ -8,10 +8,12 @@ Menu
 {% endblock %}
 
 {% block segundo_menu_titulo %}
-Cohorte Actual
+Cursos
 {% endblock %}
 {% block segundo_menu_item  %}
-<li><i class="icon-angle-right"></i><a href="master_teacher_actividades_evaluacion">Actividades de Evaluacion</a><span></span></li>
+{% for cohorte in cohortes %}
+<li><i class="icon-angle-right"></i><a href="master_teacher_actividades_evaluacion">{{ cohorte.id }}</a><span></span></li>
+{% endfor %}
 <li><i class="icon-angle-right"></i><a href="master_teacher_estudiantes">Estudiantes</a><span></span></li>
 {% endblock %}
 

@@ -66,7 +66,7 @@ admin.site.register(Curso, CursoAdmin)
 
 #Recarga la lista de cohorte.
 class CohorteAdmin(admin.ModelAdmin):
-    list_display = ('fecha_inicio', 'fecha_fin', 'nombre_curso',
+    list_display = ('id','fecha_inicio', 'fecha_fin', 'nombre_curso',
     'id_Master_Teacher', 'nombre_Master_Teacher')
     #busca deacuerdo a la llave foranea
     search_fields = ('fecha_inicio', 'fecha_fin', 'curso__nombre',

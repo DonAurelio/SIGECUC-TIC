@@ -7,6 +7,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from apps.cursos.models import MasterTeacher
 from apps.cursos.models import LeaderTeacher
 
+from apps.cursos.models import Curso
+from apps.cursos.models import Cohorte
+from django.contrib.auth.models import User
+
 class PerfilHtml:
 
 	def __init__(self,request):
@@ -31,11 +35,18 @@ class MasterTeacherHtml(PerfilHtml):
 		PerfilHtml.__init__(self,request)
 
 	def obtener_pagina(self):
-		mensaje =  "Bienvenido a tu cuenta de Master Teacher "
-		mensaje += self.user.username
+		user = self.request.user
+		user_id = user.id
+		master_teacher = MasterTeacher.objects.get(user_id=user_id)
+		master_teacher_id = master_teacher.persona.identificacion
+		cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
 		
+		#nombre_master_teacher = master_teacher.persona.primer_nombre
+		mensaje =  "Bienvenido a tu cuenta de Master Teacher "
+		mensaje += master_teacher.persona.primer_nombre
+		contexto = {'user':self.user, 'mensaje':mensaje,'cohortes':cohortes}
 
-		return render_to_response('master_teacher.html',{'user':self.user, 'mensaje':mensaje})
+		return render_to_response('master_teacher.html',contexto)
 
 class LeaderTeacherHtml(PerfilHtml):
 
