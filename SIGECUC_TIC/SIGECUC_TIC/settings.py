@@ -26,7 +26,9 @@ INSTALLED_APPS = (
 'django.contrib.staticfiles',
 'apps.inicio',
 'apps.cursos',
-'apps.inscripcion'
+'apps.inscripcion',
+'apps.MasterTeacher',
+'apps.LeaderTeacher'
 )
 MIDDLEWARE_CLASSES = (
 'django.contrib.sessions.middleware.SessionMiddleware', #Middleware Django para el inicio de sesion

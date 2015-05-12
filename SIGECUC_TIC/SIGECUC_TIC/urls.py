@@ -12,5 +12,6 @@ urlpatterns = patterns('',
 	url(r'^admin', include( admin.site.urls )),
 	url(r'', include('apps.inicio.url', namespace='inicio')),
 	url(r'', include('apps.inscripcion.url', namespace='inscripcion')),
+	url(r'', include('apps.MasterTeacher.url', namespace = 'masterTeacher')),
 
 )

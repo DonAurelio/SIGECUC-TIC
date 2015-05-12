@@ -1,16 +1,27 @@
-{% extends "master_teacher.html" %}
+{% load static %}
+{% block body %}
+<form id='contactform' method='post' action=''>{% csrf_token %}
+<!--{% include "form_snippets.html" %}-->
+{% for field in form_personaMasterTeacher %}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
+</div>
+{% endfor %}
 
-<!-- Contenido -->
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Guardar</button>
+<span class="pull-right margintop20">* Por favor diligencie todos los campos</span>
+</p>
+{% endblock%}
 
-<!-- Primer bloque -->
-{% block primer_titulo %}
-Informacion Personal
-{% endblock %}
-
-{% block primer_contenido %}
-{{ formulario.as_p }}
-{% endblock %}
-
-<!-- Fin Primer bloque -->
-
-<!-- Fin Contenido -->
