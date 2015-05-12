@@ -6,6 +6,8 @@ from apps.cursos.models import ZonaInstitucionEducativa
 from apps.cursos.models import CaracterTecnica
 from apps.cursos.models import EtniaEducativa
 from apps.cursos.models import GradosEscolares
+from apps.cursos.models import NivelEscolar
+from apps.cursos.models import AreaFormacionDesarrollada
 from apps.cursos.models import Inscrito
 from apps.cursos.models import Persona
 
@@ -23,6 +25,10 @@ class HistorialAcademicoForm(forms.ModelForm):
 		queryset=EtniaEducativa.objects.all())
 	grado_escolar = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
 		queryset=GradosEscolares.objects.all())
+	nivel_Escolar = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
+		queryset=NivelEscolar.objects.all())
+	area_formacion_desarrollada = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=True,
+		queryset=AreaFormacionDesarrollada.objects.all())
 	class Meta:
 		model = HistorialAcademico
 
