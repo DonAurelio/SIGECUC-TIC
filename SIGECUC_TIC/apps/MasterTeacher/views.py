@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 from .forms import Persona_MasterTeacherForm
 from apps.cursos.models import MasterTeacher
+from apps.cursos.models import Cohorte
+from apps.cursos.models import Curso
+from apps.cursos.models import LeaderTeacher_Cohorte
 import hashlib
 
 
@@ -43,4 +46,20 @@ def pagina_master_teacher_informacion_personal(request):
 	contexto = {'user':user, 'form_personaMasterTeacher' : form_personaMasterTeacher}
 	return render_to_response('master_teacher_informacion_personal.html',contexto, context_instance= RequestContext(request))
 
+
+def pagina_master_teacher_actividades_evaluacion(request):
+	id_cohorte = request.GET.get('id_cohorte')
+	cohorte = Cohorte.objects.get(id=id_cohorte)
+	curso_id=cohorte.curso.id
+	curso = Curso.objects.get(id=curso_id)
+	estudiantes = LeaderTeacher_Cohorte.objects.filter(cohorte_id=id_cohorte)
+	contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes}
+	return render_to_response('master_teacher_actividades_de_evaluacion.html',contexto, context_instance= RequestContext(request))
+	#html = "<html><body><h1>id cohorte:</h1><h3>%s<h/3> <h1> Name curso</h1><h2><h/2></body></html>" % curso
+	#return HttpResponse(html)
+
+
+def pagina_master_teacher_calificar_leaderTeacher(request, slug):
+	html = "<html><body><h1>id cohorte:</h1><h3>%s<h/3> <h1> Name curso</h1><h2><h/2></body></html>"%slug	
+	return HttpResponse(html)
 

@@ -12,7 +12,8 @@ Cursos
 {% endblock %}
 {% block segundo_menu_item  %}
 {% for cohorte in cohortes %}
-<li><i class="icon-angle-right"></i><a href="master_teacher_actividades_evaluacion">{{ cohorte.id }}</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="master_teacher_actividades_evaluacion/?id_cohorte={{ cohorte.id  }}">{{ cohorte.id }} 
+{{ cohorte.curso.nombre }}</a><span></span></li>
 {% endfor %}
 <li><i class="icon-angle-right"></i><a href="master_teacher_estudiantes">Estudiantes</a><span></span></li>
 {% endblock %}

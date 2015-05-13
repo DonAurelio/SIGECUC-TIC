@@ -51,7 +51,7 @@ WSGI_APPLICATION = 'SIGECUC_TIC.wsgi.application'
 # }
 #}
 
-
+"""
 DATABASES = {
 'default': {
 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -73,7 +73,7 @@ DATABASES = {
 'PORT': '5432', # Set to empty string for default. Not used with sqlite3.
 }
 }
-"""
+
 #LOCALIZACION DE LOS TEMPLATES DE LAS APLICACIONES
 SETTINGS_DIR = os.path.dirname(__file__)
 TEMPLATE_PATH = os.path.join(SETTINGS_DIR, 'templates').replace('\\','/')

@@ -8,7 +8,26 @@ Actividades de Evaluacion
 {% endblock %}
 
 {% block primer_contenido %}
-{{ formulario.as_p }}
+<h3>Nombre curso: </h3> {{ curso.nombre }}</br>
+<h4>Cohorte Numero: {{ cohorte.id}}</h4>  
+<h4>Fecha inicio: {{ cohorte.fecha_inicio}} Fecha fin: {{ cohorte.fecha_fin}}</h4>  
+
+{% for estudiante in estudiantes %}
+
+{{ estudiante.leader_teacher.inscrito.persona.identificacion }}
+{{ estudiante.leader_teacher.inscrito.persona.primer_nombre }}
+{{ estudiante.leader_teacher.inscrito.persona.segundo_nombre }}
+{{ estudiante.leader_teacher.inscrito.persona.primer_apellido }}
+{{ estudiante.leader_teacher.inscrito.persona.segundo_apellido }}
+{{ estudiante.leader_teacher.inscrito.persona.email }}
+<h5> Nombre curso: {{ estudiante.leader_teacher.inscrito.persona.inscrito.curso.nombre }}</h5>
+<a href="{% url "masterTeacher:master_teacher_calificar_leaderTeacher" estudiante.leader_teacher.inscrito.persona.identificacion %}">Calificar
+{{ cohorte.curso.nombre }}</a>
+
+</br>
+
+{% endfor %}
+
 {% endblock %}
 
 <!-- Fin Primer bloque -->
