@@ -41,10 +41,14 @@ class MasterTeacherHtml(PerfilHtml):
 		master_teacher = MasterTeacher.objects.get(user_id=user_id)
 		master_teacher_id = master_teacher.persona.identificacion
 		cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
-		
-		#nombre_master_teacher = master_teacher.persona.primer_nombre
-		mensaje =  "Bienvenido a tu cuenta de Master Teacher "
+
+		mensaje = "Bienvenido"
+		sexo = master_teacher.persona.sexo
+		if sexo == "FEMENINO":
+			mensaje = "Bienvenida"
+		mensaje +=  " tu cuenta de Master Teacher "
 		mensaje += master_teacher.persona.primer_nombre
+		#nombre_master_teacher = master_teacher.persona.primer_nombre
 		contexto = {'user':self.user, 'mensaje':mensaje,'cohortes':cohortes}
 
 		return render_to_response('master_teacher.html',contexto)
@@ -55,7 +59,19 @@ class LeaderTeacherHtml(PerfilHtml):
 		PerfilHtml.__init__(self,request)
 
 	def obtener_pagina(self):
-		return render_to_response('leader_teacher.html',{'user':self.user})
+		user = self.request.user
+		user_id = user.id
+		
+		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+		mensaje = "Bienvenido"
+		sexo = leader_teacher.inscrito.persona.sexo
+		if sexo == "FEMENINO":
+			mensaje = "Bienvenida"
+		mensaje +=  " tu cuenta de Leader Teacher "
+		#nombre_leader_teacher = leader_teacher.inscrito.persona.primer_nombre
+		mensaje += leader_teacher.inscrito.persona.primer_nombre
+		contexto = {'user':self.user, 'mensaje':mensaje}
+		return render_to_response('leader_teacher.html',contexto)
 
 class ErrorHtml(PerfilHtml):
 	def __init__(self,request,message):
