@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 from django.http import HttpResponse
+from django.core.mail import EmailMultiAlternatives
 
 from .forms import InscripcionPersonaForm
 from .forms import HistorialLaboralForm
@@ -14,6 +15,18 @@ import datetime
 	
 def inscripcion(request):
 	return render_to_response('inscripcion.html')
+
+def enviar_email(email, nombre_curso):
+	subject = 'Asunto'
+	text_content = 'Mensaje...nLinea 2nLinea3'
+	html_content = '<h2>Notificacion registro</h2><p>La inscripcion al curso</p>'
+	html_content += nombre_curso 
+	html_content += '<p>se ha realizado con exito, se informara a traves de este medio su aprobacion</p>'
+	from_email = '"SIGECUC-TIC" <emisor.telnet.univalle@gmail.com>'
+	to = email
+	msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+	msg.attach_alternative(html_content, "text/html")
+	msg.send()
 
 
 def pagina_inscripcion_curso(request):
@@ -35,8 +48,6 @@ def pagina_inscripcion_curso(request):
 			ide_historialAcademico = form_HistorialAcademico.instance.pk
 			add_HistorialLaboral.save() 
 			ide_historialLaboral = form_HistorialLaboral.instance.pk
-			#add_HistorialAcademico.save() #Guardamos la informacion
-			#add_HistorialLaboral.save() #Guardamos la informacion
 			form_persona.save_m2m() #Guarda las relaciones de ManyToMany
 			form_HistorialAcademico.save_m2m() #Guarda las relaciones de ManyToMany
 			form_HistorialLaboral.save_m2m() #Guarda las relaciones de ManyToMany
@@ -44,8 +55,9 @@ def pagina_inscripcion_curso(request):
 
 			inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico,id_course)
 			inscrip.save()
-
-			html = "<html><body><h1></h1><h3>Guardado %s</h3> </body></html>"
+			email = request.POST.get('email')
+			enviar_email(email, name_course)
+			html = "<html><body><h1></h1><h3>Guardado se enviara una notificacion a su email de confirmacion de registro%s</h3> </body></html>"
 			return HttpResponse(html)
 				
 	else:

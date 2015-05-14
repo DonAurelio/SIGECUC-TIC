@@ -115,3 +115,10 @@ STATICFILES_DIRS = (
     STATIC_PATH,
 )
 
+
+# EMAIL SETTINGS
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = "25"
+EMAIL_HOST_USER = "emisor.telnet.univalle@gmail.com"
+EMAIL_HOST_PASSWORD = "sigecuc-tic2015"
+EMAIL_USE_TLS = True
