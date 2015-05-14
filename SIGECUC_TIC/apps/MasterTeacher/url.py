@@ -10,10 +10,6 @@ urlpatterns = patterns('',
 	url(r'^master_teacher_actividades_evaluacion', 'apps.MasterTeacher.views.pagina_master_teacher_actividades_evaluacion',
 		name= 'master_teacher_actividades_evaluacion'),
 	url(r'^master_teacher_calificar_leaderTeacher/(?P<slug>[-\w]+)/$','apps.MasterTeacher.views.pagina_master_teacher_calificar_leaderTeacher',
-		name='master_teacher_calificar_leaderTeacher')
-	
-	
-
-	
+		name='master_teacher_calificar_leaderTeacher'),
 
 )

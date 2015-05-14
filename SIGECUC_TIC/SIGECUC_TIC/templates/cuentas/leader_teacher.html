@@ -26,6 +26,7 @@ Cursos
 {% block tercer_menu_item  %}
 <li><i class="icon-angle-right"></i><a href="leader_teacher_historial_academico">Historial Academico</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="leader_teacher_certificados_obtenidos">Certificados Obtenidos</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="/accounts/password_change">Cambiar password</a></li>
 {% endblock %}
 <!--Fin Menu 3 -->
 
@@ -37,7 +38,7 @@ Cursos
 {% endblock %}
 
 {% block primer_contenido %}
-{{ formulario.as_p }}
+{{ mensaje }}
 {% endblock %}
 
 {% block primer_boton %}

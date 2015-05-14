@@ -4,12 +4,12 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
-from .forms import Persona_MasterTeacherForm
+#from .forms import Persona_MasterTeacherForm
+from apps.cursos.forms import Informacion_personalForm
 from apps.cursos.models import MasterTeacher
 from apps.cursos.models import Cohorte
 from apps.cursos.models import Curso
 from apps.cursos.models import LeaderTeacher_Cohorte
-import hashlib
 
 
 # Create your views here.
@@ -21,7 +21,7 @@ def pagina_master_teacher_informacion_personal(request):
 	master_teacher = MasterTeacher.objects.get(user_id=user_id)
 	if request.method == "POST":
 		#se instancia el master_teacher para que pase la validez y sea un formulario para modificar
-		form_personaMasterTeacher = Persona_MasterTeacherForm(request.POST, instance=master_teacher)
+		form_personaMasterTeacher = Informacion_personalForm(request.POST, instance=master_teacher)
 		if form_personaMasterTeacher.is_valid():
 			email = form_personaMasterTeacher.cleaned_data["email"]
 			master_teacher.persona.email = email
@@ -34,9 +34,9 @@ def pagina_master_teacher_informacion_personal(request):
 			return render_to_response('master_teacher.html',{'user':user,'mensaje':mensaje})
 	
 	else:
-		form_personaMasterTeacher = Persona_MasterTeacherForm(request.POST, instance= master_teacher) 
+		form_personaMasterTeacher = Informacion_personalForm(request.POST, instance= master_teacher) 
 
-		form_personaMasterTeacher = Persona_MasterTeacherForm(initial = {'identificacion' : master_teacher.persona.identificacion, 
+		form_personaMasterTeacher = Informacion_personalForm(initial = {'identificacion' : master_teacher.persona.identificacion, 
 			'primer_nombre' : master_teacher.persona.primer_nombre, 'segundo_nombre' : master_teacher.persona.segundo_nombre,
 			'primer_apellido': master_teacher.persona.primer_apellido, 'segundo_apellido' : master_teacher.persona.segundo_apellido,
 			'email' : master_teacher.persona.email, 'telefono' : master_teacher.persona.telefono, 
