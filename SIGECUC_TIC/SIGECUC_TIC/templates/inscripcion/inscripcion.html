@@ -10,6 +10,10 @@
 
 {% block body %}
 
+{% if mensaje %}
+{{ mensaje }}
+{% else %}
+
 <form id='contactform' method='post' action=''>{% csrf_token %}
 
 <!-- Parte informacion personal -->
@@ -51,6 +55,7 @@
 	</div>
 	{% endif %}
 </div>
+
 {% endfor %}
 
 
@@ -78,5 +83,6 @@
 <span class="pull-right margintop20">* Por favor diligencie todos los campos</span>
 </p>
 </form>
+{% endif %}
 {% endblock%}
 

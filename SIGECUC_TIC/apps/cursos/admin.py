@@ -74,7 +74,7 @@ class CohorteAdmin(admin.ModelAdmin):
     'master_teacher__persona__primer_nombre')
 admin.site.register(Cohorte, CohorteAdmin)
 admin.site.register(Calificacion)
-admin.site.register(LeaderTeacher_Cohorte)
+
 
 class HistorialLaboralAdmin(admin.ModelAdmin):
     list_display=('id', 'exp_preescolar', 'exp_primaria', 'exp_total')

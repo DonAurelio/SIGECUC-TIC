@@ -7,8 +7,11 @@ from django.core.mail import EmailMultiAlternatives
 from .forms import InscripcionPersonaForm
 from .forms import HistorialLaboralForm
 from .forms import HistorialAcademicoForm
+from .forms import InscripcionConsulaForm
 from apps.cursos.models import Inscrito
 import datetime
+
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
@@ -28,6 +31,30 @@ def enviar_email(email, nombre_curso):
 	msg.attach_alternative(html_content, "text/html")
 	msg.send()
 
+def pagina_incripcion_consulta(request):
+	id_course = request.GET.get('id_course')
+	name_course = request.GET.get('name_course')
+	form = InscripcionConsulaForm()
+	contexto = {'form':form}
+	if request.method == "POST":
+		form = InscripcionConsulaForm(request.POST)
+		if form.is_valid():
+			identificacion = request.POST.get('identificacion')
+			
+			try:
+				inscrito = Inscrito.objects.get(persona_id=identificacion)
+				return HttpResponse("Existe")
+			except ObjectDoesNotExist:
+				form_persona = InscripcionPersonaForm()
+				form_HistorialAcademico = HistorialAcademicoForm() 
+				form_HistorialLaboral = HistorialLaboralForm()
+
+				ctx = {'form_persona':form_persona, 'form_HistorialLaboral': form_HistorialLaboral,'form_HistorialAcademico': form_HistorialAcademico,
+				 'id_course':id_course, 'name_course':name_course}
+				return render_to_response('inscripcion.html', ctx, context_instance= RequestContext(request))
+		else:
+			form = InscripcionConsulaForm(request.POST)
+	return render_to_response('inscripcion_consulta.html',contexto,context_instance= RequestContext(request))
 
 def pagina_inscripcion_curso(request):
 	#funcion que crea el formulario de inscripcion
@@ -57,14 +84,19 @@ def pagina_inscripcion_curso(request):
 			inscrip.save()
 			email = request.POST.get('email')
 			enviar_email(email, name_course)
-			html = "<html><body><h1></h1><h3>Guardado se enviara una notificacion a su email de confirmacion de registro%s</h3> </body></html>"
-			return HttpResponse(html)
-				
+			mensaje = "Su inscripcion se ha realizado con exito, se ha enviado una notificacion al correo %s" %email 
+			contexto = {'mensaje':mensaje}
+			return render_to_response('inscripcion.html',contexto)
+		else:
+			form_persona = InscripcionPersonaForm(request.POST)
+			form_HistorialAcademico = HistorialAcademicoForm(request.POST) 
+			form_HistorialLaboral = HistorialLaboralForm(request.POST)
+		
 	else:
 		form_persona = InscripcionPersonaForm()
-		form_HistorialAcademico = HistorialAcademicoForm(request.POST) 
-		form_HistorialLaboral = HistorialLaboralForm(request.POST)
+		form_HistorialAcademico = HistorialAcademicoForm() 
+		form_HistorialLaboral = HistorialLaboralForm()
 
-	ctx = {'form_persona':form_persona, 'form_HistorialLaboral': form_HistorialLaboral, 'form_HistorialAcademico': form_HistorialAcademico,
+	ctx = {'form_persona':form_persona, 'form_HistorialLaboral': form_HistorialLaboral,'form_HistorialAcademico': form_HistorialAcademico,
 	 'informacion':info, 'id_course':id_course, 'name_course':name_course}
 	return render_to_response('inscripcion.html', ctx, context_instance= RequestContext(request))

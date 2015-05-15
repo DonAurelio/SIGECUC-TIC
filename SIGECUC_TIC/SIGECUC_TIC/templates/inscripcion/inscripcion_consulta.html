@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "inscripcion_base.html" %}
+{% load static %}
+
+{% block first_title %} Nuevo Aspirante {% endblock %}
+
+{% block _title %} Formulario de incripcion al curso {% endblock%}
+
+{% block sub_title %} {{ name_course }} {% endblock %}
+
+{% block body %}
+
+<form id='contactform' method='post' action=''>{% csrf_token %}
+
+<strong><h3>Por favor digite su numero de documento</h3></strong>
+{% include "division.html" %}
+{% for field in form %}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
+</div>
+{% endfor %}
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
+</p>
+</form>
+{% endblock%}
+
