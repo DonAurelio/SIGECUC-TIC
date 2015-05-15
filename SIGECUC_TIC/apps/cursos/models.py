@@ -318,8 +318,6 @@ class Inscrito(models.Model):
 class LeaderTeacher(models.Model):
 	user = models.ForeignKey(User,unique=True)
 	inscrito = models.OneToOneField(Inscrito, primary_key=True)
-	#permiso = models.
-	#viatico = models.
 
 	#metodo para que retorne la identificacion de persona
 	def identificacion(self):
@@ -356,6 +354,7 @@ class LeaderTeacher(models.Model):
 	ciudad_labora = models.CharField(max_length=30)
 	departamento_labora = models.CharField(max_length=30)
 	fecha_activacion = models.DateField()
+	cohorte = models.ManyToManyField(Cohorte)
 
 	class Meta:
 		verbose_name_plural = "Ver Leader Teacher"
@@ -369,9 +368,11 @@ class Calificacion(models.Model):
 	actividad = models.ForeignKey(ActividadEvaluacion)
 #=========================> FIN CALIFICACION <=========================
 
-#=========================> LEADER_TEACHER_COHORTE <===================
-class LeaderTeacher_Cohorte(models.Model):
-	nota_final = models.DecimalField(max_digits=3, decimal_places=2)
+
+#========================> ASISTENCIA <==================================
+class Asistencia(models.Model):
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
-#=========================> FIN LEADER_TEACHER_COHORTE <===============
+	numero_asistencia = models.CharField(max_length=2)
+#========================> FIN ASISTENCIA <==============================
+
