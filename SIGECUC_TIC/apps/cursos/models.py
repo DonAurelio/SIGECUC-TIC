@@ -288,7 +288,7 @@ class Inscrito(models.Model):
 	estado = models.BooleanField(default=True)
 	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
 	historial_academico = models.OneToOneField(HistorialAcademico)
-	curso = models.ForeignKey(Curso)
+	#curso = models.ForeignKey(Curso)
 
 	#metodo para que retorne la identificacion de persona
 	def identificacion(self):
@@ -313,6 +313,12 @@ class Inscrito(models.Model):
 	def __str__(self):
 		return '%s %s %s %s' % (self.persona.identificacion, self.persona.primer_nombre, 
 			self.persona.primer_apellido, self.persona.segundo_apellido) 
+
+
+class Cursos_Inscrito(models.Model):
+	curso = models.ForeignKey(Curso)
+	inscrito = models.ForeignKey(Inscrito)
+	fecha_inscripcion = models.DateField()
 
 #=========================> FIN INSCRITO <=============================
 class LeaderTeacher(models.Model):
