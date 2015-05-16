@@ -44,9 +44,9 @@ def pagina_incripcion_consulta(request):
 			
 			try:
 				inscrito = Inscrito.objects.get(persona_id=identificacion)
-				return HttpResponse('Existe')
+				#return HttpResponse('Existe')
 				fecha_actual =  datetime.datetime.now()
-				curso_inscrito = Cursos_Inscrito(id_course,identificacion,fecha_actual)
+				curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=identificacion, fecha_inscripcion=fecha_actual)
 				curso_inscrito.save()
 
 				email = inscrito.persona.email
@@ -87,9 +87,10 @@ def pagina_inscripcion_curso(request):
 			fecha_actual =  datetime.datetime.now()
 
 			inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico)
-			curso_inscrito = Cursos_Inscrito(id_course,ide_persona,fecha_actual)
-			curso_inscrito.save()
+			curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual)
 			inscrip.save()
+			curso_inscrito.save()
+
 			email = request.POST.get('email')
 			enviar_email(email, name_course)
 			mensaje = "Su inscripcion se ha realizado con exito, se ha enviado una notificacion al correo %s" %email 

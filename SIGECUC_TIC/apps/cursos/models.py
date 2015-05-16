@@ -318,7 +318,7 @@ class Inscrito(models.Model):
 class Cursos_Inscrito(models.Model):
 	curso = models.ForeignKey(Curso)
 	inscrito = models.ForeignKey(Inscrito)
-	fecha_inscripcion = models.DateField()
+	fecha_inscripcion = models.DateField(auto_now_add=True)
 
 #=========================> FIN INSCRITO <=============================
 class LeaderTeacher(models.Model):
