@@ -1,0 +1,49 @@
+{% extends "cuenta_base.html" %}
+
+<!--Menu 1-->
+{% block primer_menu_titulo %}
+Menu
+{% endblock %}
+{% block primer_menu_item %}
+<li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_personal">Informacion Personal</a><span></span></li>
+{% endblock %}
+<!--Fin Menu 1-->
+
+<!--Menu 2-->
+{% block segundo_menu_titulo %}
+Curso Actual
+{% endblock %}
+{% block segundo_menu_item  %}
+<li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_curso">Informacion Curso</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_calificaciones">Calificaciones</a><span></span></li>
+{% endblock %}
+<!--Fin Menu 2 -->
+
+<!--Menu 3-->
+{% block tercer_menu_titulo %}
+Cursos
+{% endblock %}
+{% block tercer_menu_item  %}
+<li><i class="icon-angle-right"></i><a href="leader_teacher_historial_academico">Historial Academico</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="leader_teacher_certificados_obtenidos">Certificados Obtenidos</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="/accounts/password_change">Cambiar password</a></li>
+{% endblock %}
+<!--Fin Menu 3 -->
+
+<!-- Contenido -->
+
+<!-- Primer bloque -->
+{% block primer_titulo %}
+{{ titulo }}
+{% endblock %}
+
+{% block primer_contenido %}
+{{ mensaje }}
+{% endblock %}
+
+{% block primer_boton %}
+Aceptar
+{% endblock %}
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->
