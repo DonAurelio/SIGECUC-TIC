@@ -7,7 +7,7 @@ from django.core.mail import EmailMultiAlternatives
 from .forms import InscripcionPersonaForm
 from .forms import HistorialLaboralForm
 from .forms import HistorialAcademicoForm
-from .forms import InscripcionConsulaForm
+from .forms import InscripcionConsultaForm
 from apps.cursos.models import Inscrito
 import datetime
 
@@ -34,16 +34,17 @@ def enviar_email(email, nombre_curso):
 def pagina_incripcion_consulta(request):
 	id_course = request.GET.get('id_course')
 	name_course = request.GET.get('name_course')
-	form = InscripcionConsulaForm()
-	contexto = {'form':form}
 	if request.method == "POST":
-		form = InscripcionConsulaForm(request.POST)
+		form = InscripcionConsultaForm(request.POST)
 		if form.is_valid():
 			identificacion = request.POST.get('identificacion')
 			
 			try:
 				inscrito = Inscrito.objects.get(persona_id=identificacion)
 				return HttpResponse("Existe")
+				fecha_actual =  datetime.datetime.now()
+				inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico,id_curso)
+				inscrip.save()
 			except ObjectDoesNotExist:
 				form_persona = InscripcionPersonaForm()
 				form_HistorialAcademico = HistorialAcademicoForm() 
@@ -52,8 +53,9 @@ def pagina_incripcion_consulta(request):
 				ctx = {'form_persona':form_persona, 'form_HistorialLaboral': form_HistorialLaboral,'form_HistorialAcademico': form_HistorialAcademico,
 				 'id_course':id_course, 'name_course':name_course}
 				return render_to_response('inscripcion.html', ctx, context_instance= RequestContext(request))
-		else:
-			form = InscripcionConsulaForm(request.POST)
+	else:
+		form = InscripcionConsultaForm()
+	contexto = {'form':form}
 	return render_to_response('inscripcion_consulta.html',contexto,context_instance= RequestContext(request))
 
 def pagina_inscripcion_curso(request):

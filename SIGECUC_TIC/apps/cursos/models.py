@@ -376,3 +376,4 @@ class Asistencia(models.Model):
 	numero_asistencia = models.CharField(max_length=2)
 #========================> FIN ASISTENCIA <==============================
 
+

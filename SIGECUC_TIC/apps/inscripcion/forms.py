@@ -36,5 +36,6 @@ class HistorialLaboralForm(forms.ModelForm):
 	class Meta:
 		model = HistorialLaboral
 
-class InscripcionConsulaForm(forms.Form):
-	identificacion = forms.CharField(label='Numero Identificacion',max_length=11,required=True)	
+class InscripcionConsultaForm(forms.Form):
+	identificacion = forms.CharField(label='Numero Identificacion',max_length=11,required=True) 
+
