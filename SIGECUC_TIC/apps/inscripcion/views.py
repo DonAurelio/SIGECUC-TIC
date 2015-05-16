@@ -8,7 +8,9 @@ from .forms import InscripcionPersonaForm
 from .forms import HistorialLaboralForm
 from .forms import HistorialAcademicoForm
 from .forms import InscripcionConsultaForm
+
 from apps.cursos.models import Inscrito
+from apps.cursos.models import Cursos_Inscrito
 import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -37,22 +39,24 @@ def pagina_incripcion_consulta(request):
 	if request.method == "POST":
 		form = InscripcionConsultaForm(request.POST)
 		if form.is_valid():
+
 			identificacion = request.POST.get('identificacion')
 			
 			try:
 				inscrito = Inscrito.objects.get(persona_id=identificacion)
-				return HttpResponse("Existe")
+				return HttpResponse('Existe')
 				fecha_actual =  datetime.datetime.now()
-				inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico,id_curso)
-				inscrip.save()
-			except ObjectDoesNotExist:
-				form_persona = InscripcionPersonaForm()
-				form_HistorialAcademico = HistorialAcademicoForm() 
-				form_HistorialLaboral = HistorialLaboralForm()
+				curso_inscrito = Cursos_Inscrito(id_course,identificacion,fecha_actual)
+				curso_inscrito.save()
 
-				ctx = {'form_persona':form_persona, 'form_HistorialLaboral': form_HistorialLaboral,'form_HistorialAcademico': form_HistorialAcademico,
-				 'id_course':id_course, 'name_course':name_course}
-				return render_to_response('inscripcion.html', ctx, context_instance= RequestContext(request))
+				email = inscrito.persona.email
+				mensaje = "Su inscripcion se ha realizado con exito, se ha enviado una notificacion al correo %s" %email 
+				contexto = {'mensaje':mensaje}
+				return render_to_response('inscripcion.html',contexto)
+
+			except ObjectDoesNotExist:
+				
+				return pagina_inscripcion_curso(request)
 	else:
 		form = InscripcionConsultaForm()
 	contexto = {'form':form}
@@ -82,7 +86,9 @@ def pagina_inscripcion_curso(request):
 			form_HistorialLaboral.save_m2m() #Guarda las relaciones de ManyToMany
 			fecha_actual =  datetime.datetime.now()
 
-			inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico,id_course)
+			inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico)
+			curso_inscrito = Cursos_Inscrito(id_course,ide_persona,fecha_actual)
+			curso_inscrito.save()
 			inscrip.save()
 			email = request.POST.get('email')
 			enviar_email(email, name_course)
