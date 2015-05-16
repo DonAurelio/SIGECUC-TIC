@@ -29,7 +29,8 @@ INSTALLED_APPS = (
 'apps.inscripcion',
 'apps.MasterTeacher',
 'apps.LeaderTeacher',
-'apps.reportes'
+'apps.registro',
+'apps.reportes',
 )
 MIDDLEWARE_CLASSES = (
 'django.contrib.sessions.middleware.SessionMiddleware', #Middleware Django para el inicio de sesion
@@ -82,7 +83,9 @@ TEMPLATE_PATH_INICIO = os.path.join(SETTINGS_DIR, 'templates/inicio').replace('\
 TEMPLEATE_PATH_BASE = os.path.join(SETTINGS_DIR, 'templates/base').replace('\\','/')
 TEMPLEATE_PATH_CUENTAS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
 TEMPLEATE_PATH_INSCRIPCION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
-
+TEMPLATE_PATH_MASTER_TEACHER = os.path.join(SETTINGS_DIR, 'templates/master_teacher').replace('\\','/')
+TEMPLATE_PATH_LEADER_TEACHER = os.path.join(SETTINGS_DIR, 'templates/leader_teacher').replace('\\','/')
+TEMPLATE_PATH_REGISTRO = os.path.join(SETTINGS_DIR, 'templates/registro').replace('\\','/')
 #TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
 #TEMPLATE_PATH_INSCRIPCTION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
 
@@ -93,6 +96,9 @@ TEMPLEATE_PATH_BASE,
 TEMPLATE_PATH_INICIO,
 TEMPLEATE_PATH_CUENTAS,
 TEMPLEATE_PATH_INSCRIPCION,
+TEMPLATE_PATH_MASTER_TEACHER,
+TEMPLATE_PATH_LEADER_TEACHER,
+TEMPLATE_PATH_REGISTRO,
 
 #TEMPLATE_PATH,
 #TEMPLATE_PATH_ACCOUNTS,

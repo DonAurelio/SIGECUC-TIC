@@ -11,6 +11,8 @@ from apps.cursos.models import Curso
 from apps.cursos.models import Cohorte
 from django.contrib.auth.models import User
 
+from apps.registro.models import RegistroUser
+
 class PerfilHtml:
 
 	def __init__(self,request):
@@ -73,6 +75,23 @@ class LeaderTeacherHtml(PerfilHtml):
 		contexto = {'user':self.user, 'mensaje':mensaje}
 		return render_to_response('leader_teacher.html',contexto)
 
+class RegistroHtml(PerfilHtml):
+	def __init__(self,request):
+		PerfilHtml.__init__(self,request)
+
+	def obtener_pagina(self):
+		user = self.request.user
+		user_id = user.id
+		
+		registro_user = RegistroUser.objects.get(user_id=user_id)
+		#mensaje = RegistroUser.persona.primer_nombre
+		mensaje = " bienvenid@ al modulo de registro,"
+		mensaje += " por favor seleccione ona opcion del menu"
+		
+		contexto = {'user':self.user, 'mensaje':mensaje}
+		return render_to_response('registro.html',contexto)
+
+
 class ErrorHtml(PerfilHtml):
 	def __init__(self,request,message):
 		PerfilHtml.__init__(self,request)
@@ -110,6 +129,7 @@ class FabricaPaginaPrincipalUsuario:
 					#Si el usuario es Master Teacher o Leader Teacher
 					tipo_MasterTeacher = 0 
 					tipo_LeaderTeacher = 0
+					tipo_registro_user = 0
 					user_id = user.id
 
 					#Se verifica que tipo de usuario es 
@@ -123,8 +143,13 @@ class FabricaPaginaPrincipalUsuario:
 						tipo_LeaderTeacher = 1 #tipo de usuario Mater Teacher
 					except ObjectDoesNotExist:
 						tipo_LeaderTeacher = 0
-					
 
+					try:
+						registro_user = RegistroUser.objects.get(user_id=user_id)
+						tipo_registro_user = 1 
+					except ObjectDoesNotExist:
+						tipo_registro_user = 0
+					
 					if tipo_MasterTeacher == 1:
 						pagina_master_teacher = MasterTeacherHtml(self.request)				
 						return pagina_master_teacher
@@ -132,6 +157,10 @@ class FabricaPaginaPrincipalUsuario:
 					elif tipo_LeaderTeacher == 1:
 						pagina_leader_teacher = LeaderTeacherHtml(self.request)
 						return pagina_leader_teacher
+
+					elif tipo_registro_user == 1:
+						pagina_registro = RegistroHtml(self.request)
+						return pagina_registro
 				
 				elif tipo_MasterTeacher == 0 and tipo_LeaderTeacher == 0: 
 					message = "Tu usuario esta inactivo"
@@ -156,6 +185,7 @@ class FabricaPaginaPrincipalUsuario:
 		#Si el usuario es Master Teacher o Leader Teacher
 		tipo_MasterTeacher = 0 
 		tipo_LeaderTeacher = 0
+		tipo_registro_user = 0
 		user_id = user.id
 
 		#Se verifica que tipo de usuario es 
@@ -169,6 +199,12 @@ class FabricaPaginaPrincipalUsuario:
 			tipo_LeaderTeacher = 1 #tipo de usuario Mater Teacher
 		except ObjectDoesNotExist:
 			tipo_LeaderTeacher = 0
+
+		try:
+			registro_user = RegistroUser.objects.get(user_id=user_id)
+			tipo_registro_user = 1 
+		except ObjectDoesNotExist:
+			tipo_registro_user = 0
 		
 
 		if tipo_MasterTeacher == 1:
@@ -179,4 +215,6 @@ class FabricaPaginaPrincipalUsuario:
 			pagina_leader_teacher = LeaderTeacherHtml(self.request)
 			return pagina_leader_teacher
 
-		
+		elif tipo_registro_user == 1:
+			pagina_registro = RegistroHtml(self.request)
+			return pagina_registro
