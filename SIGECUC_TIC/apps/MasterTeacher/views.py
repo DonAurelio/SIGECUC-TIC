@@ -1,6 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.views.generic import TemplateView
+from django.views.generic import ListView
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
@@ -49,6 +49,13 @@ def pagina_master_teacher_informacion_personal(request):
 
 
 def pagina_master_teacher_actividades_evaluacion(request):
+	user = request.user
+	user_id = user.id
+	
+	master_teacher = MasterTeacher.objects.get(user_id=user_id)
+	master_teacher_id = master_teacher.persona.identificacion
+	cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
+
 	id_cohorte = request.GET.get('id_cohorte')
 	cohorte = Cohorte.objects.get(id=id_cohorte)
 	curso_id=cohorte.curso.id
@@ -58,7 +65,7 @@ def pagina_master_teacher_actividades_evaluacion(request):
 	estudiantes = LeaderTeacher.objects.filter(cohorte__id=id_cohorte)
 	actividad_evaluacion = curso.nombre
 
-	contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes}
+	contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes}
 	return render_to_response('master_teacher_actividades_de_evaluacion.html',contexto, context_instance= RequestContext(request))
 	#html = "<html><body><h1>id cohorte:</h1><h3>%s<h/3> <h1> Name curso</h1><h2><h/2></body></html>" % curso
 	#return HttpResponse(html)

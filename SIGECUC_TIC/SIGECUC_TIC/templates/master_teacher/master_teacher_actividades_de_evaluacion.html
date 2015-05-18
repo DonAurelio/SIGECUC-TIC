@@ -8,31 +8,43 @@ Actividades de Evaluacion
 {% endblock %}
 
 {% block primer_contenido %}
+
 <h3>Nombre curso: </h3> {{ curso.nombre }}</br>
 <h4>Cohorte Numero: {{ cohorte.id}}</h4>  
 <h4>Fecha inicio: {{ cohorte.fecha_inicio}} Fecha fin: {{ cohorte.fecha_fin}}</h4>  
 
+{% include "division.html" %}
+
+
+<div class="row">
+	<div class="col-lg-4 field">
+		Calificaciones
+	</div>
+	{% for actividad in curso.actividad_evaluacion.all %}
+	<div class="col-lg-4 field">
+		{{ actividad.descripcion }}
+	</div>
+	{% endfor %}
+</div>
+
 {% for estudiante in estudiantes %}
+<div class="row">
+	<div class="col-lg-4 field">
 
-{{ estudiante.inscrito.persona.identificacion }}
-{{ estudiante.inscrito.persona.primer_nombre }}
-{{ estudiante.inscrito.persona.segundo_nombre }}
-{{ estudiante.inscrito.persona.primer_apellido }}
-{{ estudiante.inscrito.persona.segundo_apellido }}
-{{ estudiante.persona.email }}
-Actividad 1: <input type="text" name="{{ estudiante.inscrito.persona.identificacion }}" size="3" maxlength="3">
-</br>
-<h5> {{ estudiante.leader_teacher.cohorte.id}}</h5>
-
-
-</br>
-
+	{{ estudiante.inscrito.persona.identificacion }}
+	{{ estudiante.inscrito.persona.primer_nombre }}
+	{{ estudiante.inscrito.persona.segundo_nombre }}
+	{{ estudiante.inscrito.persona.primer_apellido }}
+	{{ estudiante.inscrito.persona.segundo_apellido }}
+		
+	</div>
+	{% for actividad in curso.actividad_evaluacion.all %}
+	<div class="col-lg-4 field">
+		<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}" size="3" maxlength="3">
+	</div>
+	{% endfor %}
+</div>
 {% endfor %}
-
-{% for actividad in curso.actividad_evaluacion.all %}
-{{ actividad.descripcion }}
-{% endfor %}
-
 
 {% endblock %}
 
