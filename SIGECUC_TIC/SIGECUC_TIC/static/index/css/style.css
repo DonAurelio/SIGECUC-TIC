@@ -536,8 +536,31 @@ form#contactform select {
     cursor:pointer;
 }
 
+form#calificacionform input[type=text]{
+  width: 30%;
+  border: 1px solid #f5f5f5;
+  min-height: 40px;
+  padding-left:20px;
+  font-size:13px;
+  padding-right:20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 
+}
 
+form#calificacionform h4{
+  width: 30%;
+  border: 1px solid #f5f5f5;
+  min-height: 40px;
+  padding-left:20px;
+  font-size:13px;
+  padding-right:20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+
+}
 
 /*
 form#contactform input[type="text"] {
