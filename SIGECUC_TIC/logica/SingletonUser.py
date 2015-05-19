@@ -1,5 +1,5 @@
 class SingletonUser:
-
+	
 	def __init__(self,request):
 		self.singleton_user = None
 		self.id = request.user.id
