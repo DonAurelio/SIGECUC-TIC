@@ -125,3 +125,5 @@ class AreaFormacionDesarrolladaAdmin(admin.ModelAdmin):
     list_display = ('id', 'area_formacion')
 admin.site.register(AreaFormacionDesarrollada, AreaFormacionDesarrolladaAdmin)
 
+admin.site.register(Cursos_Inscrito)
+
