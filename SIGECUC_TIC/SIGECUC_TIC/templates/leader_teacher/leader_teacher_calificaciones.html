@@ -8,8 +8,22 @@ Calificaciones
 {% endblock %}
 
 {% block primer_contenido %}
-{{ formulario.as_p }}
+<h3>Nombre curso: </h3> {{ curso_inscrito.curso.nombre }}</br>
+
+{% include "division.html" %}
+
+{% for calificacion in calificaciones %}
+<div class="row">
+	<div class="col-lg-4 field">
+	{{ calificacion.actividad.descripcion }}
+	{{ calificacion.nota_actividad }}
+		
+	</div>
+
+</div>
+{% endfor %}
 {% endblock %}
+
 
 <!-- Fin Primer bloque -->
 

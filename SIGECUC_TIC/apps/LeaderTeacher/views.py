@@ -7,10 +7,14 @@ from django.contrib.auth.models import User
 #from .forms import Persona_MasterTeacherForm
 from apps.cursos.forms import Informacion_personalForm
 from apps.cursos.models import LeaderTeacher
+from apps.cursos.models import Cursos_Inscrito
+from apps.cursos.models import Calificacion
 
 # Create your views here.
 
+#=========================> Inicio pagina_leader_teacher_informacion_personal #=========================>
 def pagina_leader_teacher_informacion_personal(request):
+	#Funcion que muestra el formulario para modificar datos presonales
 	user = request.user
 	user_id = user.id
 	#consulta a Mater Teacher
@@ -41,3 +45,24 @@ def pagina_leader_teacher_informacion_personal(request):
 			})
 	contexto = {'user':user, 'form_personaLeaderTeacher' : form_personaLeaderTeacher}
 	return render_to_response('leader_teacher_informacion_personal.html',contexto, context_instance= RequestContext(request))
+#=========================> FIN pagina_leader_teacher_informacion_personal #=========================>
+
+
+
+def pagina_leader_teacher_calificaciones(request):
+#funcion que permite ver las calificaciones de el curso actual
+	user = request.user
+	user_id = user.id
+    
+    #Se busca la identificacion del Leader Teacher
+	leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+	id_leader_teacher = leader_teacher.inscrito.persona.identificacion
+
+	#se busca el curso que pertenece el inscrito
+	curso_inscrito = Cursos_Inscrito.objects.get(inscrito_id=id_leader_teacher)
+	#Se busca las calificaciones ordenando por attividad
+	calificaciones = Calificacion.objects.filter(leader_teacher_id=id_leader_teacher).order_by('actividad_id')
+
+	contexto = {'user':user, 'curso_inscrito': curso_inscrito, 'calificaciones': calificaciones}
+	return render_to_response('leader_teacher_calificaciones.html',contexto, context_instance= RequestContext(request))
+

@@ -7,5 +7,7 @@ urlpatterns = patterns('',
 	# URLS INICIO DE DE SESION  
 	url(r'^leader_teacher_informacion_personal', 'apps.LeaderTeacher.views.pagina_leader_teacher_informacion_personal', 
 		name='leader_teacher_informacion_personal'),
+	url(r'^leader_teacher_calificaciones', 'apps.LeaderTeacher.views.pagina_leader_teacher_calificaciones', 
+		name='leader_teacher_calificaciones'),
 
 )
