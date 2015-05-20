@@ -111,12 +111,16 @@ def pagina_master_teacher_actividades_evaluacion(request):
 	else:
 		#Codigo cuando se carga la pagina
 		#===================================================================================================
-		consulta_calificacion = consultar_calificaciones(request, id_cohorte)
-	
+		#consulta_calificacion = consultar_calificaciones(request, id_cohorte)
+		calificaciones_curso = []
+		for estudiante in estudiantes:
+			calififcaciones_estudiante = Calificacion.objects.filter(leader_teacher_id=estudiante.inscrito.persona.identificacion,cohorte_id=id_cohorte)
+			calificaciones_curso.append(calififcaciones_estudiante)
+		estudiantes_calificaciones = zip(estudiantes,calificaciones_curso)
 		#===================================================================================================
 		actividad_evaluacion = curso.nombre
 		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes, 
-		'consulta_calificacion':consulta_calificacion}
+		'estudiantes_calificaciones':estudiantes_calificaciones}
 		return render_to_response('master_teacher_actividades_de_evaluacion.html',contexto, context_instance= RequestContext(request))
 		#html = "<html><body><h1>id cohorte:</h1><h3>%s<h/3> <h1> Name curso</h1><h2><h/2></body></html>" % curso
 		#return HttpResponse(html)

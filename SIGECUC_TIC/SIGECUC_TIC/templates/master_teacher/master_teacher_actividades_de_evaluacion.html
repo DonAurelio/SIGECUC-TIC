@@ -21,48 +21,40 @@ Actividades de Evaluacion
 		<td>
 		Calificaciones
 		</td>
-	
+
 		{% for actividad in curso.actividad_evaluacion.all %}
 		<td>
 			{{ actividad.descripcion }}
 		</td>
 		{% endfor %}
-	</tr>
-
-	{% for estudiante in estudiantes %}
+		
+	{% for estudiante , calificaciones_estudiante in estudiantes_calificaciones %}
 	<tr>
 		<td>
-
-		{{ estudiante.inscrito.persona.identificacion }}
-		{{ estudiante.inscrito.persona.primer_nombre }}
-		{{ estudiante.inscrito.persona.segundo_nombre }}
-		{{ estudiante.inscrito.persona.primer_apellido }}
-		{{ estudiante.inscrito.persona.segundo_apellido }}
-			
+			{{ estudiante.inscrito.persona.identificacion }}
+			{{ estudiante.inscrito.persona.primer_nombre }}
+			{{ estudiante.inscrito.persona.segundo_nombre }}
+			{{ estudiante.inscrito.persona.primer_apellido }}
+			{{ estudiante.inscrito.persona.segundo_apellido }}
 		</td>
-{% comment %} 
-Asi se comenta
-{% endcomment %} 
-		{% for actividad in curso.actividad_evaluacion.all %}
 
+		{% for calificacion in calificaciones_estudiante %}
 		<td>
-			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" size="3" maxlength="3"
-			value = "" >
+			{{ calificacion.nota_actividad }}
 		</td>
 		{% endfor %}
-
 	</tr>
 	{% endfor %}
+	
+	</tr>
 
 </table>
 </div>
+{% include "division.html" %}
 <p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Calificacion</button>
 </p>
 </form>
-
-
-
 
 {% endblock %}
 
