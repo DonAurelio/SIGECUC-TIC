@@ -365,6 +365,9 @@ class LeaderTeacher(models.Model):
 	class Meta:
 		verbose_name_plural = "Ver Leader Teacher"
 
+	def __str__(self):
+		return '%s' % (self.inscrito.identificacion)
+
 
 #=========================> CALIFICACION <=============================
 class Calificacion(models.Model):

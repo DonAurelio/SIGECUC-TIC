@@ -14,7 +14,7 @@ Actividades de Evaluacion
 <h4>Fecha inicio: {{ cohorte.fecha_inicio}} Fecha fin: {{ cohorte.fecha_fin}}</h4>  
 
 {% include "division.html" %}
-
+<form  method='post' action=''>{% csrf_token %}
 <div class="CSSTableGenerator" >
 <table>
 	<tr>
@@ -40,16 +40,26 @@ Actividades de Evaluacion
 		{{ estudiante.inscrito.persona.segundo_apellido }}
 			
 		</td>
+{% comment %} 
+Asi se comenta
+{% endcomment %} 
 		{% for actividad in curso.actividad_evaluacion.all %}
+
 		<td>
-			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}" size="3" maxlength="3">
+			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" size="3" maxlength="3"
+			value = "" >
 		</td>
 		{% endfor %}
+
 	</tr>
 	{% endfor %}
 
 </table>
 </div>
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Calificacion</button>
+</p>
+</form>
 
 
 
