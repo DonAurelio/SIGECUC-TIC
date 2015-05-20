@@ -371,7 +371,8 @@ class LeaderTeacher(models.Model):
 
 #=========================> CALIFICACION <=============================
 class Calificacion(models.Model):
-	nota_actividad = models.DecimalField(max_digits=3, decimal_places=2)  # 4.25
+	#nota_actividad = models.DecimalField(max_digits=3, decimal_places=2)  # 4.25
+	nota_actividad = models.CharField(max_length=3, blank=True) #cambio por cadena generaba conflictos
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
 	actividad = models.ForeignKey(ActividadEvaluacion)

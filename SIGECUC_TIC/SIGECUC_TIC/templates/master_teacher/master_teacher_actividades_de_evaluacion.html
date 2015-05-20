@@ -38,11 +38,24 @@ Actividades de Evaluacion
 			{{ estudiante.inscrito.persona.segundo_apellido }}
 		</td>
 
+{% if validador == False %}
+	{% for actividad in curso.actividad_evaluacion.all %}
+		<td>
+			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" size="3" maxlength="3"
+			value = "" >
+		</td>
+	{% endfor %}
+{% endif %}	
+
+{% if validador == True %}
 		{% for calificacion in calificaciones_estudiante %}
 		<td>
-			{{ calificacion.nota_actividad }}
+			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" size="3"
+			maxlength="3"value = "{{ calificacion.nota_actividad }}" >
 		</td>
 		{% endfor %}
+{% endif %}	
+
 	</tr>
 	{% endfor %}
 	

@@ -12,6 +12,7 @@ from apps.cursos.models import Curso
 from apps.cursos.models import LeaderTeacher
 from apps.cursos.models import Calificacion
 
+from decimal import Decimal
 
 
 # Create your views here.
@@ -60,7 +61,7 @@ def esta_calificacion(request,leader_teacher_id, cohorte_id, actividad_id):
 
 def guardar_notas_html(request, estudiantes, curso, id_cohorte):
 	#funcion que guarda las notas de los leader_Teacher
-	campo_nota = ""
+	#campo_nota = ""
 	for estudiante in estudiantes:
 		for actividad in curso.actividad_evaluacion.all():
 			campo_nota = request.POST.get(''+estudiante.inscrito.persona.identificacion+'#'+str(actividad.id)+'')
@@ -111,16 +112,22 @@ def pagina_master_teacher_actividades_evaluacion(request):
 	else:
 		#Codigo cuando se carga la pagina
 		#===================================================================================================
-		#consulta_calificacion = consultar_calificaciones(request, id_cohorte)
+		consulta_calificacion = consultar_calificaciones(request, id_cohorte)
 		calificaciones_curso = []
 		for estudiante in estudiantes:
 			calififcaciones_estudiante = Calificacion.objects.filter(leader_teacher_id=estudiante.inscrito.persona.identificacion,cohorte_id=id_cohorte)
 			calificaciones_curso.append(calififcaciones_estudiante)
 		estudiantes_calificaciones = zip(estudiantes,calificaciones_curso)
+
 		#===================================================================================================
 		actividad_evaluacion = curso.nombre
+		if consulta_calificacion:
+			#si tiene calificacion validador True para que muestre el foermulario con las notas
+			validador = True
+		else:
+			validador = False
 		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes, 
-		'estudiantes_calificaciones':estudiantes_calificaciones}
+		'estudiantes_calificaciones':estudiantes_calificaciones, 'validador':validador}
 		return render_to_response('master_teacher_actividades_de_evaluacion.html',contexto, context_instance= RequestContext(request))
 		#html = "<html><body><h1>id cohorte:</h1><h3>%s<h/3> <h1> Name curso</h1><h2><h/2></body></html>" % curso
 		#return HttpResponse(html)
