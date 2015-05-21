@@ -36,7 +36,7 @@ class Persona(models.Model):
 
 	class Meta:
 			ordering = ["primer_nombre"]
-			verbose_name_plural = "Ver Personas"
+			verbose_name_plural = "Personas"
 
 	def __str__(self):
 		return '%s %s %s %s %s' % (self.identificacion,
@@ -75,7 +75,7 @@ class MasterTeacher(models.Model):
 		return (self.user.id)
 
 	class Meta:
-		verbose_name_plural = "Ver Master Teacher"
+		verbose_name_plural = "Master Teacher"
 
 	def __str__(self):
 		return '%s %s %s' % (self.persona.identificacion,
@@ -90,7 +90,7 @@ class AreaFormacion(models.Model):
 
 	class Meta:
 			ordering = ["nombre"]
-			verbose_name_plural = "Ver Area de formacion"
+			verbose_name_plural = "Area de formacion"
 
 	def __str__(self):
 		return '%s' % (self.nombre)
@@ -102,7 +102,7 @@ class ActividadEvaluacion(models.Model):
 
 	class Meta:
 		ordering = ["descripcion"]
-		verbose_name_plural = "Ver Actividad de evaluacion"
+		verbose_name_plural = "Actividad de evaluacion"
 
 	def __str__(self):
 		return '%s' % (self.descripcion)
@@ -124,7 +124,7 @@ class Curso(models.Model):
 
 	class Meta:
 		ordering = ["nombre"]
-		verbose_name_plural = "Ver Cursos"
+		verbose_name_plural = "Cursos"
 
 	def __str__(self):
 		return '%s' % (self.nombre)
@@ -152,7 +152,10 @@ class Cohorte(models.Model):
 			self.master_teacher.persona.primer_apellido)
 
 	class Meta:
-		verbose_name_plural = "Ver Cohortes"
+		verbose_name_plural = "Cohortes"
+
+	def __str__(self):
+		return 'Cohorte %s %s %s' % (self.id , str(self.fecha_inicio), str(self.fecha_fin))
 #=========================> FIN COHORTES <============================
 
 
@@ -161,7 +164,7 @@ class ZonaInstitucionEducativa(models.Model):
 	zona = models.CharField(max_length=50)
 	class Meta:
 		ordering = ["zona"]
-		verbose_name_plural = "Ver ZonaInstitucionEducativa"
+		verbose_name_plural = "ZonaInstitucionEducativa"
 
 	def __str__(self):
 		return '%s' % (self.zona)
@@ -169,7 +172,7 @@ class ZonaInstitucionEducativa(models.Model):
 class CaracterTecnica(models.Model):
 	caracter_tecnico = models.CharField(max_length=50)
 	class Meta:
-		verbose_name_plural = "Ver CaracterTecnica"
+		verbose_name_plural = "CaracterTecnica"
 
 	def __str__(self):
 		return '%s' % (self.caracter_tecnico)     
@@ -177,7 +180,7 @@ class CaracterTecnica(models.Model):
 class EtniaEducativa(models.Model):
 	etnia_educativa = models.CharField(max_length=50)
 	class Meta:
-		verbose_name_plural = "Ver EtniaEducativa"
+		verbose_name_plural = "EtniaEducativa"
 
 	def __str__(self):
 		return '%s' % (self.etnia_educativa)       
@@ -185,7 +188,7 @@ class EtniaEducativa(models.Model):
 class NivelEscolar(models.Model):
 	nivel_escolar = models.CharField(max_length=50)
 	class Meta:
-		verbose_name_plural = "Ver Nivel Escolar"
+		verbose_name_plural = "Nivel Escolar"
 
 	def __str__(self):
 		return '%s' % (self.nivel_escolar)  
@@ -193,7 +196,7 @@ class NivelEscolar(models.Model):
 class GradosEscolares(models.Model):
 	grado_escolar = models.CharField(max_length=50)
 	class Meta:
-		verbose_name_plural = "Ver Grados Escolares"
+		verbose_name_plural = "Grados Escolares"
 
 	def __str__(self):
 		return '%s' % (self.grado_escolar)  
@@ -203,7 +206,7 @@ class AreaFormacionDesarrollada(models.Model):
 	area_formacion = models.CharField(max_length=200)
 	class Meta:
 		ordering = ["area_formacion"]
-		verbose_name_plural = "Ver Area Formacion Desarrollada"
+		verbose_name_plural = "Area Formacion Desarrollada"
 
 	def __str__(self):
 		return '%s' % (self.area_formacion) 
@@ -252,7 +255,7 @@ class HistorialAcademico(models.Model):
 	area_formacion_desarrollada = models.ManyToManyField(AreaFormacionDesarrollada)
 
 	class Meta:
-		verbose_name_plural = "Ver Historiales Academicos"
+		verbose_name_plural = "Historiales Academicos"
 
 	def __str__(self):
 		return '%s' % (self.id)
@@ -274,7 +277,7 @@ class HistorialLaboral(models.Model):
 	exp_total = models.CharField(max_length=50)
 
 	class Meta:
-		verbose_name_plural = "Ver Historiales Laborales"
+		verbose_name_plural = "Historiales Laborales"
 
 	def __str__(self):
 		return '%s' % (self.id)
@@ -320,6 +323,36 @@ class Cursos_Inscrito(models.Model):
 	inscrito = models.ForeignKey(Inscrito)
 	fecha_inscripcion = models.DateField(auto_now_add=True)
 
+#retorna el nombre del curso
+	def nombre_curso(self):
+		return (self.curso.nombre)
+
+	def identificacion_inscrito(self):
+		return (self.inscrito.persona.identificacion)
+
+	#metodo para que retorne el primer_nombre de inscrito
+	def primer_nombre_inscrito(self):
+		return (self.inscrito.persona.primer_nombre)
+
+	#metodo para que retorne el segundo_nombre de inscrito
+	def segundo_nombre_inscrito(self):
+		return (self.inscrito.persona.segundo_nombre)
+
+	#metodo para que retorne el primer_apellido de inscrito
+	def primer_apellido_inscrito(self):
+		return (self.inscrito.persona.primer_apellido)
+
+	#metodo para que retorne el segundo_apellido de  inscrito
+	def segundo_apellido_inscrito(self):
+		return (self.inscrito.persona.segundo_apellido)
+
+	#metodo para que retorne el email de  inscrito
+	def email_inscrito(self):
+		return (self.inscrito.persona.email)
+
+	class Meta:
+		verbose_name_plural = "Cursos de los inscritos"
+
 #=========================> FIN INSCRITO <=============================
 class LeaderTeacher(models.Model):
 	user = models.ForeignKey(User,unique=True)
@@ -363,7 +396,7 @@ class LeaderTeacher(models.Model):
 	cohorte = models.ManyToManyField(Cohorte)
 
 	class Meta:
-		verbose_name_plural = "Ver Leader Teacher"
+		verbose_name_plural = "Leader Teacher"
 
 	def __str__(self):
 		return '%s' % (self.inscrito.identificacion)
@@ -376,6 +409,35 @@ class Calificacion(models.Model):
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
 	actividad = models.ForeignKey(ActividadEvaluacion)
+
+	def identificacion_leader_teacher(self):
+		return (self.leader_teacher.inscrito.persona.identificacion)
+		#metodo para que retorne el primer_nombre de persona
+	def primer_nombre_leader_teacher(self):
+		return (self.leader_teacher.inscrito.persona.primer_nombre)
+
+	#metodo para que retorne el segundo_nombre de  persona
+	def segundo_nombre_leader_teacher(self):
+		return (self.leader_teacher.inscrito.persona.segundo_nombre)
+
+	#metodo para que retorne el primer_apellido de  persona
+	def primer_apellido_leader_teacher(self):
+		return (self.leader_teacher.inscrito.persona.primer_apellido)
+
+	#metodo para que retorne el segundo_apellido de  persona
+	def segundo_apellido_leader_teacher(self):
+		return (self.leader_teacher.inscrito.persona.segundo_apellido)
+
+	def nombre_curso(self):
+		return(self.cohorte.curso.nombre)
+
+		#metodo para que retorne el segundo_apellido de  persona
+	def nombre_actividad(self):
+		return (self.actividad.descripcion)
+
+	class Meta:
+		verbose_name_plural = "Calificaciones"
+
 #=========================> FIN CALIFICACION <=========================
 
 
