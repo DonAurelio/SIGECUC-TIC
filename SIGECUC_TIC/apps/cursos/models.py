@@ -155,7 +155,7 @@ class Cohorte(models.Model):
 		verbose_name_plural = "Cohortes"
 
 	def __str__(self):
-		return 'Cohorte %s %s %s' % (self.id , str(self.fecha_inicio), str(self.fecha_fin))
+		return 'Cohorte: %s Nombre curso: %s %s %s' % (self.id , self.curso.nombre, str(self.fecha_inicio), str(self.fecha_fin))
 #=========================> FIN COHORTES <============================
 
 
