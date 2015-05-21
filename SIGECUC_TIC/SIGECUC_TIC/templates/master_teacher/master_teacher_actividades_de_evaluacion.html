@@ -1,7 +1,12 @@
 {% extends "master_teacher.html" %}
-
 <!-- Contenido -->
+<!--META-->
+<head>
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="vanadium.js"></script>
 
+</head>
 <!-- Primer bloque -->
 {% block primer_titulo %}
 Actividades de Evaluacion
@@ -41,7 +46,8 @@ Actividades de Evaluacion
 {% if validador == False %}
 	{% for actividad in curso.actividad_evaluacion.all %}
 		<td>
-			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" size="3" maxlength="3"
+			<input  type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" 
+			id="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" class=":float" size="3" maxlength="3" 
 			value = "" >
 		</td>
 	{% endfor %}
@@ -50,7 +56,9 @@ Actividades de Evaluacion
 {% if validador == True %}
 		{% for calificacion in calificaciones_estudiante %}
 		<td>
-			<input type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" size="3"
+			<input type="text" 
+			name="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" 
+			id="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" class=":float"  size="3"
 			maxlength="3"value = "{{ calificacion.nota_actividad }}" >
 		</td>
 		{% endfor %}
