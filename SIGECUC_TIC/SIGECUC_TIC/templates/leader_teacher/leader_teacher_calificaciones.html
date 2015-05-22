@@ -8,20 +8,25 @@ Calificaciones
 {% endblock %}
 
 {% block primer_contenido %}
-<h3>Nombre curso: </h3> {{ curso_inscrito.curso.nombre }}</br>
 
 {% include "division.html" %}
+<table>
+<tr> <td>Nombre Curso&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+	 <td>Fecha finalizacion </td>
+ </tr>
+{% for cursos_calificados in leader_teacher.cohorte.all %}
+<tr>
 
-{% for calificacion in calificaciones %}
-<div class="row">
-	<div class="col-lg-4 field">
-	{{ calificacion.actividad.descripcion }}
-	{{ calificacion.nota_actividad }}
-		
-	</div>
-
-</div>
+	<td> <a href="leader_teacher_descripcion_calificacion/?id_cohorte={{ cursos_calificados.id }}">
+	{{ cursos_calificados.curso.nombre }}</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</td>
+	<td> 
+	{{ cursos_calificados.fecha_fin }}
+	</td>
+</tr>
 {% endfor %}
+</table>
 {% endblock %}
 
 

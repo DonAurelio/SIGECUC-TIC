@@ -1,0 +1,32 @@
+{% extends "leader_teacher.html" %}
+
+<!-- Contenido -->
+
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Calificaciones
+{% endblock %}
+
+{% block primer_contenido %}
+Nombre curso: {{ curso_inscrito.curso.nombre }}
+{% include "division.html" %}
+
+{% for calificacion in calificaciones %}
+<div class="row">
+	<div class="col-lg-4 field">
+	{{ calificacion.actividad.descripcion }}
+	{{ calificacion.nota_actividad }}
+		
+	</div>
+
+</div>
+{% endfor %}
+
+{{ nota_final }}
+
+{% if aprobo %}
+<h5>Generar certificado</h5> 
+{% else %}
+<h5>No abrobo curso</h5> 
+{% endif %}
+{% endblock %}
