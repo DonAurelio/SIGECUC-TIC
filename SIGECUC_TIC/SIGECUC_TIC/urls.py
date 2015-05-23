@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 	url(r'', include('apps.MasterTeacher.url', namespace = 'masterTeacher')),
 	url(r'', include('apps.LeaderTeacher.url', namespace= 'leaderTeacher')),
 	url(r'', include('apps.registro.url', namespace= 'registro')),
+	url(r'', include('apps.reportes.url', namespace= 'reportes')),
 
 		# Change Password URLs:
 	url(r'^accounts/password_change/$', 

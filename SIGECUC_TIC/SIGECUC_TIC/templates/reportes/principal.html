@@ -1,0 +1,25 @@
+{% extends "cuenta_base.html" %}
+{% block primer_menu_titulo %}
+Tablas
+{% endblock %}
+{% block primer_menu_item %}
+<li><i class="icon-angle-right"></i><a href="{% url "reportes:reporte1" %}">Notas por Estudiantes</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="#">Historico Estudiante Cursos Aprobados</a></li>
+<li><i class="icon-angle-right"></i><a href="#">Estudiantes en Cursos por Departamento</a></li>
+{% endblock %}
+
+{% block segundo_menu_titulo %}
+Graficos
+{% endblock %}
+{% block segundo_menu_item  %}
+<li><i class="icon-angle-right"></i><a href="#">Cursos Mayor Numero Asistentes (Top10)</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="#">Estudiantes que han llegado por Departamento</a></li>
+<li><i class="icon-angle-right"></i><a href="#">Cursos Menor Portencia de Avance (Top5)</a></li>
+<li><i class="icon-angle-right"></i><a href="#">Porsentaje de Estudiantes Aprovaron Curso por Semestre</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="#">Porsentaje de Estudiantes Reprovaron Curso por Semestre</a><span></span></li>
+{% endblock %}
+
+
+
+
+

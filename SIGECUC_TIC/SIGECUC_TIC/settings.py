@@ -86,6 +86,7 @@ TEMPLEATE_PATH_INSCRIPCION = os.path.join(SETTINGS_DIR, 'templates/inscripcion')
 TEMPLATE_PATH_MASTER_TEACHER = os.path.join(SETTINGS_DIR, 'templates/master_teacher').replace('\\','/')
 TEMPLATE_PATH_LEADER_TEACHER = os.path.join(SETTINGS_DIR, 'templates/leader_teacher').replace('\\','/')
 TEMPLATE_PATH_REGISTRO = os.path.join(SETTINGS_DIR, 'templates/registro').replace('\\','/')
+TEMPLATE_PATH_REPORTES = os.path.join(SETTINGS_DIR, 'templates/reportes').replace('\\','/')
 #TEMPLATE_PATH_ACCOUNTS = os.path.join(SETTINGS_DIR, 'templates/cuentas').replace('\\','/')
 #TEMPLATE_PATH_INSCRIPCTION = os.path.join(SETTINGS_DIR, 'templates/inscripcion').replace('\\','/')
 
@@ -99,6 +100,7 @@ TEMPLEATE_PATH_INSCRIPCION,
 TEMPLATE_PATH_MASTER_TEACHER,
 TEMPLATE_PATH_LEADER_TEACHER,
 TEMPLATE_PATH_REGISTRO,
+TEMPLATE_PATH_REPORTES,
 
 #TEMPLATE_PATH,
 #TEMPLATE_PATH_ACCOUNTS,
