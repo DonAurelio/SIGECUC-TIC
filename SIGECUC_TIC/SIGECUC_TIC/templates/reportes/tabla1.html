@@ -11,6 +11,8 @@ Detalle del reporte notas por estudiante
 
 {% include "division.html" %}
 
+{% for estudiante in estudiantes %}
+<div>
 <div class="row">
 			    <div class="col-md-6 ui-sortable">
 			        
@@ -22,48 +24,35 @@ Detalle del reporte notas por estudiante
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 
                             </div>
-                            <h4 class="panel-title">Bordered Table</h4>
+                            <h4 class="panel-title">{{ estudiante.estudiante.inscrito.persona.primer_nombre }}</h4>
                         </div>
                         <div class="panel-body">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Username</th>
-                                        <th>Email Address</th>
+                                        <th>Cohorte</th>
+                                        <th>Curso</th>
+                                        <th>Nota Final</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	{% for cohorte , calificacion in estudiante.cohortes_calificaciones %}
                                     <tr>
-                                        <td>1</td>
-                                        <td>Nicky Almera</td>
-                                        <td>nicky@hotmail.com</td>
+                                        <td>{{ cohorte.curso.id }}</td>
+                                        <td>{{ cohorte.curso.nombre }}</td>
+                                        <td>{{ calificacion }}</td>
+                                       
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Edmund Wong</td>
-                                        <td>edmund@yahoo.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Harvinder Singh</td>
-                                        <td>harvinder@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Terry Khoo</td>
-                                        <td>terry@gmail.com</td>
-                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    
-			        
-                    
-                   
 			    </div>
-	
+			    </div>
+
+{% endfor %}
+
 
 {% endblock %}
 
