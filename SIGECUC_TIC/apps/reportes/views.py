@@ -49,8 +49,7 @@ def reporte_estudiantes_curso_por_departamento(request):
 	if request.method == "POST":
 		pass
 
-
-	contexto = {'user':user}
+	contexto = {'user':user, 'cursos': cursos}
 	return render_to_response('tabla3_consulta.html',contexto)
 	
 

@@ -12,7 +12,17 @@ Por favor seleccione el curso de interes
 {% include "division.html" %}
 
 
+<form  id='contactform' method='post' action=''>{% csrf_token %}
+<select>
+{% for curso in cursos %}
+  <option value="{{ cursos.id }}">{{ curso.nombre}}</option>
+ {% endfor %}
+</select>
 
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Consultar</button>
+</p>
+</form>
 
 {% endblock %}
 
