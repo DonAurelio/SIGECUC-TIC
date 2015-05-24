@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from apps.cursos.models import LeaderTeacher, Curso, Cohorte
 from logica.estudiante import Estudiante
 
+import json
+
 
 # Create your views here.
 
@@ -70,4 +72,9 @@ def reporte_estudiantes_curso_por_departamento(request):
 		return render_to_response('tabla3_consulta.html',contexto,context_instance= RequestContext(request))
 		
 def reporte_cursos_numero_asitentes(request):
-	return render_to_response('grafica1.html')
+
+	labels = ["enero", "febrero", "Marzo"]
+	json_labels = json.dumps(labels)
+	datos = [100, 5, 7]
+	contexto = {'datos': datos, 'labels': json_labels}
+	return render_to_response('grafica1.html', contexto, context_instance= RequestContext(request))

@@ -1,5 +1,5 @@
 {% extends "principal.html" %}
-
+{% load static %}
 <!-- Contenido -->
 
 <!-- Primer bloque -->
@@ -10,6 +10,39 @@ Graficas cursos mayor numero asistentes
 {% block primer_contenido %}
 
 {% include "division.html" %}
+
+<script src="{% static "reportes/graficas/Chart.min.js" %}" type="text/javascript">
+</script>
+<script src="{% static "index/js/jquery.min.js" %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+//alert({{ labels }})
+var parametros_labels = {{ labels|safe }};
+var data = {
+    labels:  parametros_labels ,
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: {{ datos }}
+        },
+        
+    ]
+
+};
+
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+   // var myLineChart = new Chart(ctx).Line(data);
+    var myBarChart = new Chart(ctx).Bar(data);
+
+});
+</script>
+
 
 <!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed in">
@@ -29,7 +62,7 @@ Graficas cursos mayor numero asistentes
                         </div>
                         <div class="panel-body">
                             <div style="padding: 0px; position: relative;" id="bar-chart" class="height-sm">
-
+                            <canvas id="myChart" width="500" height="300"></canvas>
                             <!--
                             <canvas height="300" width="317" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 317px; height: 300px;" class="flot-base"></canvas><div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);" class="flot-text"><div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;" class="flot-x-axis flot-x1-axis xAxis x1Axis"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 14px; text-align: center;">January</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 60px; text-align: center;">February</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 117px; text-align: center;">March</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 172px; text-align: center;">April</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 223px; text-align: center;">May</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 272px; text-align: center;">June</div></div><div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;" class="flot-y-axis flot-y1-axis yAxis y1Axis"><div class="flot-tick-label tickLabel" style="position: absolute; top: 271px; left: 6px; text-align: right;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 203px; left: 6px; text-align: right;">5</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 136px; left: 0px; text-align: right;">10</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 68px; left: 0px; text-align: right;">15</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 0px; left: 0px; text-align: right;">20</div></div></div><canvas height="300" width="317" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 317px; height: 300px;" class="flot-overlay"></canvas>
 							-->
