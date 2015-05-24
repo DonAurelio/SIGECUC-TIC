@@ -73,8 +73,26 @@ def reporte_estudiantes_curso_por_departamento(request):
 		
 def reporte_cursos_numero_asitentes(request):
 
+	#Datos Bar chart
 	labels = ["enero", "febrero", "Marzo"]
 	json_labels = json.dumps(labels)
 	datos = [100, 5, 7]
-	contexto = {'datos': datos, 'labels': json_labels}
+	
+
+	#Datos Donut chart
+	labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+	json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+	colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+	"#F6CEF5","#04B486","#F7D358"]
+	json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+	datos_doughnut_chart = [80,20,20]
+
+	contexto = {
+	'datos': datos, 
+	'labels': json_labels,
+	'datos_doughnut':datos_doughnut_chart,
+	'labels_doughnut':json_labels_doughnut_chart,
+	'colors_doughnut':json_colors_doughnut_chart}
 	return render_to_response('grafica1.html', contexto, context_instance= RequestContext(request))
