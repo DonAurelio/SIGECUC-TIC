@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 	#URLS DEL PROGRAMA GENERAL	
 	url(r'^reportes', 'apps.reportes.views.principal', name='principal'),
 	url(r'^notas_estudiantes', 'apps.reportes.views.reporte_notas_por_estudiantes', name='reporte1'),
+	url(r'^cursos_aprobados', 'apps.reportes.views.reporte_estudiantes_cursos_aprobados', name='reporte2'),
 	
 )

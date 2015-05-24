@@ -27,3 +27,17 @@ def reporte_notas_por_estudiantes(request):
 	contexto = {'user':user,'estudiantes':estudiantes_calificados}
 
 	return render_to_response('tabla1.html',contexto)
+
+
+def reporte_estudiantes_cursos_aprobados(request):
+	user = request.user
+	leader_teachers = LeaderTeacher.objects.all()
+	estudiantes_curso_aprobado = []
+	for leader_teacher in leader_teachers:
+		estudiante = Estudiante(leader_teacher)
+		if estudiante.aprobo_almenos_un_curso:
+			estudiantes_curso_aprobado.append(estudiante)
+	
+	contexto = {'user':user,'estudiantes':estudiantes_curso_aprobado}
+
+	return render_to_response('tabla2.html',contexto)

@@ -4,7 +4,7 @@
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
-Detalle del reporte notas por estudiante
+Historico de Estudiantes que han aprobado un cursos
 {% endblock %}
 
 {% block primer_contenido %}
@@ -12,6 +12,7 @@ Detalle del reporte notas por estudiante
 {% include "division.html" %}
 
 {% for estudiante in estudiantes %}
+
 <div>
 <div class="row">
 			    <div class="col-md-6 ui-sortable">
@@ -32,16 +33,13 @@ Detalle del reporte notas por estudiante
                                     <tr>
                                         <th>Cohorte</th>
                                         <th>Curso</th>
-                                        <th>Nota Final</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                	{% for cohorte , calificacion in estudiante.cohortes_calificaciones %}
+                                	{% for cohorte in estudiante.cohortes_aprobadas %}
                                     <tr>
                                         <td>{{ cohorte.curso.id }}</td>
                                         <td>{{ cohorte.curso.nombre }}</td>
-                                        <td>{{ calificacion }}</td>
-                                       
                                     </tr>
                                     {% endfor %}
                                 </tbody>
