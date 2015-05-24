@@ -1,0 +1,94 @@
+{% extends "principal.html" %}
+
+<!-- Contenido -->
+
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Graficas cursos mayor numero asistentes
+{% endblock %}
+
+{% block primer_contenido %}
+
+{% include "division.html" %}
+
+<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed in">
+		    <!-- begin row -->
+		    <div class="row">
+		        <!-- begin col-4 -->
+		        <div class="col-md-4 ui-sortable">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Bar Chart</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding: 0px; position: relative;" id="bar-chart" class="height-sm">
+
+                            <!--
+                            <canvas height="300" width="317" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 317px; height: 300px;" class="flot-base"></canvas><div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);" class="flot-text"><div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;" class="flot-x-axis flot-x1-axis xAxis x1Axis"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 14px; text-align: center;">January</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 60px; text-align: center;">February</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 117px; text-align: center;">March</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 172px; text-align: center;">April</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 223px; text-align: center;">May</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 52px; top: 284px; left: 272px; text-align: center;">June</div></div><div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;" class="flot-y-axis flot-y1-axis yAxis y1Axis"><div class="flot-tick-label tickLabel" style="position: absolute; top: 271px; left: 6px; text-align: right;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 203px; left: 6px; text-align: right;">5</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 136px; left: 0px; text-align: right;">10</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 68px; left: 0px; text-align: right;">15</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 0px; left: 0px; text-align: right;">20</div></div></div><canvas height="300" width="317" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 317px; height: 300px;" class="flot-overlay"></canvas>
+							-->
+                            </div>
+                        </div>
+                    </div>
+		        </div>
+		        
+		        
+		        
+		        
+		        
+		        <div class="col-md-4 ui-sortable">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Pie Chart</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding: 0px; position: relative;" id="interactive-pie-chart" class="height-sm">
+                            <!--
+                            <canvas height="300" width="317" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 317px; height: 300px;" class="flot-base"></canvas><canvas height="300" width="317" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 317px; height: 300px;" class="flot-overlay"></canvas><div class="legend"><div style="position: absolute; width: 66px; height: 66px; top: 5px; right: 5px; opacity: 0.85;"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ddd;padding:1px"><div style="width:4px;height:0;border:5px solid #727cb6;overflow:hidden"></div></div></td><td class="legendLabel">Series1</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ddd;padding:1px"><div style="width:4px;height:0;border:5px solid #2d353c;overflow:hidden"></div></div></td><td class="legendLabel">Series2</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ddd;padding:1px"><div style="width:4px;height:0;border:5px solid #b6c2c9;overflow:hidden"></div></div></td><td class="legendLabel">Series3</td></tr></tbody></table></div>
+                            -->
+                            </div>
+                        </div>
+                    </div>
+		        </div>
+		        <!-- end col-4 -->
+		    </div>
+		    <!-- end row -->
+		    <!-- begin row -->
+		    
+		    <!-- end row -->
+		
+		<!-- end #content -->
+		
+        <!-- begin theme-panel -->
+        
+        <!-- end theme-panel -->
+		
+		<!-- begin scroll to top btn -->
+		
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+
+
+
+
+{% endblock %}
+
+{% block primer_boton %}
+
+{% endblock %}
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->

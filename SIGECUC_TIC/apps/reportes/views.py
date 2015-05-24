@@ -69,3 +69,5 @@ def reporte_estudiantes_curso_por_departamento(request):
 		contexto = {'cursos': cursos}
 		return render_to_response('tabla3_consulta.html',contexto,context_instance= RequestContext(request))
 		
+def reporte_cursos_numero_asitentes(request):
+	return render_to_response('grafica1.html')
