@@ -1,7 +1,8 @@
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
-from apps.cursos.models import LeaderTeacher
+from apps.cursos.models import LeaderTeacher, Curso
 from logica.estudiante import Estudiante
+
 
 # Create your views here.
 
@@ -41,3 +42,16 @@ def reporte_estudiantes_cursos_aprobados(request):
 	contexto = {'user':user,'estudiantes':estudiantes_curso_aprobado}
 
 	return render_to_response('tabla2.html',contexto)
+
+def reporte_estudiantes_curso_por_departamento(request):
+	user = request.user
+	cursos = Curso.objects.all()
+	if request.method == "POST":
+		pass
+
+
+	contexto = {'user':user}
+	return render_to_response('tabla3_consulta.html',contexto)
+	
+
+
