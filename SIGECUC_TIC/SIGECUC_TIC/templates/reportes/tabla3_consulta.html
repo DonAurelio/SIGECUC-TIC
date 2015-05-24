@@ -13,9 +13,9 @@ Por favor seleccione el curso de interes
 
 
 <form  id='contactform' method='post' action=''>{% csrf_token %}
-<select>
+<select name="id_curso">
 {% for curso in cursos %}
-  <option value="{{ cursos.id }}">{{ curso.nombre}}</option>
+  <option value="{{ curso.id }}">{{ curso.nombre}}</option>
  {% endfor %}
 </select>
 

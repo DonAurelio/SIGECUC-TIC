@@ -11,7 +11,6 @@ Detalle de estudiantes en curso por departamento
 
 {% include "division.html" %}
 
-{% for estudiante in estudiantes %}
 
 <div>
 <div class="row">
@@ -25,21 +24,27 @@ Detalle de estudiantes en curso por departamento
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 
                             </div>
-                            <h4 class="panel-title">{{ estudiante.estudiante.inscrito.persona.primer_nombre }}</h4>
+                            <h4 class="panel-title">{{ curso.nombre }}</h4>
                         </div>
                         <div class="panel-body">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Cohorte</th>
-                                        <th>Curso</th>
+                                        <th>Identificacion</th>
+                                        <th>Estudiante</th>
+                                        <th>Departamanto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                	{% for cohorte in estudiante.cohortes_aprobadas %}
+                                	{% for estudiante in estudiantes %}
                                     <tr>
-                                        <td>{{ cohorte.curso.id }}</td>
-                                        <td>{{ cohorte.curso.nombre }}</td>
+                                        <td>
+                                            {{ estudiante.inscrito.persona.identificacion }}
+                                        </td>
+                                        <td>
+                                             {{ estudiante.inscrito.persona.primer_nombre }} {{ estudiante.inscrito.persona.segundo_nombre }} {{ estudiante.inscrito.persona.primer_apellido }} {{ estudiante.inscrito.persona.segundo_apellido }}
+                                        </td>
+                                        <td>{{ estudiante.departamento_labora }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -47,9 +52,9 @@ Detalle de estudiantes en curso por departamento
                         </div>
                     </div>
 			    </div>
-			    </div>
+    </div>
+</div>
 
-{% endfor %}
 
 
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render, render_to_response
+from django.http import HttpResponse
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from apps.cursos.models import LeaderTeacher, Curso
+from apps.cursos.models import LeaderTeacher, Curso, Cohorte
 from logica.estudiante import Estudiante
 
 
@@ -44,13 +46,26 @@ def reporte_estudiantes_cursos_aprobados(request):
 	return render_to_response('tabla2.html',contexto)
 
 def reporte_estudiantes_curso_por_departamento(request):
-	user = request.user
-	cursos = Curso.objects.all()
-	if request.method == "POST":
-		pass
-
-	contexto = {'user':user, 'cursos': cursos}
-	return render_to_response('tabla3_consulta.html',contexto)
 	
+	if request.method == "POST":
+		id_curso = request.POST.get('id_curso')
+		curso = Curso.objects.get(id=id_curso)
 
-
+		cohortes = Cohorte.objects.filter(curso_id=id_curso)
+		
+		estudiantes = []
+		
+		for cohorte in cohortes:
+			leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id)
+			for leader_teacher in leader_teachers:
+				estudiantes.append(leader_teacher)
+		
+		
+		contexto = {'curso': curso,'estudiantes':estudiantes}
+		return render_to_response('tabla3.html',contexto,context_instance= RequestContext(request))
+		
+	else:
+		cursos = Curso.objects.all()
+		contexto = {'cursos': cursos}
+		return render_to_response('tabla3_consulta.html',contexto,context_instance= RequestContext(request))
+		
