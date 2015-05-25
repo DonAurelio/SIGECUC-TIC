@@ -72,6 +72,7 @@ def reporte_estudiantes_curso_por_departamento(request):
 		contexto = {'cursos': cursos}
 		return render_to_response('tabla3_consulta.html',contexto,context_instance= RequestContext(request))
 		
+#=======================>Inicio grafica1<============================================================		
 def reporte_cursos_numero_asitentes(request):
 	fechas_distintas = Asistencia.objects.all().distinct('mes','anio')
 	fechas_disponibles = []
@@ -154,3 +155,95 @@ def reporte_cursos_numero_asitentes(request):
 		'labels_doughnut':json_labels_doughnut_chart,
 		'colors_doughnut':json_colors_doughnut_chart}
 		return render_to_response('grafica1.html', contexto, context_instance= RequestContext(request))
+
+#=======================>FIN grafica1<============================================================	
+
+
+#================================== INICIO grafica 2 =============================================
+def reporte_docentes_estudiantes_departamento(request):
+	fechas_distintas = Asistencia.objects.all().distinct('mes','anio')
+	fechas_disponibles = []
+	for asistencia in fechas_distintas:
+		fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
+
+	if request.method == "POST":
+
+		#Inicio grafica de barras
+		fecha = request.POST.get('id_fecha')
+		mes_anio = fecha.split('/')
+		mes = mes_anio[0]
+		anio = mes_anio[1]
+
+		cursos_asistencias = Asistencia.objects.filter(mes=mes,anio=anio).distinct('cohorte__curso__nombre')
+		numero_asistentes = []
+		
+		for asistente in cursos_asistencias:
+			asistentes_curso = Asistencia.objects.filter(mes=mes,anio=anio,cohorte__curso__nombre=asistente.cohorte.curso.nombre).distinct('leader_teacher__inscrito__persona__identificacion')
+			numero_asistentes.append(len(asistentes_curso))
+
+		labels_bar = []
+		datos_bar = []
+		
+		for asistente, numero in zip(cursos_asistencias,numero_asistentes):
+			labels_bar.append(asistente.cohorte.curso.nombre)
+			datos_bar.append(numero)
+		
+		json_labels_bar = json.dumps(labels_bar)
+		#Fin grafica de barras
+
+		#Inicio grafica dona
+		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+		"#F6CEF5","#04B486","#F7D358"]
+		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+		datos_doughnut_chart = [80,20,20]
+		#Fin grafica dona
+
+
+		contexto = {
+		'labels_bar':json_labels_bar, 
+		'datos_bar':datos_bar,
+		'datos_doughnut':datos_bar,
+		'labels_doughnut':json_labels_bar,
+		'colors_doughnut':json_colors_doughnut_chart,
+		'fechas_disponibles':fechas_disponibles
+
+		}
+
+		return render_to_response('grafica2.html', contexto, context_instance= RequestContext(request))
+
+	else:
+		
+		
+		#Datos Bar chart
+		labels = ["enero", "febrero", "Marzo"]
+		json_labels = json.dumps(labels)
+		datos = [100, 5, 7]
+		
+
+		#Datos Donut chart
+		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+		"#F6CEF5","#04B486","#F7D358"]
+		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+		datos_doughnut_chart = [80,20,20]
+
+		contexto = {
+		'fechas_disponibles':fechas_disponibles,
+		'datos_bar': datos, 
+		'labels_bar': json_labels,
+		'datos_doughnut':datos_doughnut_chart,
+		'labels_doughnut':json_labels_doughnut_chart,
+		'colors_doughnut':json_colors_doughnut_chart}
+		return render_to_response('grafica2.html', contexto, context_instance= RequestContext(request))
+
+
+#=======================>FIN grafica 2<============================================================	
+
+
