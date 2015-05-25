@@ -248,4 +248,57 @@ def reporte_docentes_estudiantes_departamento(request):
 
 #=======================>FIN grafica 2<============================================================	
 
+def reporte_cursos_menor_potencial_avance(request):
+	cursos = Curso.objects.all()
+	notas_finales_estudiantes = 0
+	nota_cohortes = 0
+	notas_cursos = []
+	a = ""
+	for curso in cursos:
+		cohortes = Cohorte.objects.filter(curso_id=curso.id)
+		for cohorte in cohortes:
+			nota_cohortes = 0
+			notas_finales_estudiantes = 0
+			leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id)
+			for leader_teacher in leader_teachers:
+				estudiante = Estudiante(leader_teacher)
+				nota_final = estudiante.calcular_nota_final_cohorte(cohorte)
+				notas_finales_estudiantes += nota_final
+				a += leader_teacher.inscrito.persona.primer_nombre + "/" + cohorte.curso.nombre +"/"+ str(nota_final) +"<br>"
+			nota_cohortes += notas_finales_estudiantes / len(leader_teachers)
+		notas_cursos.append(nota_cohortes)
+	
+	labels_bar = []
+	datos_bar = []
+	
+	for curso, nota in zip(cursos,notas_cursos):
+		labels_bar.append(curso.nombre)
+		datos_bar.append(nota)
+	
+	json_labels_bar = json.dumps(labels_bar)
+	#Fin grafica de barras
 
+	#Inicio grafica dona
+	labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+	json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+	colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+	"#F6CEF5","#04B486","#F7D358"]
+	json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+	datos_doughnut_chart = [80,20,20]
+	#Fin grafica dona
+
+
+	contexto = {
+	'labels_bar':json_labels_bar, 
+	'datos_bar':datos_bar,
+	'datos_doughnut':datos_bar,
+	'labels_doughnut':json_labels_bar,
+	'colors_doughnut':json_colors_doughnut_chart,
+	
+	}
+
+	return render_to_response('grafica3.html', contexto, context_instance= RequestContext(request))
+
+	

@@ -4,16 +4,20 @@ class Estudiante:
 	def __init__(self,estudiante):
 		self.estudiante = estudiante
 		self.cohortes = estudiante.cohorte.all()
-		self.calcular_nota_final()
+		self.calcular_calificaciones_por_cohorte()
 		self.calcular_cohortes_cursos_aprobadas()
 		self.aprobo_un_curso()
 
 
-	def calcular_nota_final(self):
+	def calcular_nota_final_cohorte(self,cohorte):
+		calificaciones = Calificacion.objects.filter(cohorte_id=cohorte.id,leader_teacher_id=self.estudiante.inscrito.persona.identificacion)
+		nota_final = self.calcular_nota_final_curso(calificaciones)
+		return nota_final
+	
+	def calcular_calificaciones_por_cohorte(self):
 		calificacines_finales = []
 		for cohorte in self.cohortes:
-			calificaciones = Calificacion.objects.filter(cohorte_id=cohorte.id,leader_teacher_id=self.estudiante.inscrito.persona.identificacion)
-			nota_final = self.calcular_nota_final_curso(calificaciones)
+			nota_final = self.calcular_nota_final_cohorte(cohorte)
 			calificacines_finales.append(nota_final)
 			
 		self.cohortes_calificaciones = zip(self.cohortes,calificacines_finales)
@@ -22,7 +26,6 @@ class Estudiante:
 		self.aprobo_almenos_un_curso = True
 		if self.cohortes_aprobadas == []:
 			self.aprobo_almenos_un_curso = False
-
 
 	def calcular_cohortes_cursos_aprobadas(self):
 		self.cohortes_aprobadas = []
