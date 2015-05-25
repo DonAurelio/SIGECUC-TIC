@@ -89,7 +89,8 @@ def pagina_inscripcion_curso(request):
 			form_HistorialLaboral.save_m2m() #Guarda las relaciones de ManyToMany
 			fecha_actual =  datetime.datetime.now()
 			numero_mes = datetime.datetime.now().month
-			mes = TraductorFecha.numero_a_mes(numero_mes)
+			fecha_transformada = TraductorFecha(fecha_actual)
+			mes = fecha_transformada.mes()
 			dia = datetime.datetime.now().day
 			anio = atetime.datetime.now().year		
 			inscrip= Inscrito(ide_persona, dia, mes, anio, True, ide_historialLaboral,ide_historialAcademico)

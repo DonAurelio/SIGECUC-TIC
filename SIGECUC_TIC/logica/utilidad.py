@@ -7,13 +7,9 @@ class TraductorFecha:
 		1:"Enero",2:"Febrero",3:"Marzo",4:"Abril",5:"Mayo",6:"Junio",
 		7:"Julio",8:"Agosto",9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre",}
 
-		self.mes = fecha.datetime.now().month
-		self.dia = fecha.datetime.now().day
-		self.anio = fecha.datetime.now().year
-
- 	@staticmethod
-	def numero_a_mes(self,numero):
-		return self.meses[numero]
+		self.mes = fecha.now().month
+		self.dia = fecha.now().day
+		self.anio = fecha.now().year
 
 	def mes(self):
 		return self.meses[self.mes]
