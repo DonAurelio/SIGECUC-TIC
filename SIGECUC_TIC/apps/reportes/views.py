@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from apps.cursos.models import LeaderTeacher, Curso, Cohorte, Asistencia
+from apps.cursos.models import LeaderTeacher, Curso, Cohorte, Asistencia, Inscrito
 from logica.estudiante import Estudiante
 from django.db.models import Count
 
@@ -161,7 +161,7 @@ def reporte_cursos_numero_asitentes(request):
 
 #================================== INICIO grafica 2 =============================================
 def reporte_docentes_estudiantes_departamento(request):
-	fechas_distintas = Asistencia.objects.all().distinct('mes','anio')
+	fechas_distintas = Inscrito.objects.all().distinct('mes','anio')
 	fechas_disponibles = []
 	for asistencia in fechas_distintas:
 		fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
@@ -174,7 +174,9 @@ def reporte_docentes_estudiantes_departamento(request):
 		mes = mes_anio[0]
 		anio = mes_anio[1]
 
-		cursos_asistencias = Asistencia.objects.filter(mes=mes,anio=anio).distinct('cohorte__curso__nombre')
+
+		leader_teachers_departamentos = LeaderTeacher.objects.filter(mes=mes,anio=anio).distinct
+		cursos_asistencias = Inscrito.objects.filter(mes=mes,anio=anio).distinct('cohorte__curso__nombre')
 		numero_asistentes = []
 		
 		for asistente in cursos_asistencias:

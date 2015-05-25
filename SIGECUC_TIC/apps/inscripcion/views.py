@@ -87,12 +87,14 @@ def pagina_inscripcion_curso(request):
 			form_persona.save_m2m() #Guarda las relaciones de ManyToMany
 			form_HistorialAcademico.save_m2m() #Guarda las relaciones de ManyToMany
 			form_HistorialLaboral.save_m2m() #Guarda las relaciones de ManyToMany
+			
 			fecha_actual =  datetime.datetime.now()
 			numero_mes = datetime.datetime.now().month
-			fecha_transformada = TraductorFecha(fecha_actual)
-			mes = fecha_transformada.mes()
-			dia = datetime.datetime.now().day
-			anio = atetime.datetime.now().year		
+			fecha_transformada = TraductorFecha(datetime.datetime.now())
+			mes = fecha_transformada.get_mes()
+			dia = fecha_transformada.get_dia()
+			anio = fecha_transformada.get_anio()
+
 			inscrip= Inscrito(ide_persona, dia, mes, anio, True, ide_historialLaboral,ide_historialAcademico)
 			curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual)
 			inscrip.save()

@@ -11,13 +11,13 @@ class TraductorFecha:
 		self.dia = fecha.now().day
 		self.anio = fecha.now().year
 
-	def mes(self):
+	def get_mes(self):
 		return self.meses[self.mes]
 
-	def dia(self):
+	def get_dia(self):
 		return self.dia
 
-	def anio(self):
+	def get_anio(self):
 		return self.anio
 		
 
