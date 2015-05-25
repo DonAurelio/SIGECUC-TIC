@@ -1,4 +1,5 @@
 import datetime
+from django.core.mail import EmailMultiAlternatives
 
 class TraductorFecha:
 	def __init__(self,fecha):
@@ -19,6 +20,21 @@ class TraductorFecha:
 
 	def get_anio(self):
 		return self.anio
+
+
+class EmailSender:
+
+	def __init__(self,email,nombre_curso):
+		subject = 'Asunto'
+		text_content = 'Mensaje...nLinea 2nLinea3'
+		html_content = '<h2>Notificacion registro</h2><p>La inscripcion al curso</p>'
+		html_content += nombre_curso 
+		html_content += '<p>se ha realizado con exito, se informara a traves de este medio su aprobacion</p>'
+		from_email = '"SIGECUC-TIC" <emisor.telnet.univalle@gmail.com>'
+		to = email
+		msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
 		
 
 
