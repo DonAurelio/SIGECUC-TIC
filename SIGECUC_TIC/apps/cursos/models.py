@@ -443,9 +443,27 @@ class Calificacion(models.Model):
 
 #========================> ASISTENCIA <==================================
 class Asistencia(models.Model):
+
+	meses = (
+	('Enero','Enero'),
+	('Febrero','Febrero'),
+	('Marzo','Marzo'),
+	('Abril','Abril'),
+	('Mayo','Mayo'),
+	('Junio','Junio'),
+	('Julio','Julio'),
+	('Agosto','Agosto'),
+	('Septiembre','Septiembre'),
+	('Octubre','Octubre'),
+	('Noviembre','Noviembre'),
+	('Diciembre','Diciembre'),
+	)
 	leader_teacher = models.ForeignKey(LeaderTeacher)
 	cohorte = models.ForeignKey(Cohorte)
-	numero_asistencia = models.CharField(max_length=2)
+	dia = models.CharField(max_length=2)
+	mes = models.CharField(max_length=20,choices=meses)
+	anio = models.CharField(max_length=4)
+	
 #========================> FIN ASISTENCIA <==============================
 
 

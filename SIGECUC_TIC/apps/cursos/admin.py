@@ -145,3 +145,14 @@ class Cursos_InscritoAdmin(admin.ModelAdmin):
 
 admin.site.register(Cursos_Inscrito, Cursos_InscritoAdmin)
 
+
+class AsistenciaAdmin(admin.ModelAdmin):
+    #Muestra las columnas de la tabla
+    list_display = ('leader_teacher', 'cohorte','dia','mes','anio')
+    #criterios de filtro de busqueda
+    search_fields = ('leader_teacher__inscrito__persona__identificacion', 'cohorte__curso__nombre')
+
+admin.site.register(Asistencia,AsistenciaAdmin)
+
+
+
