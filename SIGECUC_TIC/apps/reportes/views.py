@@ -161,7 +161,7 @@ def reporte_cursos_numero_asitentes(request):
 
 #================================== INICIO grafica 2 =============================================
 def reporte_docentes_estudiantes_departamento(request):
-	fechas_distintas = Inscrito.objects.all().distinct('mes','anio')
+	fechas_distintas = LeaderTeacher.objects.all().distinct('mes','anio')
 	fechas_disponibles = []
 	for asistencia in fechas_distintas:
 		fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
@@ -176,23 +176,18 @@ def reporte_docentes_estudiantes_departamento(request):
 
 
 		leader_teachers_departamentos = LeaderTeacher.objects.filter(mes=mes,anio=anio).distinct('departamento_labora')
-
-		s = ""
-		for leader_teacher in leader_teachers_departamentos:
-			s += leader_teacher.departamento_labora
-		return HttpResponse(s)
-		cursos_asistencias = Inscrito.objects.filter(mes=mes,anio=anio).distinct('cohorte__curso__nombre')
-		numero_asistentes = []
+		numero_leader_teachers = []
 		
-		for asistente in cursos_asistencias:
-			asistentes_curso = Asistencia.objects.filter(mes=mes,anio=anio,cohorte__curso__nombre=asistente.cohorte.curso.nombre).distinct('leader_teacher__inscrito__persona__identificacion')
-			numero_asistentes.append(len(asistentes_curso))
-
+		for leader_teachers_departamento in leader_teachers_departamentos:
+			departamento = leader_teachers_departamento.departamento_labora
+			leader_teachers = LeaderTeacher.objects.filter(mes=mes,anio=anio,departamento_labora=departamento)
+			numero_leader_teachers.append(len(leader_teachers))
+			
 		labels_bar = []
 		datos_bar = []
 		
-		for asistente, numero in zip(cursos_asistencias,numero_asistentes):
-			labels_bar.append(asistente.cohorte.curso.nombre)
+		for leader_teacher, numero in zip(leader_teachers_departamentos,numero_leader_teachers):
+			labels_bar.append(leader_teacher.departamento_labora)
 			datos_bar.append(numero)
 		
 		json_labels_bar = json.dumps(labels_bar)
