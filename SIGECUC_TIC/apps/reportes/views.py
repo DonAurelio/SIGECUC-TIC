@@ -302,3 +302,199 @@ def reporte_cursos_menor_potencial_avance(request):
 	return render_to_response('grafica3.html', contexto, context_instance= RequestContext(request))
 
 	
+#================================== INICIO grafica 2 =============================================
+
+def reporte_porcentaje_estudiantes_aprobados_cursos_departamentos(request):
+
+	cursos_disponibles = []
+	leader_teachers = LeaderTeacher.objects.all().distinct('cohorte__curso__nombre')
+	departametos_disponibles = []
+	for leader_teacher in leader_teachers:
+		cohortes = leader_teacher.cohorte.all().distinct('curso__nombre')
+		for cohorte in cohortes:
+			cursos_disponibles.append(cohorte.curso)
+
+	if request.method == "POST":
+
+		id_curso = request.POST.get('id_curso')
+		cohortes = Cohorte.objects.filter(curso_id=id_curso)
+		departamentos = []
+		for cohorte in cohortes:
+			leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id).distinct('departamento_labora')
+			for leader_teacher in leader_teachers:
+				departamentos.append(leader_teacher.departamento_labora)
+
+		aprobados_departamentos = []
+		for cohorte in cohortes:
+			for departamento in departamentos:
+				numero_aprobados_cohorte = 0
+				leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id,departamento_labora=departamento)
+				for leader_teacher in leader_teachers:
+					estudiante = Estudiante(leader_teacher)
+					nota_final = estudiante.calcular_nota_final_cohorte(cohorte)
+					if nota_final >= 3.0:
+						numero_aprobados_cohorte += 1
+				aprobados_departamentos.append(numero_aprobados_cohorte)
+
+
+			
+		labels_bar = []
+		datos_bar = []
+		
+		for departamento, numero in zip(departamentos,aprobados_departamentos):
+			labels_bar.append(departamento)
+			datos_bar.append(numero)
+		
+		json_labels_bar = json.dumps(labels_bar)
+		#Fin grafica de barras
+
+		#Inicio grafica dona
+		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+		"#F6CEF5","#04B486","#F7D358"]
+		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+		datos_doughnut_chart = [80,20,20]
+		#Fin grafica dona
+
+
+		contexto = {
+		'labels_bar':json_labels_bar, 
+		'datos_bar':datos_bar,
+		'datos_doughnut':datos_bar,
+		'labels_doughnut':json_labels_bar,
+		'colors_doughnut':json_colors_doughnut_chart,
+		'cursos_disponibles':cursos_disponibles
+
+		}
+
+		return render_to_response('grafica4.html', contexto, context_instance= RequestContext(request))
+
+	else:
+		
+		
+		#Datos Bar chart
+		labels = ["enero", "febrero", "Marzo"]
+		json_labels = json.dumps(labels)
+		datos = [100, 5, 7]
+		
+
+		#Datos Donut chart
+		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+		"#F6CEF5","#04B486","#F7D358"]
+		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+		datos_doughnut_chart = [80,20,20]
+
+		contexto = {
+		'cursos_disponibles':cursos_disponibles,
+		'datos_bar': datos, 
+		'labels_bar': json_labels,
+		'datos_doughnut':datos_doughnut_chart,
+		'labels_doughnut':json_labels_doughnut_chart,
+		'colors_doughnut':json_colors_doughnut_chart
+
+		}
+		return render_to_response('grafica4.html', contexto, context_instance= RequestContext(request))
+
+def reporte_porcentaje_estudiantes_reprobados_cursos_departamentos(request):
+	cursos_disponibles = []
+	leader_teachers = LeaderTeacher.objects.all().distinct('cohorte__curso__nombre')
+	departametos_disponibles = []
+	for leader_teacher in leader_teachers:
+		cohortes = leader_teacher.cohorte.all().distinct('curso__nombre')
+		for cohorte in cohortes:
+			cursos_disponibles.append(cohorte.curso)
+
+	if request.method == "POST":
+
+		id_curso = request.POST.get('id_curso')
+		cohortes = Cohorte.objects.filter(curso_id=id_curso)
+		departamentos = []
+		for cohorte in cohortes:
+			leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id).distinct('departamento_labora')
+			for leader_teacher in leader_teachers:
+				departamentos.append(leader_teacher.departamento_labora)
+
+		aprobados_departamentos = []
+		for cohorte in cohortes:
+			for departamento in departamentos:
+				numero_aprobados_cohorte = 0
+				leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id,departamento_labora=departamento)
+				for leader_teacher in leader_teachers:
+					estudiante = Estudiante(leader_teacher)
+					nota_final = estudiante.calcular_nota_final_cohorte(cohorte)
+					if nota_final < 3.0:
+						numero_aprobados_cohorte += 1
+				aprobados_departamentos.append(numero_aprobados_cohorte)
+
+
+			
+		labels_bar = []
+		datos_bar = []
+		
+		for departamento, numero in zip(departamentos,aprobados_departamentos):
+			labels_bar.append(departamento)
+			datos_bar.append(numero)
+		
+		json_labels_bar = json.dumps(labels_bar)
+		#Fin grafica de barras
+
+		#Inicio grafica dona
+		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+		"#F6CEF5","#04B486","#F7D358"]
+		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+		datos_doughnut_chart = [80,20,20]
+		#Fin grafica dona
+
+
+		contexto = {
+		'labels_bar':json_labels_bar, 
+		'datos_bar':datos_bar,
+		'datos_doughnut':datos_bar,
+		'labels_doughnut':json_labels_bar,
+		'colors_doughnut':json_colors_doughnut_chart,
+		'cursos_disponibles':cursos_disponibles
+
+		}
+
+		return render_to_response('grafica4.html', contexto, context_instance= RequestContext(request))
+
+	else:
+		
+		
+		#Datos Bar chart
+		labels = ["enero", "febrero", "Marzo"]
+		json_labels = json.dumps(labels)
+		datos = [100, 5, 7]
+		
+
+		#Datos Donut chart
+		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
+		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
+
+		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
+		"#F6CEF5","#04B486","#F7D358"]
+		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
+
+		datos_doughnut_chart = [80,20,20]
+
+		contexto = {
+		'cursos_disponibles':cursos_disponibles,
+		'datos_bar': datos, 
+		'labels_bar': json_labels,
+		'datos_doughnut':datos_doughnut_chart,
+		'labels_doughnut':json_labels_doughnut_chart,
+		'colors_doughnut':json_colors_doughnut_chart
+
+		}
+		return render_to_response('grafica5.html', contexto, context_instance= RequestContext(request))
