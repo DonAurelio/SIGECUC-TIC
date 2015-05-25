@@ -92,10 +92,16 @@ body {
 LOGIN FORM
 *******************/
 
+
+    
+
 .login-form {
 	width: 300px;
 	margin: 0 auto;
 	position: relative;
+	left: 20px;
+    top: 100px;
+
 	z-index:5;
 	
 	background: #f3f3f3;
@@ -188,19 +194,20 @@ CONTENT
 	padding-right: 2px;
 	z-index: 3;
 	
+	
 	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomleft: 15px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
 }
 
 .user-icon {
-	top:147px; /* Positioning fix for slide-in, got lazy to think up of simpler method. */
+	top:270px; /* Positioning fix for slide-in, got lazy to think up of simpler method. */
 	background: rgba(65,72,72,0.75) url(../images/user-icon.png) no-repeat center;	
 }
 
 .pass-icon {
-	top:221px;
+	top:350px;
 	background: rgba(65,72,72,0.75) url(../images/pass-icon.png) no-repeat center;
 }
 

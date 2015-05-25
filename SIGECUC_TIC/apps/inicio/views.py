@@ -1,25 +1,19 @@
-from django.views.generic import TemplateView,View, DetailView
+from django.shortcuts import render_to_response
+
+#Modulos django
 from django.template import RequestContext
-from django.shortcuts import render, render_to_response
-from django.contrib.auth import authenticate, login
-from django.views.generic import TemplateView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.exceptions import ObjectDoesNotExist
-import datetime
 
 #Models de la aplicacion cursos
-from apps.cursos.models import Curso
+from apps.cursos.models import Curso, MasterTeacher, LeaderTeacher
 
-#Modelos de aplicacion inicio
+#Formulario de la aplicacion inicio
 from .forms import LoginForm
-from apps.cursos.models import MasterTeacher
-from apps.cursos.models import LeaderTeacher
 
-#Importamos 
-from logica.PerfilFabrica import FabricaPaginaPrincipalUsuario
+#Se importa el patron de disenio fabrica de perfiles 
+from logica.perfil_fabrica import FabricaPaginaPrincipalUsuario
 
 def pagina_principal(request):
-	#funcion que lista los cursos activos cuando el estado es 1
+	#Listamos los cursos que tiene como estado 1 (activo)
 	cursos = Curso.objects.filter(estado='1')
 	user = request.user
 	context = {'user':user,'cursos':cursos}
