@@ -175,7 +175,12 @@ def reporte_docentes_estudiantes_departamento(request):
 		anio = mes_anio[1]
 
 
-		leader_teachers_departamentos = LeaderTeacher.objects.filter(mes=mes,anio=anio).distinct
+		leader_teachers_departamentos = LeaderTeacher.objects.filter(mes=mes,anio=anio).distinct('departamento_labora')
+
+		s = ""
+		for leader_teacher in leader_teachers_departamentos:
+			s += leader_teacher.departamento_labora
+		return HttpResponse(s)
 		cursos_asistencias = Inscrito.objects.filter(mes=mes,anio=anio).distinct('cohorte__curso__nombre')
 		numero_asistentes = []
 		

@@ -49,7 +49,7 @@ def pagina_incripcion_consulta(request):
 				
 				fecha_actual =  datetime.datetime.now()
 				
-				curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=identificacion, fecha_inscripcion=fecha_actual)
+				curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=identificacion, fecha_inscripcion=fecha_actual, estado='Pendiante')
 				curso_inscrito.save()
 
 				email = inscrito.persona.email
@@ -96,7 +96,7 @@ def pagina_inscripcion_curso(request):
 			anio = fecha_transformada.get_anio()
 
 			inscrip= Inscrito(ide_persona, dia, mes, anio, True, ide_historialLaboral,ide_historialAcademico)
-			curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual)
+			curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual, estado='Pendiante')
 			inscrip.save()
 			curso_inscrito.save()
 

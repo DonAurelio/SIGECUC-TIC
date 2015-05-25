@@ -32,7 +32,7 @@ class LeaderTeacherAdmin(admin.ModelAdmin):
 	'primer_apellido', 'segundo_apellido', 'fecha_nacimiento', 
 	'ciudad_nacimiento', 'pais_nacimiento', 'ciudad_residencia',
 	 'pais_residencia', 'ciudad_labora', 'departamento_labora',
-	 'fecha_activacion','nombre_usuario','identificacion_usuario')
+	 'dia','mes','anio','nombre_usuario','identificacion_usuario')
 """
 	search_fields = ('persona__identificacion', 'persona__primer_nombre',
 		'persona__segundo_nombre', 'persona__primer_apellido',
@@ -51,8 +51,8 @@ admin.site.register(AreaFormacion, Area_formacionAdmin)
 
 #Recarga la lista de curso.
 class ActividadEvaluacionAdmin(admin.ModelAdmin):
-	list_display = ('descripcion', 'peso')
-	search_fields = ('descripcion', 'peso')
+	list_display = ('nombre','descripcion', 'peso')
+	search_fields = ('nombre','descripcion', 'peso')
 admin.site.register(ActividadEvaluacion, ActividadEvaluacionAdmin)
 
 

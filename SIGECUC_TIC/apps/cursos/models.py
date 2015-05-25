@@ -97,6 +97,7 @@ class AreaFormacion(models.Model):
 
 
 class ActividadEvaluacion(models.Model):
+	nombre = models.CharField(max_length=30)
 	descripcion = models.TextField()
 	peso = models.DecimalField(max_digits=3, decimal_places=2)  # ej: 0.75
 
@@ -325,7 +326,14 @@ class Cursos_Inscrito(models.Model):
 	inscrito = models.ForeignKey(Inscrito)
 	fecha_inscripcion = models.DateField(auto_now_add=True)
 
-#retorna el nombre del curso
+	estado_incripcion_cuso = (
+		('Pendiente','Pendiente'),
+		('Aceptado','Aceptado')
+		)
+
+	estado = models.CharField(choices=estado_incripcion_cuso,max_length=20)
+
+	#retorna el nombre del curso
 	def nombre_curso(self):
 		return (self.curso.nombre)
 
@@ -394,7 +402,23 @@ class LeaderTeacher(models.Model):
 	pais_residencia = models.CharField(max_length=30)
 	ciudad_labora = models.CharField(max_length=30)
 	departamento_labora = models.CharField(max_length=30)
-	fecha_activacion = models.DateField()
+	dia = models.CharField(max_length=2)
+	meses = (
+	('Enero','Enero'),
+	('Febrero','Febrero'),
+	('Marzo','Marzo'),
+	('Abril','Abril'),
+	('Mayo','Mayo'),
+	('Junio','Junio'),
+	('Julio','Julio'),
+	('Agosto','Agosto'),
+	('Septiembre','Septiembre'),
+	('Octubre','Octubre'),
+	('Noviembre','Noviembre'),
+	('Diciembre','Diciembre'),
+	)
+	mes = models.CharField(choices=meses,max_length=20)
+	anio = models.CharField(max_length=4)
 	cohorte = models.ManyToManyField(Cohorte)
 
 	class Meta:
