@@ -287,7 +287,9 @@ class HistorialLaboral(models.Model):
 #=========================> INSCRITO <================================
 class Inscrito(models.Model):
 	persona = models.OneToOneField(Persona, primary_key=True)
-	fecha_inscripcion = models.DateField(auto_now_add=True)
+	dia = models.CharField(max_length=2)
+	mes = models.CharField(max_length=20)
+	anio = models.CharField(max_length=4)
 	estado = models.BooleanField(default=True)
 	historial_laboral = models.OneToOneField(HistorialLaboral)  # delete cascade
 	historial_academico = models.OneToOneField(HistorialAcademico)

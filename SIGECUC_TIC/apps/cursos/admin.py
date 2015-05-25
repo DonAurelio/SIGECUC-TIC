@@ -98,7 +98,7 @@ admin.site.register(HistorialAcademico, HistorialAcademicoAdmin)
 class InscritoAdmin(admin.ModelAdmin):
 	#Muestra las columnas de la tabla
 	list_display = ('identificacion', 'primer_nombre', 'segundo_nombre',
-	'primer_apellido', 'segundo_apellido')
+	'primer_apellido', 'segundo_apellido','dia','mes','anio')
 	#criterios de filtro de busqueda
 	search_fields = ('persona__identificacion', 'persona__primer_nombre',
 		'persona__segundo_nombre', 'persona__primer_apellido',

@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.core.mail import EmailMultiAlternatives
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import InscripcionPersonaForm
 from .forms import HistorialLaboralForm
@@ -11,9 +12,10 @@ from .forms import InscripcionConsultaForm
 
 from apps.cursos.models import Inscrito
 from apps.cursos.models import Cursos_Inscrito
-import datetime
 
-from django.core.exceptions import ObjectDoesNotExist
+from logica.utilidad import TraductorFecha
+
+import datetime
 
 
 # Create your views here.
@@ -44,8 +46,9 @@ def pagina_incripcion_consulta(request):
 			
 			try:
 				inscrito = Inscrito.objects.get(persona_id=identificacion)
-				#return HttpResponse('Existe')
+				
 				fecha_actual =  datetime.datetime.now()
+				
 				curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=identificacion, fecha_inscripcion=fecha_actual)
 				curso_inscrito.save()
 
@@ -85,17 +88,12 @@ def pagina_inscripcion_curso(request):
 			form_HistorialAcademico.save_m2m() #Guarda las relaciones de ManyToMany
 			form_HistorialLaboral.save_m2m() #Guarda las relaciones de ManyToMany
 			fecha_actual =  datetime.datetime.now()
-
-			"""
-			Nota cambiar en el registro de inscripcion
-			mes = datetime.datetime.now().month
+			numero_mes = datetime.datetime.now().month
+			mes = TraductorFecha.numero_a_mes(numero_mes)
 			dia = datetime.datetime.now().day
-			anio = atetime.datetime.now().year
-			"""
-			inscrip= Inscrito(ide_persona, fecha_actual, True, ide_historialLaboral,ide_historialAcademico)
+			anio = atetime.datetime.now().year		
+			inscrip= Inscrito(ide_persona, dia, mes, anio, True, ide_historialLaboral,ide_historialAcademico)
 			curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual)
-			#Nota cambiar
-			#curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, mes=mes, dia=dia, anio=anio)
 			inscrip.save()
 			curso_inscrito.save()
 
