@@ -15,5 +15,5 @@ urlpatterns = patterns('',
 		'apps.LeaderTeacher.views.pagina_leader_teacher_descripcion_calificacion',
 	name='leader_teacher_descripcion_calificacion'),
 
-	url(r"^clientes/(?P<cliente>[^/]+)/$", tuvista),
+	url(r"^clientes/(?P<curso_id>[^/]+)/$", 'apps.LeaderTeacher.views.pagina_leader_teacher_descripcion_calificacion',name='hola'),
 )

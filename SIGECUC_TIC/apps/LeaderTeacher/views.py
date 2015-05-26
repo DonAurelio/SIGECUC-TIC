@@ -1,6 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-
+from django.http import HttpResponse
 
 from apps.cursos.forms import Informacion_personalForm
 from apps.cursos.models import LeaderTeacher
@@ -47,7 +47,8 @@ def calcular_nota_final_curso(calificaciones):
 
 
 
-def pagina_leader_teacher_descripcion_calificacion(request):
+def pagina_leader_teacher_descripcion_calificacion(request,curso_id):
+	return HttpResponse(curso_id)
 	#https://docs.djangoproject.com/en/1.8/topics/db/aggregation/
 #funcion que permite ver las calificaciones de el curso actual
 	user = request.user
