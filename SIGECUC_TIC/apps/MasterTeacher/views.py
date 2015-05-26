@@ -11,8 +11,11 @@ from apps.cursos.models import Cohorte
 from apps.cursos.models import Curso
 from apps.cursos.models import LeaderTeacher
 from apps.cursos.models import Calificacion
+from apps.cursos.models import Asistencia
+from logica.utilidad import TraductorFecha
 
 from decimal import Decimal
+import datetime
 
 
 # Create your views here.
@@ -137,6 +140,7 @@ def pagina_master_teacher_actividades_evaluacion(request, cohorte_id):
 
 
 #=================================>Inicio Asistencia estudiante<=======================================================
+
 def pagina_master_teacher_asistencia_estudiante(request, cohorte_id):
 	user = request.user
 	user_id = user.id
@@ -154,7 +158,20 @@ def pagina_master_teacher_asistencia_estudiante(request, cohorte_id):
 	#consulta los Leader Teacher pertenecientes a la cohorte 
 	estudiantes = LeaderTeacher.objects.filter(cohorte__id=id_cohorte).order_by('inscrito_id')
 	if request.method == 'POST':
-		pass
+		fecha_transformada = TraductorFecha(datetime.datetime.now())
+		mes = fecha_transformada.get_mes()
+		dia = fecha_transformada.get_dia()
+		anio = fecha_transformada.get_anio()
+		for estudiante in estudiantes:
+			asistencia = request.POST.get(''+estudiante.inscrito.persona.identificacion)
+			if(not asistencia is None):
+				guardar_asistencia.save()
+				guardar_asistencia = Asistencia(leader_teacher_id = estudiante.inscrito.persona.identificacion,
+					cohorte_id=id_cohorte, dia=dia, mes=mes, anio=anio)	
+		mensaje = "Se ha registrado la asistencia"					
+		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes, 
+		'mensaje':mensaje}
+		return render_to_response('master_teacher_asistencia_estudiante.html',contexto, context_instance= RequestContext(request))
 
 	else:
 		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes}

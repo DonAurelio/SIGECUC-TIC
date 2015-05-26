@@ -18,6 +18,10 @@ Asistencias
 <h4>Cohorte Numero: {{ cohorte.id}}</h4>  
 <h4>Fecha inicio: {{ cohorte.fecha_inicio}} Fecha fin: {{ cohorte.fecha_fin}}</h4>  
 
+{% if mensaje %}
+{{ mensaje }}
+{% else %}
+
 {% include "division.html" %}
 <form  method='post' action=''>{% csrf_token %}
 <div class="CSSTableGenerator" >
@@ -27,13 +31,12 @@ Asistencias
 		Calificaciones
 		</td>
 
-		{% for actividad in curso.actividad_evaluacion.all %}
 		<td>
-			{{ actividad.nombre }}
+			Asistencia
 		</td>
-		{% endfor %}
+</tr>
 		
-	{% for estudiante , calificaciones_estudiante in estudiantes_calificaciones %}
+	{% for estudiante in estudiantes %}
 	<tr>
 		<td>
 			{{ estudiante.inscrito.persona.identificacion }}
@@ -43,8 +46,14 @@ Asistencias
 			{{ estudiante.inscrito.persona.segundo_apellido }}
 		</td>
 
+		<td>
+		<input name="{{ estudiante.inscrito.persona.identificacion }}" type="checkbox" />
+
+		</td>
 
 	</tr>
+
+
 	{% endfor %}
 	
 	</tr>
@@ -53,10 +62,10 @@ Asistencias
 </div>
 {% include "division.html" %}
 <p>
-<button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Calificacion</button>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Asistencia</button>
 </p>
 </form>
-
+{% endif %}
 {% endblock %}
 
 <!-- Fin Primer bloque -->
