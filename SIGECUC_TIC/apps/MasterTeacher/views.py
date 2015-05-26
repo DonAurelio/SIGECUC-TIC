@@ -87,7 +87,7 @@ def consultar_calificaciones(request, id_cohorte):
 
 
 
-def pagina_master_teacher_actividades_evaluacion(request):
+def pagina_master_teacher_actividades_evaluacion(request, cohorte_id):
 	user = request.user
 	user_id = user.id
 	
@@ -95,7 +95,8 @@ def pagina_master_teacher_actividades_evaluacion(request):
 	master_teacher_id = master_teacher.persona.identificacion
 
 	cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
-	id_cohorte = request.GET.get('id_cohorte')
+	#id_cohorte = request.GET.get('id_cohorte')
+	id_cohorte = cohorte_id
 	cohorte = Cohorte.objects.get(id=id_cohorte)
 	curso_id=cohorte.curso.id
 	#se consulta el curso
@@ -134,7 +135,4 @@ def pagina_master_teacher_actividades_evaluacion(request):
 
 #=================================>FIN CALIFICANCIONES PARA MASTER TEACHER<=====================================================
 
-def pagina_master_teacher_calificar_leaderTeacher(request, slug):
-	html = "<html><body><h1>id cohorte:</h1><h3>%s<h/3> <h1> Name curso</h1><h2><h/2></body></html>"%slug	
-	return HttpResponse(html)
 
