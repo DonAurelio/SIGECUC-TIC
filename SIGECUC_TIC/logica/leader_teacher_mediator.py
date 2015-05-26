@@ -79,7 +79,56 @@ class InformacionPersonalTask:
 		'titulo':titulo}
 		return render_to_response('leader_teacher.html',contexto)
 
-	
+class CalificacionesTask:
+
+	def get_cursos_calificados(self,request):
+		user = request.user
+		user_id = user.id
+		#Se busca la identificacion del Leader Teacher
+		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+		contexto = {'user': user, 'leader_teacher': leader_teacher}
+		return render_to_response('leader_teacher_calificaciones.html', contexto, context_instance = RequestContext(request))
+
+	def get_detalle_calificacion_curso(self,request,cohorte_id):
+		#https://docs.djangoproject.com/en/1.8/topics/db/aggregation/
+		#funcion que permite ver las calificaciones de el curso actual
+		user = request.user
+		user_id = user.id
+		#id_cohorte = request.GET.get('id_cohorte')
+		id_cohorte = cohorte_id
+
+		#Se busca la identificacion del Leader Teacher
+		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+		id_leader_teacher = leader_teacher.inscrito.persona.identificacion
+
+		#se busca el curso que pertenece el inscrito
+		curso_inscrito = Cursos_Inscrito.objects.filter(inscrito_id=id_leader_teacher)
+		#Se busca las calificaciones ordenando por attividad
+		calificaciones = Calificacion.objects.filter(leader_teacher_id=id_leader_teacher, cohorte_id=id_cohorte).order_by('actividad_id')
+		#usa fiuncion para calcular la nota_final
+		nota_final = self.calcular_nota_final_curso(calificaciones)
+		aprobo = self.validar_aprobacion(nota_final)
+		contexto = {'user':user, 'curso_inscrito': curso_inscrito, 'calificaciones': calificaciones, 'nota_final': nota_final, 'aprobo':aprobo }
+		return render_to_response('leader_teacher_descripcion_calificacion.html',contexto, context_instance= RequestContext(request))
+
+
+	def validar_aprobacion(self,nota):
+		#valida si aprobo o no el estudiante
+		aprobo = False
+		if nota >= 3:
+			aprobo = True
+		return aprobo
+
+
+	def calcular_nota_final_curso(self,calificaciones):
+		nota_final = 0.0
+		#funcion que calcula la nota final del curso con su peso en porcentaje
+		for calificacion in calificaciones:
+			nota_parcial = float(calificacion.nota_actividad)
+			porcentaje_actividad = float(calificacion.actividad.peso)
+			nota_final = nota_final + (nota_parcial * porcentaje_actividad)
+		return nota_final
+
 class LeaderTeacherMediator:
 
 	#Tarea relacionada con la informacion personal
@@ -89,5 +138,14 @@ class LeaderTeacherMediator:
 			return leader_teacher_informacion_personal_task.get_informacion_personal(request)
 		else:
 			return leader_teacher_informacion_personal_task.update_informacion_personal(request)
+
+	def calificaciones_task(self,request,cohorte_id=None,option=1):
+		leader_teacher_calificacion_task = CalificacionesTask()
+		if option == 1:
+			return leader_teacher_calificacion_task.get_cursos_calificados(request)
+		else:
+			return leader_teacher_calificacion_task.get_detalle_calificacion_curso(request,cohorte_id)
+
+
 
 
