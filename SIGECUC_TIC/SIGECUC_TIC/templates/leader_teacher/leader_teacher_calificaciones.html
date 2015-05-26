@@ -20,7 +20,11 @@ Calificaciones
 	<td> <a href="leader_teacher_descripcion_calificacion/?id_cohorte={{ cursos_calificados.id }}">
 	{{ cursos_calificados.curso.nombre }}</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+	<td> <a href="{% url leader_teacher:hola {{ cursos_calificados.id }} %}">Link</a>
 	</td>
+
 	<td> 
 	{{ cursos_calificados.fecha_fin }}
 	</td>
