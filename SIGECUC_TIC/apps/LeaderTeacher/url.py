@@ -14,4 +14,6 @@ urlpatterns = patterns('',
 	url(r'^leader_teacher_descripcion_calificacion', 
 		'apps.LeaderTeacher.views.pagina_leader_teacher_descripcion_calificacion',
 	name='leader_teacher_descripcion_calificacion'),
+
+	url(r"^clientes/(?P<cliente>[^/]+)/$", tuvista),
 )
