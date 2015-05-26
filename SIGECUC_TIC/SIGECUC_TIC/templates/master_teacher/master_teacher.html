@@ -26,7 +26,7 @@ Asistencias
 {% block tercer_menu_item  %}
 {% for cohorte in cohortes %}
 <li><i class="icon-angle-right"></i>
-<a href="{% url "masterTeacher:master_teacher_actividades_evaluacion" cohorte.id %}">
+<a href="{% url "masterTeacher:master_teacher_asistencia_estudiante" cohorte.id %}">
 {{ cohorte.id }} 
 {{ cohorte.curso.nombre }}</a><span></span></li>
 {% endfor %}
