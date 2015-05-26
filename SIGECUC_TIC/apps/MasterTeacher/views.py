@@ -136,3 +136,28 @@ def pagina_master_teacher_actividades_evaluacion(request, cohorte_id):
 #=================================>FIN CALIFICANCIONES PARA MASTER TEACHER<=====================================================
 
 
+#=================================>Inicio Asistencia estudiante<=======================================================
+def pagina_master_teacher_asistencia_estudiante(request, cohorte_id):
+	user = request.user
+	user_id = user.id
+	
+	master_teacher = MasterTeacher.objects.get(user_id=user_id)
+	master_teacher_id = master_teacher.persona.identificacion
+
+	cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
+	#id_cohorte = request.GET.get('id_cohorte')
+	id_cohorte = cohorte_id
+	cohorte = Cohorte.objects.get(id=id_cohorte)
+	curso_id=cohorte.curso.id
+	#se consulta el curso
+	curso = Curso.objects.get(id=curso_id)
+	#consulta los Leader Teacher pertenecientes a la cohorte 
+	estudiantes = LeaderTeacher.objects.filter(cohorte__id=id_cohorte).order_by('inscrito_id')
+	if request.method == 'POST':
+		pass
+
+	else:
+		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes}
+		return render_to_response('master_teacher_asistencia_estudiante.html',contexto, context_instance= RequestContext(request))
+
+#=================================>FIN Asistencia estudiante<=======================================================

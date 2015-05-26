@@ -1,0 +1,64 @@
+{% extends "master_teacher.html" %}
+<!-- Contenido -->
+<!--META-->
+<head>
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="vanadium.js"></script>
+
+</head>
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Asistencias
+{% endblock %}
+
+{% block primer_contenido %}
+
+<h3>Nombre curso: </h3> {{ curso.nombre }}</br>
+<h4>Cohorte Numero: {{ cohorte.id}}</h4>  
+<h4>Fecha inicio: {{ cohorte.fecha_inicio}} Fecha fin: {{ cohorte.fecha_fin}}</h4>  
+
+{% include "division.html" %}
+<form  method='post' action=''>{% csrf_token %}
+<div class="CSSTableGenerator" >
+<table>
+	<tr>
+		<td>
+		Calificaciones
+		</td>
+
+		{% for actividad in curso.actividad_evaluacion.all %}
+		<td>
+			{{ actividad.nombre }}
+		</td>
+		{% endfor %}
+		
+	{% for estudiante , calificaciones_estudiante in estudiantes_calificaciones %}
+	<tr>
+		<td>
+			{{ estudiante.inscrito.persona.identificacion }}
+			{{ estudiante.inscrito.persona.primer_nombre }}
+			{{ estudiante.inscrito.persona.segundo_nombre }}
+			{{ estudiante.inscrito.persona.primer_apellido }}
+			{{ estudiante.inscrito.persona.segundo_apellido }}
+		</td>
+
+
+	</tr>
+	{% endfor %}
+	
+	</tr>
+
+</table>
+</div>
+{% include "division.html" %}
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Calificacion</button>
+</p>
+</form>
+
+{% endblock %}
+
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->
