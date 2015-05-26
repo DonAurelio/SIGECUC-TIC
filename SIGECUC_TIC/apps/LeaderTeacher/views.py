@@ -59,7 +59,7 @@ def pagina_leader_teacher_descripcion_calificacion(request):
 	id_leader_teacher = leader_teacher.inscrito.persona.identificacion
 
 	#se busca el curso que pertenece el inscrito
-	curso_inscrito = Cursos_Inscrito.objects.get(inscrito_id=id_leader_teacher)
+	curso_inscrito = Cursos_Inscrito.objects.filter(inscrito_id=id_leader_teacher)
 	#Se busca las calificaciones ordenando por attividad
 	calificaciones = Calificacion.objects.filter(leader_teacher_id=id_leader_teacher, cohorte_id=id_cohorte).order_by('actividad_id')
 	#usa fiuncion para calcular la nota_final
