@@ -1,0 +1,27 @@
+{% extends "leader_teacher.html" %}
+
+<!-- Contenido -->
+
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Informacion personal 
+{% endblock %}
+
+{% block primer_contenido %}
+
+{% include "division.html" %}
+<form id='contactform' method='post' action=''>{% csrf_token %}
+
+{{ form_personaLeaderTeacher.as_p }}
+
+{% include "division.html" %}
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
+</p>
+</form>
+{% endblock %}
+
+
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->

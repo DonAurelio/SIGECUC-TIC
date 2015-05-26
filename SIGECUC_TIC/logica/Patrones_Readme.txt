@@ -15,3 +15,13 @@ e Historial Academico
 ligenciada por el usuarios cada uno de los datos necesarios para 
 construir cada formulario y asi poder obtener como producto final
 la inscripcion de un aspirante docente
+
+#Patron de diseño mediador(Mediator)
+Permite reducir la complejidad en la comunicacion entre dos objetos,
+este patron va a hacer el mediador de las tareas que puede realizar un
+master teacher o un leader teacher con sus perfiles de usuario
+
+#Patron de diseño Fabrica(Factory)
+Permite fabricar el perfil especifico para el tipo de usuario logeado
+unicamente contruye el template con el contexto indicado para el 
+tipo de usuario

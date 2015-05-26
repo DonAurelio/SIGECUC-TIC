@@ -487,6 +487,8 @@ ul.breadcrumb li a:hover {
 /* --- contact form (Aurelio) ---- */
 /* estilo de inputs */
 form#contactform input[type=text]{
+  background: #fafafa;
+  color:#888;
   width: 100%;
   border: 1px solid #f5f5f5;
   min-height: 40px;
@@ -513,6 +515,7 @@ form#contactform input[type=email]{
 }
 
 /* estilo de selects */ 
+/*
 form#contactform select {
 	width: 100%;
 	min-height: 40px;
@@ -535,6 +538,32 @@ form#contactform select {
     appearance:none;
     cursor:pointer;
 }
+*/
+
+form#contactform select {
+	width: 100%;
+	min-height: 25px;
+	font-size:13px;
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+/*-----------------*/
 
 form#calificacionform input[type=text]{
   width: 30%;
@@ -559,6 +588,8 @@ form#calificacionform h4{
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+
+
 
 }
 
