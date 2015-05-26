@@ -17,13 +17,11 @@ Calificaciones
 {% for cursos_calificados in leader_teacher.cohorte.all %}
 <tr>
 
-	<td> <a href="leader_teacher_descripcion_calificacion/?id_cohorte={{ cursos_calificados.id }}">
-	{{ cursos_calificados.curso.nombre }}</a>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-	<td> <a href="{% url "leaderTeacher:hola" cursos_calificados.id %}">Link</a>
+	<td> 
+<a href="{% url "leaderTeacher:consultar_calificacion" cursos_calificados.id %}">
+{{ cursos_calificados.curso.nombre }}</a>
 	</td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 	<td> 
 	{{ cursos_calificados.fecha_fin }}

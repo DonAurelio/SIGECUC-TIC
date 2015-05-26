@@ -5,7 +5,8 @@
 Menu
 {% endblock %}
 {% block primer_menu_item %}
-<li><i class="icon-angle-right"></i><a href="leader_teacher_informacion_personal">Informacion Personal</a><span></span></li>
+<li><i class="icon-angle-right"></i>
+<a href="{% url "leaderTeacher:leader_teacher_informacion_personal" %}">Informacion Personal</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 1-->
 
@@ -14,7 +15,8 @@ Menu
 Calificaciones
 {% endblock %}
 {% block segundo_menu_item  %}
-<li><i class="icon-angle-right"></i><a href="leader_teacher_calificaciones">Calificaciones</a><span></span></li>
+<li><i class="icon-angle-right"></i>
+<a href="{% url "leaderTeacher:leader_teacher_calificaciones" %}">Calificaciones</a><span></span></li>
 {% endblock %}
 <!--Fin Menu 2 -->
 

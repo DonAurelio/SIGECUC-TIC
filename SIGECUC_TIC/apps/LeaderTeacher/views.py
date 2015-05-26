@@ -47,13 +47,13 @@ def calcular_nota_final_curso(calificaciones):
 
 
 
-def pagina_leader_teacher_descripcion_calificacion(request,curso_id):
-	return HttpResponse(curso_id)
+def pagina_leader_teacher_descripcion_calificacion(request,cohorte_id):
 	#https://docs.djangoproject.com/en/1.8/topics/db/aggregation/
 #funcion que permite ver las calificaciones de el curso actual
 	user = request.user
 	user_id = user.id
-	id_cohorte = request.GET.get('id_cohorte')
+	#id_cohorte = request.GET.get('id_cohorte')
+	id_cohorte = cohorte_id
 	
 	#Se busca la identificacion del Leader Teacher
 	leader_teacher = LeaderTeacher.objects.get(user_id=user_id)

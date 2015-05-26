@@ -3,7 +3,8 @@
 Datos de usuario
 {% endblock %}
 {% block primer_menu_item %}
-<li><i class="icon-angle-right"></i><a href="master_teacher_informacion_personal">Informacion Personal</a><span></span></li>
+<li><i class="icon-angle-right"></i>
+<a href="{% url "masterTeacher:master_teacher_informacion_personal" %}">Informacion Personal</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="/accounts/password_change">Cambiar password</a></li>
 {% endblock %}
 

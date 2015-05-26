@@ -11,9 +11,7 @@ urlpatterns = patterns('',
 	#	name='leader_teacher_calificaciones'),
 	url(r'^leader_teacher_calificaciones', 'apps.LeaderTeacher.views.pagina_consulta_cursos_calificados', 
 		name='leader_teacher_calificaciones'),
-	url(r'^leader_teacher_descripcion_calificacion', 
+	url(r"^leader_teacher_descripcion_calificacion/(?P<cohorte_id>[^/]+)/$", 
 		'apps.LeaderTeacher.views.pagina_leader_teacher_descripcion_calificacion',
-	name='leader_teacher_descripcion_calificacion'),
-
-	url(r"^clientes/(?P<curso_id>[^/]+)/$", 'apps.LeaderTeacher.views.pagina_leader_teacher_descripcion_calificacion',name='hola'),
+		name='consultar_calificacion'),
 )
