@@ -8,14 +8,16 @@
 Matricula
 {% endblock %}
 {% block primer_menu_item %}
-<li><i class="icon-angle-right"></i><a href="#">Matricular Leader Teacher</a><span></span></li>
+<li><i class="icon-angle-right"></i>
+<a href="#">Matricular Leader Teacher</a><span></span></li>
 {% endblock %}
 
 {% block segundo_menu_titulo %}
 Registro
 {% endblock %}
 {% block segundo_menu_item  %}
-<li><i class="icon-angle-right"></i><a href="#">Registrar Master Teacher</a><span></span></li>
+<li><i class="icon-angle-right"></i>
+<a href="{% url "registro:registrar_master_teacher" %}">Registrar Master Teacher</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="#">Asignar Master Teacher Cohorte</a><span></span></li>
 {% endblock %}
 

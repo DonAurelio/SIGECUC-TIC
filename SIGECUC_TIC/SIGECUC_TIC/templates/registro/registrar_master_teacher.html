@@ -1,0 +1,76 @@
+{% extends "registro.html" %}
+<!-- Contenido -->
+<!--META-->
+<head>
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="vanadium.js"></script>
+
+</head>
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Registro Master Teacher
+{% endblock %}
+
+{% block primer_contenido %}
+
+{% include "division.html" %}
+
+{% if mensaje %}
+{{ mensaje }}
+{% else %}
+<form  method='post' action=''>{% csrf_token %}
+
+
+<!-- Parte User -->
+<strong><h3>Usuario </h3></strong>
+{% include "division.html" %}
+{% for field in form_user %}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
+</div>
+{% endfor %}
+
+
+
+<!-- Parte informacion personal -->
+<strong><h3>Informacion Personal</h3></strong>
+{% include "division.html" %}
+{% for field in form_persona %}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
+</div>
+{% endfor %}
+
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Master Teacher</button>
+</p>
+</form>
+{% endif %}
+{% endblock %}
+
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->
