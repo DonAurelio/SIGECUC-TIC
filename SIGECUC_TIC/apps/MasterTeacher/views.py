@@ -155,6 +155,19 @@ def pagina_master_teacher_asistencia_estudiante(request, cohorte_id):
 	curso_id=cohorte.curso.id
 	#se consulta el curso
 	curso = Curso.objects.get(id=curso_id)
+
+	fecha_transformada = TraductorFecha(datetime.datetime.now())
+	mes = fecha_transformada.get_mes()
+	dia = fecha_transformada.get_dia()
+	anio = fecha_transformada.get_anio()
+	#verifica cantidad de asistente
+	cantidad_asistencia = Asistencia.objects.filter(cohorte__id=id_cohorte, dia=dia, 
+		mes=mes, anio=anio).count()
+	if(cantidad_asistencia !=0):
+		mensaje = "Ya ha sido registrada la asistencia en la fecha de hoy"
+		contexto = {'cohorte': cohorte, 'curso': curso,'cohortes':cohortes, 'mensaje': mensaje}
+		return render_to_response('master_teacher_asistencia_estudiante.html',contexto, context_instance= RequestContext(request))
+
 	#consulta los Leader Teacher pertenecientes a la cohorte 
 	estudiantes = LeaderTeacher.objects.filter(cohorte__id=id_cohorte).order_by('inscrito_id')
 	if request.method == 'POST':
@@ -162,13 +175,19 @@ def pagina_master_teacher_asistencia_estudiante(request, cohorte_id):
 		mes = fecha_transformada.get_mes()
 		dia = fecha_transformada.get_dia()
 		anio = fecha_transformada.get_anio()
+		cantidad_registro = 0 #valida cuantos registros han sido guardados
 		for estudiante in estudiantes:
 			asistencia = request.POST.get(''+estudiante.inscrito.persona.identificacion)
 			if(not asistencia is None):
-				guardar_asistencia.save()
+				cantidad_registro += 1
 				guardar_asistencia = Asistencia(leader_teacher_id = estudiante.inscrito.persona.identificacion,
 					cohorte_id=id_cohorte, dia=dia, mes=mes, anio=anio)	
-		mensaje = "Se ha registrado la asistencia"					
+				guardar_asistencia.save()
+		#compara si ha sido registrado un asistente
+		if cantidad_registro == 0:
+			mensaje = "No se ha registrado la asistencia por favor seleccione los asistentes"	
+		else:
+			mensaje = "Se ha registrado la asistencia"					
 		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes, 
 		'mensaje':mensaje}
 		return render_to_response('master_teacher_asistencia_estudiante.html',contexto, context_instance= RequestContext(request))
