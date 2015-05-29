@@ -25,6 +25,10 @@ def pagina_master_teacher_informacion_personal(request):
 	user_id = user.id
 	#consulta a Mater Teacher
 	master_teacher = MasterTeacher.objects.get(user_id=user_id)
+	master_teacher_id = master_teacher.persona.identificacion
+	cohortes = Cohorte.objects.filter(master_teacher_id=master_teacher_id)
+
+
 	if request.method == "POST":
 		#se instancia el master_teacher para que pase la validez y sea un formulario para modificar
 		form_personaMasterTeacher = Informacion_personalForm(request.POST, instance=master_teacher)
@@ -49,7 +53,7 @@ def pagina_master_teacher_informacion_personal(request):
 			'direccion' : master_teacher.persona.direccion
 
 			})
-	contexto = {'user':user, 'form_personaMasterTeacher' : form_personaMasterTeacher}
+	contexto = {'user':user, 'form_personaMasterTeacher' : form_personaMasterTeacher,'cohortes':cohortes}
 	return render_to_response('master_teacher_informacion_personal.html',contexto, context_instance= RequestContext(request))
 
 #=================================>CALIFICANCIONES PARA MASTER TEACHER<=======================================================

@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+<head>
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="{% static "reportes/tablas/css.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/jquery-ui.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/bootstrap.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/font-awesome.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/animate.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/style.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/style-responsive.css" %}" rel="stylesheet">
+	<link href="{% static "reportes/tablas/default.css" %}" rel="stylesheet" id="theme">
+<!-- ================== END BASE CSS STYLE ================== -->
+</head>
 <body>
 <div id="wrapper">
 	<!-- start header -->
@@ -153,5 +166,27 @@
 <script src="{% static "index/js/custom.js" %}"></script>
 <script src="{% static "index/js/jquery.min.js" %}"></script>
 <script src="{% static "index/js/vanadium-min.js" %}"></script>
+
+
+<script src="{% static "reportes/tablas/jquery-1.js" %}"></script>
+<script src="{% static "reportes/tablas/jquery-ui.js" %}"></script>
+<script src="{% static "reportes/tablas/bootstrap.js" %}"></script>
+<!--[if lt IE 9]>
+	<script src="assets/crossbrowserjs/html5shiv.js"></script>
+	<script src="assets/crossbrowserjs/respond.min.js"></script>
+	<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+<![endif]-->
+<script src="{% static "reportes/tablas/jquery_002.js" %}"></script>
+<script src="{% static "reportes/tablas/jquery.js" %}"></script>
+<!-- ================== END BASE JS ================== -->
+
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="{% static "reportes/tablas/apps.js" %}"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+	$(document).ready(function() {
+		App.init();
+	});
+</script>
 </body>
 </html>

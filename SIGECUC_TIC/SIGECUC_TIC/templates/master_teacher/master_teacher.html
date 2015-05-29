@@ -1,11 +1,15 @@
 {% extends "cuenta_base.html" %}
+{% load static %}
+
+
+
 {% block primer_menu_titulo %}
 Datos de usuario
 {% endblock %}
 {% block primer_menu_item %}
 <li><i class="icon-angle-right"></i>
-<a href="{% url "masterTeacher:master_teacher_informacion_personal" %}">Informacion Personal</a><span></span></li>
-<li><i class="icon-angle-right"></i><a href="/accounts/password_change">Cambiar password</a></li>
+<a href="{% url "masterTeacher:master_teacher_informacion_personal" %}">Informacion personal</a><span></span></li>
+<li><i class="icon-angle-right"></i><a href="/accounts/password_change">Cambiar contraseña</a></li>
 {% endblock %}
 
 {% block segundo_menu_titulo %}
@@ -48,5 +52,7 @@ Asistencias
 <!-- Fin Primer bloque -->
 
 <!-- Fin Contenido -->
+
+
 
 

@@ -1,4 +1,5 @@
 {% extends "master_teacher.html" %}
+
 <!-- Contenido -->
 <!--META-->
 <head>
@@ -20,57 +21,75 @@ Actividades de Evaluacion
 
 {% include "division.html" %}
 <form  method='post' action=''>{% csrf_token %}
-<div class="CSSTableGenerator" >
-<table>
-	<tr>
-		<td>
-		Calificaciones
-		</td>
 
-		{% for actividad in curso.actividad_evaluacion.all %}
-		<td>
-			{{ actividad.nombre }}
-		</td>
-		{% endfor %}
-		
-	{% for estudiante , calificaciones_estudiante in estudiantes_calificaciones %}
-	<tr>
-		<td>
-			{{ estudiante.inscrito.persona.identificacion }}
-			{{ estudiante.inscrito.persona.primer_nombre }}
-			{{ estudiante.inscrito.persona.segundo_nombre }}
-			{{ estudiante.inscrito.persona.primer_apellido }}
-			{{ estudiante.inscrito.persona.segundo_apellido }}
-		</td>
+<div>
+<div class="row">
+			    <div class="col-md-12 ui-sortable">
+			        
+                    <div style="" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                
+                            </div>
+                            <h4 class="panel-title">Calificaciones</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Estudiantes</th>
+                                        {% for actividad in curso.actividad_evaluacion.all %}
+                                        <th>{{ actividad.nombre }}</th>
+                                  		{% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	{% for estudiante , calificaciones_estudiante in estudiantes_calificaciones %}
+                                    <tr>
+                                        <td>
+                                        	{{ estudiante.inscrito.persona.identificacion }}
+											{{ estudiante.inscrito.persona.primer_nombre }}
+											{{ estudiante.inscrito.persona.segundo_nombre }}
+											{{ estudiante.inscrito.persona.primer_apellido }}
+											{{ estudiante.inscrito.persona.segundo_apellido }}
 
-{% if validador == False %}
-	{% for actividad in curso.actividad_evaluacion.all %}
-		<td>
-			<input  type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" 
-			id="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" class=":float" size="3" maxlength="3" 
-			value = "" >
-		</td>
-	{% endfor %}
-{% endif %}	
+                                        </td>
+                                        {% if validador == False %}
+											{% for actividad in curso.actividad_evaluacion.all %}
+												<td>
+													<input  type="text" name="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" 
+													id="{{ estudiante.inscrito.persona.identificacion }}#{{ actividad.id }}" class=":float" size="3" maxlength="3" 
+													value = "" >
+												</td>
+											{% endfor %}
+										{% endif %}	
 
-{% if validador == True %}
-		{% for calificacion in calificaciones_estudiante %}
-		<td>
-			<input type="text" 
-			name="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" 
-			id="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" class=":float"  size="3"
-			maxlength="3"value = "{{ calificacion.nota_actividad }}" >
-		</td>
-		{% endfor %}
-{% endif %}	
 
-	</tr>
-	{% endfor %}
-	
-	</tr>
-
-</table>
+										{% if validador == True %}
+												{% for calificacion in calificaciones_estudiante %}
+												<td>
+													<input type="text" 
+													name="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" 
+													id="{{ estudiante.inscrito.persona.identificacion }}#{{ calificacion.actividad.id }}" class=":float"  size="3"
+													maxlength="3"value = "{{ calificacion.nota_actividad }}" >
+												</td>
+												{% endfor %}
+										{% endif %}	
+                                       
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+			    </div>
+			    </div>
 </div>
+
+
 {% include "division.html" %}
 <p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Guardar Calificacion</button>
