@@ -6,6 +6,7 @@ from apps.cursos.forms import Informacion_personalForm
 from apps.cursos.models import LeaderTeacher
 from apps.cursos.models import Cursos_Inscrito
 from apps.cursos.models import Calificacion
+from apps.cursos.models import Cohorte
 
 #Esta clase representa una tarea, que envuelve todas las acciones 
 #necesarias para llevar a cabo la tarea
@@ -95,16 +96,19 @@ class CalificacionesTask:
 		user = request.user
 		user_id = user.id
 		#id_cohorte = request.GET.get('id_cohorte')
-		id_cohorte = cohorte_id
+		
+
+		cohorte = Cohorte.objects.get(id=cohorte_id)
+		curso_id = cohorte.curso.id
 
 		#Se busca la identificacion del Leader Teacher
 		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
 		id_leader_teacher = leader_teacher.inscrito.persona.identificacion
 
 		#se busca el curso que pertenece el inscrito
-		curso_inscrito = Cursos_Inscrito.objects.filter(inscrito_id=id_leader_teacher)
+		curso_inscrito = Cursos_Inscrito.objects.get(inscrito_id=id_leader_teacher,curso__id=curso_id)
 		#Se busca las calificaciones ordenando por attividad
-		calificaciones = Calificacion.objects.filter(leader_teacher_id=id_leader_teacher, cohorte_id=id_cohorte).order_by('actividad_id')
+		calificaciones = Calificacion.objects.filter(leader_teacher_id=id_leader_teacher, cohorte_id=cohorte_id).order_by('actividad_id')
 		#usa fiuncion para calcular la nota_final
 		nota_final = self.calcular_nota_final_curso(calificaciones)
 		aprobo = self.validar_aprobacion(nota_final)

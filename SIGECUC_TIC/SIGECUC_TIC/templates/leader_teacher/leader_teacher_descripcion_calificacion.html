@@ -4,29 +4,64 @@
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
-Calificaciones
+<h1>Calificaciones</h1>
 {% endblock %}
 
 {% block primer_contenido %}
-Nombre curso: {{ curso_inscrito.curso.nombre }}
+<h3>{{ curso_inscrito.curso.nombre }}</h3>
 {% include "division.html" %}
 
-{% for calificacion in calificaciones %}
+<div>
 <div class="row">
-	<div class="col-lg-4 field">
-	{{ calificacion.actividad.nombre }}
-	{{ calificacion.nota_actividad }}
-		
-	</div>
+			    <div class="col-md-12 ui-sortable">
+			        
+                    <div style="" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                
+                            </div>
+                            <h4 class="panel-title">Detalle calificaciones</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Actividades</th>
+                                        <th>Nota</th>
+                                  		
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	{% for calificacion in calificaciones %}
+                                    <tr>
+                                        <td>{{ calificacion.actividad.nombre }}</td>
+                                        <td>{{ calificacion.nota_actividad }}</td>
+									</tr>
+									{% endfor %}	
 
+									<tr>	
+                                       <td>
+                                       <strong>Definitiva</strong>
+                                       </td>
+                                       <td>{{ nota_final }}</td>
+                                    </tr>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+			    </div>
+			    </div>
 </div>
-{% endfor %}
-
-{{ nota_final }}
-
+<p>
 {% if aprobo %}
-<h5>Generar certificado</h5> 
+<a href="{% url "leaderTeacher:certificado" %}">Generar certificado</a>
 {% else %}
-<h5>No abrobo curso</h5> 
+<span class="pull-right margintop20">* Usted no aprobo el curso de {{ curso_inscrito.curso.nombre }}</span>
 {% endif %}
+</p>
+
 {% endblock %}

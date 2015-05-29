@@ -28,5 +28,8 @@ def pagina_leader_teacher_descripcion_calificacion(request,cohorte_id):
 	leader_teacher_mediator = LeaderTeacherMediator()
 	return leader_teacher_mediator.calificaciones_task(request=request,cohorte_id=cohorte_id,option=2)
 
+def pagina_generar_certificado(request):
+	return render_to_response('certificado.html',context_instance=RequestContext(request))
+
 
 
