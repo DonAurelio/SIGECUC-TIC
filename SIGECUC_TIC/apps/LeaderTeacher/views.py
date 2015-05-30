@@ -7,6 +7,8 @@ from apps.cursos.models import LeaderTeacher
 from apps.cursos.models import Cursos_Inscrito
 from apps.cursos.models import Calificacion
 
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
 
 from logica.leader_teacher_mediator import LeaderTeacherMediator
 
@@ -31,5 +33,23 @@ def pagina_leader_teacher_descripcion_calificacion(request,cohorte_id):
 def pagina_generar_certificado(request):
 	return render_to_response('certificado.html',context_instance=RequestContext(request))
 
+
+
+def some_view(request):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
 
 

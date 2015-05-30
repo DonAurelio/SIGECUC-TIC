@@ -15,6 +15,6 @@ urlpatterns = patterns('',
 		'apps.LeaderTeacher.views.pagina_leader_teacher_descripcion_calificacion',
 		name='consultar_calificacion'),
 	url(r"^leader_teacher_certificado", 
-		'apps.LeaderTeacher.views.pagina_generar_certificado',
+		'apps.LeaderTeacher.views.some_view',
 		name='certificado'),
 )
