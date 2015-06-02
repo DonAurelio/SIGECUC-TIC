@@ -39,11 +39,9 @@ def reporte_estudiantes_curso_por_departamento(request):
 	return reporte3.get_report(request)
 		
 #=================================================================================================
+
 def reporte_cursos_numero_asitentes(request):
-	fechas_distintas = Asistencia.objects.all().distinct('mes','anio')
-	fechas_disponibles = []
-	for asistencia in fechas_distintas:
-		fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
+	
 
 	if request.method == "POST":
 
@@ -60,75 +58,76 @@ def reporte_cursos_numero_asitentes(request):
 			asistentes_curso = Asistencia.objects.filter(mes=mes,anio=anio,cohorte__curso__nombre=asistente.cohorte.curso.nombre).distinct('leader_teacher__inscrito__persona__identificacion')
 			numero_asistentes.append(len(asistentes_curso))
 
-		labels_bar = []
-		datos_bar = []
+		labels = []
+		data = []
 		
 		for asistente, numero in zip(cursos_asistencias,numero_asistentes):
-			labels_bar.append(asistente.cohorte.curso.nombre)
-			datos_bar.append(numero)
+			labels.append(asistente.cohorte.curso.nombre)
+			data.append(numero)
 		
-		json_labels_bar = json.dumps(labels_bar)
+		json_labels = json.dumps(labels)
 		#Fin grafica de barras
 
 		#Inicio grafica dona
-		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
+		
 		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 		"#F6CEF5","#04B486","#F7D358"]
 		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
-
-		datos_doughnut_chart = [80,20,20]
+		
 		#Fin grafica dona
 
+		fechas_distintas = Asistencia.objects.all().distinct('mes','anio')
+		fechas_disponibles = []
+		for asistencia in fechas_distintas:
+			fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
 
+		title_graph = "Graficas cursos mayor numero asistentes "
+		filter_label = "Por favor seleccione el mes que desea consultar"
 		contexto = {
-		'labels_bar':json_labels_bar, 
-		'datos_bar':datos_bar,
-		'datos_doughnut':datos_bar,
-		'labels_doughnut':json_labels_bar,
+		'title_graph': title_graph,
+		'filter_label': filter_label,
+		'filter_items': fechas_disponibles,
+		'labels':json_labels, 
+		'data':data,
 		'colors_doughnut':json_colors_doughnut_chart,
-		'fechas_disponibles':fechas_disponibles
-
 		}
 
-		return render_to_response('grafica1.html', contexto, context_instance= RequestContext(request))
+		return render_to_response('grafica.html', contexto, context_instance= RequestContext(request))
 
 	else:
+		fechas_distintas = Asistencia.objects.all().distinct('mes','anio')
+		fechas_disponibles = []
+		for asistencia in fechas_distintas:
+			fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
 		
 		
 		#Datos Bar chart
-		labels = ["enero", "febrero", "Marzo"]
+		labels = ["Ejemplo 1", "Ejemplo 2", "Ejemplo 3"]
 		json_labels = json.dumps(labels)
-		datos = [100, 5, 7]
+		data = [100, 5, 7]
 		
 
 		#Datos Donut chart
-		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
 		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 		"#F6CEF5","#04B486","#F7D358"]
 		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
 
-		datos_doughnut_chart = [80,20,20]
-
+		
+		title_graph = "Graficas cursos mayor numero asistentes "
+		filter_label = "Por favor seleccione el mes que desea consultar"
 		contexto = {
-		'fechas_disponibles':fechas_disponibles,
-		'datos_bar': datos, 
-		'labels_bar': json_labels,
-		'datos_doughnut':datos_doughnut_chart,
-		'labels_doughnut':json_labels_doughnut_chart,
-		'colors_doughnut':json_colors_doughnut_chart}
-		return render_to_response('grafica1.html', contexto, context_instance= RequestContext(request))
+		'title_graph': title_graph,
+		'filter_label': filter_label,
+		'filter_items': fechas_disponibles,
+		'labels':json_labels, 
+		'data':data,
+		'colors_doughnut':json_colors_doughnut_chart,
+		}
+		return render_to_response('grafica.html', contexto, context_instance= RequestContext(request))
 
 
 def reporte_docentes_estudiantes_departamento(request):
-	fechas_distintas = LeaderTeacher.objects.all().distinct('mes','anio')
-	fechas_disponibles = []
-	for asistencia in fechas_distintas:
-		fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
-
+	
 	if request.method == "POST":
 
 		#Inicio grafica de barras
@@ -146,20 +145,18 @@ def reporte_docentes_estudiantes_departamento(request):
 			leader_teachers = LeaderTeacher.objects.filter(mes=mes,anio=anio,departamento_labora=departamento)
 			numero_leader_teachers.append(len(leader_teachers))
 			
-		labels_bar = []
-		datos_bar = []
+		labels = []
+		data = []
 		
 		for leader_teacher, numero in zip(leader_teachers_departamentos,numero_leader_teachers):
-			labels_bar.append(leader_teacher.departamento_labora)
-			datos_bar.append(numero)
+			labels.append(leader_teacher.departamento_labora)
+			data.append(numero)
 		
-		json_labels_bar = json.dumps(labels_bar)
+		json_labels = json.dumps(labels)
 		#Fin grafica de barras
 
 		#Inicio grafica dona
-		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
+		
 		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 		"#F6CEF5","#04B486","#F7D358"]
 		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
@@ -167,47 +164,54 @@ def reporte_docentes_estudiantes_departamento(request):
 		datos_doughnut_chart = [80,20,20]
 		#Fin grafica dona
 
+		fechas_distintas = LeaderTeacher.objects.all().distinct('mes','anio')
+		fechas_disponibles = []
+		for asistencia in fechas_distintas:
+			fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
 
+
+		title_graph = "Estudiantes que han llegado por departamento en el mes"
+		filter_label = "Por favor seleccione el mes que desea consultar"
 		contexto = {
-		'labels_bar':json_labels_bar, 
-		'datos_bar':datos_bar,
-		'datos_doughnut':datos_bar,
-		'labels_doughnut':json_labels_bar,
+		'title_graph': title_graph,
+		'filter_label': filter_label,
+		'filter_items': fechas_disponibles,
+		'labels':json_labels, 
+		'data':data,
 		'colors_doughnut':json_colors_doughnut_chart,
-		'fechas_disponibles':fechas_disponibles
-
 		}
-
-		return render_to_response('grafica2.html', contexto, context_instance= RequestContext(request))
-
+		return render_to_response('grafica.html', contexto, context_instance= RequestContext(request))
 	else:
+
+		fechas_distintas = LeaderTeacher.objects.all().distinct('mes','anio')
+		fechas_disponibles = []
+		for asistencia in fechas_distintas:
+			fechas_disponibles.append(asistencia.mes + "/" + asistencia.anio)
 		
 		
 		#Datos Bar chart
-		labels = ["enero", "febrero", "Marzo"]
+		labels = ["Ejemplo 1", "Ejemplo 2", "Ejemplo 3"]
 		json_labels = json.dumps(labels)
-		datos = [100, 5, 7]
+		data = [100, 5, 7]
 		
 
 		#Datos Donut chart
-		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
 		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 		"#F6CEF5","#04B486","#F7D358"]
 		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
 
-		datos_doughnut_chart = [80,20,20]
-
+		
+		title_graph = "Estudiantes que han llegado por departamento en el mes"
+		filter_label = "Por favor seleccione el mes que desea consultar"
 		contexto = {
-		'fechas_disponibles':fechas_disponibles,
-		'datos_bar': datos, 
-		'labels_bar': json_labels,
-		'datos_doughnut':datos_doughnut_chart,
-		'labels_doughnut':json_labels_doughnut_chart,
-		'colors_doughnut':json_colors_doughnut_chart}
-		return render_to_response('grafica2.html', contexto, context_instance= RequestContext(request))
-
+		'title_graph': title_graph,
+		'filter_label': filter_label,
+		'filter_items': fechas_disponibles,
+		'labels':json_labels, 
+		'data':data,
+		'colors_doughnut':json_colors_doughnut_chart,
+		}
+		return render_to_response('grafica.html', contexto, context_instance= RequestContext(request))
 
 #=======================>FIN grafica 2<============================================================	
 
@@ -217,9 +221,13 @@ def reporte_cursos_menor_potencial_avance(request):
 	nota_cohortes = 0
 	notas_cursos = []
 	a = ""
+	c = ""
 	for curso in cursos:
+		nota_cohortes = 0
+		notas_finales_estudiantes = 0
 		cohortes = Cohorte.objects.filter(curso_id=curso.id)
 		for cohorte in cohortes:
+			
 			nota_cohortes = 0
 			notas_finales_estudiantes = 0
 			leader_teachers = LeaderTeacher.objects.filter(cohorte__id=cohorte.id)
@@ -231,38 +239,30 @@ def reporte_cursos_menor_potencial_avance(request):
 			nota_cohortes += notas_finales_estudiantes / len(leader_teachers)
 		notas_cursos.append(nota_cohortes)
 	
-	labels_bar = []
-	datos_bar = []
+	labels = []
+	data = []
 	
 	for curso, nota in zip(cursos,notas_cursos):
-		labels_bar.append(curso.nombre)
-		datos_bar.append(nota)
+		labels.append(curso.nombre)
+		data.append(nota)
 	
-	json_labels_bar = json.dumps(labels_bar)
+	json_labels = json.dumps(labels)
 	#Fin grafica de barras
 
-	#Inicio grafica dona
-	labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-	json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
+	#Datos Donut chart
 	colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 	"#F6CEF5","#04B486","#F7D358"]
 	json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
 
-	datos_doughnut_chart = [80,20,20]
-	#Fin grafica dona
-
-
+	#Inicio grafica dona
+	title_graph = "Cursos menor potencial de avance Top(5)"
 	contexto = {
-	'labels_bar':json_labels_bar, 
-	'datos_bar':datos_bar,
-	'datos_doughnut':datos_bar,
-	'labels_doughnut':json_labels_bar,
+	'title_graph': title_graph,
+	'labels':json_labels, 
+	'data':data,
 	'colors_doughnut':json_colors_doughnut_chart,
-	
 	}
-
-	return render_to_response('grafica3.html', contexto, context_instance= RequestContext(request))
+	return render_to_response('grafica.html', contexto, context_instance= RequestContext(request))
 
 	
 #================================== INICIO grafica 2 =============================================
@@ -322,8 +322,10 @@ def reporte_porcentaje_estudiantes_aprobados_cursos_departamentos(request):
 		datos_doughnut_chart = [80,20,20]
 		#Fin grafica dona
 
+		graph_title = "Porcentaje de estudiantes que aprobaron un curso por departamento"
 
 		contexto = {
+		'graph_title': graph_title,
 		'labels_bar':json_labels_bar, 
 		'datos_bar':datos_bar,
 		'datos_doughnut':datos_bar,
@@ -333,37 +335,34 @@ def reporte_porcentaje_estudiantes_aprobados_cursos_departamentos(request):
 
 		}
 
-		return render_to_response('grafica4.html', contexto, context_instance= RequestContext(request))
+		return render_to_response('grafica_procentaje.html', contexto, context_instance= RequestContext(request))
 
 	else:
 		
 		
-		#Datos Bar chart
-		labels = ["enero", "febrero", "Marzo"]
+		labels = ["Ejemplo 1", "Ejemplo 2", "Ejemplo 3"]
 		json_labels = json.dumps(labels)
-		datos = [100, 5, 7]
+		data = [100, 5, 7]
 		
-
-		#Datos Donut chart
-		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
+	
 		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 		"#F6CEF5","#04B486","#F7D358"]
 		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
 
-		datos_doughnut_chart = [80,20,20]
 
+		graph_title = "Porcentaje de estudiantes que aprobaron un curso por departamento"
+	
 		contexto = {
+		'graph_title':graph_title,
 		'cursos_disponibles':cursos_disponibles,
-		'datos_bar': datos, 
+		'datos_bar': data, 
 		'labels_bar': json_labels,
-		'datos_doughnut':datos_doughnut_chart,
-		'labels_doughnut':json_labels_doughnut_chart,
+		'datos_doughnut':data,
+		'labels_doughnut':json_labels,
 		'colors_doughnut':json_colors_doughnut_chart
 
 		}
-		return render_to_response('grafica4.html', contexto, context_instance= RequestContext(request))
+		return render_to_response('grafica_procentaje.html', contexto, context_instance= RequestContext(request))
 
 def reporte_porcentaje_estudiantes_reprobados_cursos_departamentos(request):
 	cursos_disponibles = []
@@ -419,8 +418,10 @@ def reporte_porcentaje_estudiantes_reprobados_cursos_departamentos(request):
 		datos_doughnut_chart = [80,20,20]
 		#Fin grafica dona
 
+		graph_title = "Porcentaje de estudiantes que reprobaron un curso por departamento"
 
 		contexto = {
+		'graph_title':graph_title,
 		'labels_bar':json_labels_bar, 
 		'datos_bar':datos_bar,
 		'datos_doughnut':datos_bar,
@@ -430,34 +431,30 @@ def reporte_porcentaje_estudiantes_reprobados_cursos_departamentos(request):
 
 		}
 
-		return render_to_response('grafica4.html', contexto, context_instance= RequestContext(request))
+		return render_to_response('grafica_procentaje.html', contexto, context_instance= RequestContext(request))
 
 	else:
 		
 		
-		#Datos Bar chart
-		labels = ["enero", "febrero", "Marzo"]
+		labels = ["Ejemplo 1", "Ejemplo 2", "Ejemplo 3"]
 		json_labels = json.dumps(labels)
-		datos = [100, 5, 7]
+		data = [100, 5, 7]
 		
-
-		#Datos Donut chart
-		labels_doughnut_chart = ["Curso 1","Curso 2","Curso 3"]
-		json_labels_doughnut_chart = json.dumps(labels_doughnut_chart)
-
+	
 		colors_doughnut_chart = ["#F7464A","#46BFBD","#FDB45C","#F3E2A9","#8181F7","#FFBF00","#01DFD7",
 		"#F6CEF5","#04B486","#F7D358"]
 		json_colors_doughnut_chart = json.dumps(colors_doughnut_chart)
 
-		datos_doughnut_chart = [80,20,20]
-
+		graph_title = "Porcentaje de estudiantes que reprobaron un curso por departamento"
+	
 		contexto = {
+		'graph_title':graph_title,
 		'cursos_disponibles':cursos_disponibles,
-		'datos_bar': datos, 
+		'datos_bar': data, 
 		'labels_bar': json_labels,
-		'datos_doughnut':datos_doughnut_chart,
-		'labels_doughnut':json_labels_doughnut_chart,
+		'datos_doughnut':data,
+		'labels_doughnut':json_labels,
 		'colors_doughnut':json_colors_doughnut_chart
 
 		}
-		return render_to_response('grafica5.html', contexto, context_instance= RequestContext(request))
+		return render_to_response('grafica_procentaje.html', contexto, context_instance= RequestContext(request))

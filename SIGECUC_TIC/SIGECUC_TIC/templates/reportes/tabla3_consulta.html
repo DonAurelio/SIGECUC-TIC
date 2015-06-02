@@ -4,7 +4,7 @@
 
 <!-- Primer bloque -->
 {% block primer_titulo %}
-Por favor seleccione el curso de interes
+Estudiantes en curso por departamento
 {% endblock %}
 
 {% block primer_contenido %}
@@ -13,6 +13,7 @@ Por favor seleccione el curso de interes
 
 
 <form  id='contactform' method='post' action=''>{% csrf_token %}
+<label>Por favor seleccione el departamento de interes</label>
 <select name="id_curso">
 {% for curso in cursos %}
   <option value="{{ curso.id }}">{{ curso.nombre}}</option>

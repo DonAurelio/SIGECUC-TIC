@@ -3,13 +3,16 @@
 <!-- Contenido -->
 
 <!-- Primer bloque -->
-{% block primer_titulo %}Por favor seleccione el mes que desea consultar{% endblock %}
+{% block primer_titulo %}
+{{ graph_title }}
+{% endblock %}
 {% block primer_contenido %}
 
 <form  id='contactform' method='post' action=''>{% csrf_token %}
-<select name="id_fecha">
-{% for fecha in fechas_disponibles %}
-  <option value="{{ fecha }}">{{ fecha }}</option>
+<select name="id_curso">
+{% for curso in cursos_disponibles %}
+<label>Por favor seleccione el curso de interes</label>
+  <option value="{{ curso.id }}">{{ curso.nombre }}</option>
  {% endfor %}
 </select>
 
@@ -23,10 +26,9 @@
 {% endblock %}
 
 
-
 <!-- Segundo bloque -->
 {% block segundo_titulo %} 
-Graficas cursos mayor numero asistentes 
+Graficas 
 {% endblock %}
 
 {% block segundo_contenido %}
@@ -95,7 +97,7 @@ var myDoughnutChart = new Chart(ctx_pie).Doughnut(datos_doughnut,{});
 		    <!-- begin row -->
 		    <div class="row">
 		        <!-- begin col-4 -->
-		        <div class="col-md-4 ui-sortable">
+		        <div class="col-md-12 ui-sortable">
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
@@ -120,7 +122,7 @@ var myDoughnutChart = new Chart(ctx_pie).Doughnut(datos_doughnut,{});
 		        
 		        
 		  <div class="row">
-		        <div class="col-md-4 ui-sortable">
+		        <div class="col-md-12 ui-sortable">
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">

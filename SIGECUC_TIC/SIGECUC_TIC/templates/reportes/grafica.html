@@ -4,13 +4,14 @@
 <!-- Si hay mensaje entonces se muestra -->
 {% if title_message %}
 
-    {% block primer_titulo %}
+   
+    <h2>
     {{ title_message  }}
-    {% endblock %}
+    </h2>
 
-    {% block primer_contenido %}
+    <p>
     {{ message }}
-
+    </p>
 
 {% else %}
 
@@ -22,32 +23,32 @@
     {{ title_graph }}
 {% endblock %}
 
-{% if filter_title %}
+{% block primer_contenido %}
+    {% if filter_label %}
 
-    {% block primer_contenido %}
+        <form  id='contactform' method='post' action=''>{% csrf_token %}
+        <label>{{ filter_label }}</label>
+        
+        <select name="id_fecha">
+        {% for filter_item in filter_items %}
 
-    <h3>{{ filter_title }}</h3>
+          <option value="{{ filter_item }}">{{ filter_item }}</option>
+        {% endfor %}
+        </select>
 
-    <form  id='contactform' method='post' action=''>{% csrf_token %}
-    <select name="id_fecha">
-    {% for filter_item in filter_items %}
-      <option value="{{ filter_item }}">{{ filter_item }}</option>
-     {% endfor %}
-    </select>
+        <p>
+        <button class="btn btn-theme margintop10 pull-left" type="submit">Consultar</button>
+        </p>
+        </form>
+        <br>
+        <br>
 
-    <p>
-    <button class="btn btn-theme margintop10 pull-left" type="submit">Consultar</button>
-    </p>
-    </form>
-    <br>
-    <br>
+        {% include "division.html" %}
 
-    {% include "division.html" %}
+      
 
-    {% endblock %}
-
-{% endif %}
-
+    {% endif %}
+{% endblock %}
 <!-- Segundo bloque -->
 {% block segundo_titulo %} 
     Graficas
@@ -117,7 +118,7 @@ var myDoughnutChart = new Chart(ctx_pie).Doughnut(datos_doughnut,{});
 		    <!-- begin row -->
 		    <div class="row">
 		        <!-- begin col-4 -->
-		        <div class="col-md-4 ui-sortable">
+		        <div class="col-md-12 ui-sortable">
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
@@ -142,7 +143,7 @@ var myDoughnutChart = new Chart(ctx_pie).Doughnut(datos_doughnut,{});
 		        
 		        
 		  <div class="row">
-		        <div class="col-md-4 ui-sortable">
+		        <div class="col-md-12 ui-sortable">
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
