@@ -7,6 +7,9 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 <script type="text/javascript" src="vanadium.js"></script>
 
+
+
+
 </head>
 <!-- Primer bloque -->
 {% block primer_titulo %}
@@ -100,9 +103,20 @@
 
 
 
+
+<p>
+<label>Por favor seleccione la fecha de finalizacion de la cohorte</label>
+<input type="text" id="datepicker">
+</p>   
+
+{% include "division.html" %}
+
 <p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Crear Cohorte</button>
 </p>
+
+
+
 
 </form>
 

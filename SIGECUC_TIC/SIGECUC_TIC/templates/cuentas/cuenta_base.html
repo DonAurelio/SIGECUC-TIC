@@ -13,6 +13,16 @@
 	<link href="{% static "reportes/tablas/style-responsive.css" %}" rel="stylesheet">
 	<link href="{% static "reportes/tablas/default.css" %}" rel="stylesheet" id="theme">
 <!-- ================== END BASE CSS STYLE ================== -->
+
+<!-- Para el selector de fechas -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+
+
+
+
+
 </head>
 <body>
 <div id="wrapper">
@@ -183,6 +193,18 @@
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="{% static "reportes/tablas/apps.js" %}"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
+
+<!-- Para selector de fechas -->
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+$(function() {
+$( "#datepicker" ).datepicker();
+});
+</script>
+
+
 <script>
 	$(document).ready(function() {
 		App.init();
