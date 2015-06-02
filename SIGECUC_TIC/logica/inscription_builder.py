@@ -77,7 +77,7 @@ class InscriptionBuilder(AbstractBuilder):
 		anio = fecha_transformada.get_anio()
 
 		inscrip= Inscrito(ide_persona, dia, mes, anio, True, ide_historialLaboral,ide_historialAcademico)
-		curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual, estado='Pendiante')
+		curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=ide_persona, fecha_inscripcion=fecha_actual, estado='Pendiente')
 		inscrip.save()
 		curso_inscrito.save()
 

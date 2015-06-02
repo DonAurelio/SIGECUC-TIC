@@ -38,7 +38,7 @@ def pagina_incripcion_consulta(request):
 				
 				fecha_actual =  datetime.datetime.now()
 				
-				curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=identificacion, fecha_inscripcion=fecha_actual, estado='Pendiante')
+				curso_inscrito = Cursos_Inscrito(curso_id=id_course, inscrito_id=identificacion, fecha_inscripcion=fecha_actual, estado='Pendiente')
 				curso_inscrito.save()
 
 				email = inscrito.persona.email
