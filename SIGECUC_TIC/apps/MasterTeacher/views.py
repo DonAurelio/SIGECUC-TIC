@@ -116,7 +116,10 @@ def pagina_master_teacher_actividades_evaluacion(request, cohorte_id):
 		guardar_notas_html(request, estudiantes, curso, id_cohorte)
 		#campo_nota = request.POST.get('6558889#2')
 		#datos_iden_activi = dividir_campo_nota(campo_nota)
-		return HttpResponse ("calificado")
+		#return HttpResponse ("calificado")
+		mensaje = "calificado"
+		contexto = {'cohorte': cohorte, 'curso': curso, 'estudiantes': estudiantes,'cohortes':cohortes, 'mensaje':mensaje}
+		return render_to_response('master_teacher_actividades_de_evaluacion.html',contexto, context_instance= RequestContext(request))
 	else:
 		#Codigo cuando se carga la pagina
 		#===================================================================================================

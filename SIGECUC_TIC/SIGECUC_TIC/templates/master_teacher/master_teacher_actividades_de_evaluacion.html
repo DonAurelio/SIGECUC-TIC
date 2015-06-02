@@ -20,6 +20,11 @@ Actividades de Evaluacion
 <h4>Fecha inicio: {{ cohorte.fecha_inicio}} Fecha fin: {{ cohorte.fecha_fin}}</h4>  
 
 {% include "division.html" %}
+
+{%if mensaje %}
+{{ mensaje }}
+
+{% else %}
 <form  method='post' action=''>{% csrf_token %}
 
 <div>
@@ -96,6 +101,8 @@ Actividades de Evaluacion
 </p>
 </form>
 
+
+{% endif %}
 {% endblock %}
 
 <!-- Fin Primer bloque -->
