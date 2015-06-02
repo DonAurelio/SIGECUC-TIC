@@ -15,7 +15,7 @@
 <!-- ================== END BASE CSS STYLE ================== -->
 
 <!-- Para el selector de fechas -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{% static "datepicker/jquery-ui.css" %}">
 
 
 
@@ -195,9 +195,9 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <!-- Para selector de fechas -->
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="{% static "datepicker/query-1.10.2.js" %}"></script>
+<script src="{% static "datepicker/jquery-ui.js" %}"></script>
+<link rel="stylesheet" href="{% static "datepicker/style.css" %}">
 <script>
 $(function() {
 $( "#datepicker" ).datepicker();
