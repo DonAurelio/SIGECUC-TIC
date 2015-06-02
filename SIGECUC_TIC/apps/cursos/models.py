@@ -425,7 +425,9 @@ class LeaderTeacher(models.Model):
 		verbose_name_plural = "Leader Teacher"
 
 	def __str__(self):
-		return '%s' % (self.inscrito.identificacion)
+		return '%s %s %s %s' % (self.inscrito.persona.identificacion,
+		 self.inscrito.persona.primer_nombre, self.inscrito.persona.primer_apellido,
+		 self.inscrito.persona.segundo_apellido )
 
 
 #=========================> CALIFICACION <=============================
@@ -489,6 +491,11 @@ class Asistencia(models.Model):
 	dia = models.CharField(max_length=2)
 	mes = models.CharField(max_length=20,choices=meses)
 	anio = models.CharField(max_length=4)
+	def leader_teacher_identificacion(self):
+		return (self.leader_teacher.inscrito.persona.identificacion)
+
+	class Meta:
+		verbose_name_plural = "Asistencias"
 	
 #========================> FIN ASISTENCIA <==============================
 

@@ -137,18 +137,18 @@ admin.site.register(AreaFormacionDesarrollada, AreaFormacionDesarrolladaAdmin)
 class Cursos_InscritoAdmin(admin.ModelAdmin):
     #Muestra las columnas de la tabla
     list_display = ('nombre_curso', 'fecha_inscripcion','identificacion_inscrito', 'primer_nombre_inscrito',
-    'segundo_nombre_inscrito', 'primer_apellido_inscrito', 'segundo_apellido_inscrito', 'email_inscrito')
+    'segundo_nombre_inscrito', 'primer_apellido_inscrito', 'segundo_apellido_inscrito', 'email_inscrito', 'estado')
     #criterios de filtro de busqueda
     search_fields = ('inscrito__persona__identificacion', 'inscrito__persona__primer_nombre',
         'inscrito__persona__segundo_nombre', 'inscrito__persona__primer_apellido',
-        'inscrito__persona__segundo_apellido')
+        'inscrito__persona__segundo_apellido', 'estado')
 
 admin.site.register(Cursos_Inscrito, Cursos_InscritoAdmin)
 
 
 class AsistenciaAdmin(admin.ModelAdmin):
     #Muestra las columnas de la tabla
-    list_display = ('leader_teacher', 'cohorte','dia','mes','anio')
+    list_display = ('leader_teacher_identificacion', 'cohorte','dia','mes','anio')
     #criterios de filtro de busqueda
     search_fields = ('leader_teacher__inscrito__persona__identificacion', 'cohorte__curso__nombre')
 
