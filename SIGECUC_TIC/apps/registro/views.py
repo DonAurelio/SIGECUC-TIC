@@ -6,9 +6,13 @@ from django.contrib.auth.models import User
 from apps.cursos.models import MasterTeacher
 from apps.cursos.models import Curso
 from apps.cursos.models import Cursos_Inscrito
+from apps.cursos.models import Cohorte
+from apps.cursos.models import LeaderTeacher
+from django.contrib.auth.models import User
 
 from .forms import UserForm
 from .forms import PersonaForm
+from .forms import LeaderTeacherForm
 
 
 def pagina_registro(request):
@@ -55,15 +59,30 @@ def pagina_seleccionar_curso_cohorte(request):
 def pagina_crear_cohorte_curso(request, curso_id):
 
 	if request.method == "POST":
-		master_teacher = request.POST.get('id_master_teacher')
-		curso_id = request.POST.get('curso_id')
-		return HttpResponse(str(curso_id))
+
+		master_teacher_id = request.POST.get('id_master_teacher')
+		cohorte = Cohorte(fecha_inicio='2015-03-01',fecha_fin='2015-03-01',curso_id=curso_id,master_teacher_id=master_teacher_id)
+		cohorte.save()
+
 		inscritos_curso = Cursos_Inscrito.objects.filter(curso_id=curso_id,estado='Pendiente')
 		for inscrito in inscritos_curso:
-			registro_inscrito = request.POST.get(''+inscrito.inscrito.persona.identificacion)
-			if(not registro_inscrito is None):
-				pass
-			#codigo
+			inscrito_id = request.POST.get(''+inscrito.inscrito.persona.identificacion)
+			
+			if(not inscrito_id is None):
+				username = inscrito.inscrito.persona.identificacion
+				password = inscrito.inscrito.persona.primer_nombre +'-'+ str(inscrito.inscrito.persona.identificacion)
+				
+				user = User.objects.create_user(username=username, password=password)
+				user.save()
+
+
+				leader_teacher = LeaderTeacher(user_id=user.id,inscrito_id=inscrito.inscrito.persona.identificacion,fecha_nacimiento='2015-03-01')
+				leader_teacher.save()
+				leader_teacher.cohorte.add(cohorte)
+				
+				email = inscrito.inscrito.persona.email
+		
+		return HttpResponse('exito')
 
 
 	else:
