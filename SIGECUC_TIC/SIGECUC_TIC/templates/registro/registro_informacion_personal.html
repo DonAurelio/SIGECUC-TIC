@@ -19,6 +19,11 @@ Informacion personal
 {% block primer_contenido %}
 
 {% include "division.html" %}
+
+{%if mensaje%}
+{{ mensaje }}
+
+{% else %}
 <form id='contactform' method='post' action=''>{% csrf_token %}
 
 {% for field in persona_form %}
@@ -44,6 +49,8 @@ Informacion personal
 <button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
 </p>
 </form>
+
+{% endif %}
 {% endblock %}
 
 

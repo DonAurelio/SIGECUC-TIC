@@ -10,7 +10,7 @@ Datos de usuario
 {% block primer_menu_item %}
 <li><i class="icon-angle-right"></i>
 <a href="{% url "registro:informacion_personal_registro" %}">Informacion personal</a><span></span></li>
-<a href="{% url "registro:cambiar_clave" %}">Cambiar contraseña</a><span></span></li>
+<a href="/accounts/password_change">Cambiar contraseña</a><span></span></li>
 {% endblock %}
 
 {% block segundo_menu_titulo %}

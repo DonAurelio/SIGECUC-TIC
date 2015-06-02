@@ -13,12 +13,16 @@ from django.contrib.auth.models import User
 
 from .forms import UserForm
 from .forms import PersonaForm
+from apps.cursos.forms import Informacion_personalForm
 from .forms import LeaderTeacherForm
 from .forms import RegistroUserForm
 
 from .models import RegistroUser
 
+from django.core.mail import EmailMultiAlternatives
 import datetime 
+
+
 
 
 def pagina_registro(request):
@@ -31,10 +35,30 @@ def pagina_registro_informacion_personal(request):
 		
 	registro_user = RegistroUser.objects.get(user_id=user_id)
 	persona = registro_user.persona
-	persona_form = PersonaForm(request.POST,instance=persona)
+	persona_form = Informacion_personalForm(request.POST,instance=persona)
 
-	
+	if request.method == "POST":
+		persona_form = Informacion_personalForm(request.POST,instance=persona)
+		if persona_form.is_valid():
+			email = persona_form.cleaned_data["email"]
+			persona.email = email
+			telefono = persona_form.cleaned_data["telefono"]
+			persona.telefono = telefono
+			direccion = persona_form.cleaned_data["direccion"]
+			persona.direccion = direccion
+			persona.save()
+			mensaje = "Su informacion personal ha sido modificada correctamente"
+			return render_to_response('registro_informacion_personal.html',{'user':user,'mensaje':mensaje})
+	else:
+		persona_form = Informacion_personalForm(request.POST, instance= persona) 
 
+		persona_form = Informacion_personalForm(initial = {'identificacion' : persona.identificacion, 
+			'primer_nombre' : persona.primer_nombre, 'segundo_nombre' : persona.segundo_nombre,
+			'primer_apellido': persona.primer_apellido, 'segundo_apellido' : persona.segundo_apellido,
+			'email' : persona.email, 'telefono' : persona.telefono, 
+			'direccion' : persona.direccion
+
+			})
 	contexto = {'user':user, 'persona_form' : persona_form}
 	return render_to_response('registro_informacion_personal.html',contexto, context_instance= RequestContext(request))
 
@@ -79,6 +103,19 @@ def pagina_seleccionar_curso_cohorte(request):
 	cursos = Curso.objects.all()
 	contexto = {'cursos':cursos}
 	return render_to_response('registro_seleccionar_curso_cohorte.html',contexto,context_instance=RequestContext(request))
+
+
+def enviar_email_confirmacion(email, nombre_curso):
+	subject = 'Asunto'
+	text_content = 'Mensaje...nLinea 2nLinea3'
+	html_content = '<h2>Notificacion Confircacion curso</h2><p>Confirmacion al curso</p>'
+	html_content += nombre_curso 
+	html_content += '<p>Ha sido Aceptado al curso</p>'
+	from_email = '"SIGECUC-TIC" <emisor.telnet.univalle@gmail.com>'
+	to = email
+	msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+	msg.attach_alternative(html_content, "text/html")
+	msg.send()
 
 def pagina_crear_cohorte_curso(request, curso_id):
 
@@ -125,6 +162,7 @@ def pagina_crear_cohorte_curso(request, curso_id):
 				
 				#Enviamos un correo para indicar al inscrito que fue aceptado
 				email = curso_inscrito.inscrito.persona.email
+				enviar_email_confirmacion(email, curso_inscrito.curso.nombre)
 
 		mensaje = "Se ha creado con exito una nueva cohorte para el curso " + cohorte.curso.nombre
 		contexto = {'mensaje':mensaje}
