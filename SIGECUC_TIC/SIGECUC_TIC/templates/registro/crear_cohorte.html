@@ -1,0 +1,118 @@
+{% extends "registro.html" %}
+
+<!-- Contenido -->
+<!--META-->
+<head>
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="vanadium.js"></script>
+
+</head>
+<!-- Primer bloque -->
+{% block primer_titulo %}
+<h3>{{ curso.nombre }}</h3>
+{% endblock %}
+
+{% block primer_contenido %}
+
+{% include "division.html" %}
+
+{% if mensaje %}
+{{ mensaje }}
+{% else %}
+
+{% if inscritos %}
+
+<form  id='contactform' method='post' action=''>{% csrf_token %}
+
+<label>Por favor seleccione el Master Teacher para esta cohorte</label>
+
+<select name="id_curso">
+{% for master_teacher in master_teachers %}
+  <option value="{{ master_teacher.persona.identificacion }}">
+  {{ master_teacher.persona.identificacion }}
+  {{ master_teacher.persona.primer_nombre }}
+  {{ master_teacher.persona.segundo_nombre }}
+  {{ master_teacher.persona.primer_apellido }}
+  {{ master_teacher.persona.segundo_apellido }}
+  </option>
+ {% endfor %}
+</select>
+
+
+{% include "division.html" %}
+
+<label>Por favor seleccione los inscritos aspirantes a ser Leader Teacher</label>
+<div>
+<div class="row">
+                <div class="col-md-12 ui-sortable">
+                    
+                    <div style="" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                
+                            </div>
+                            <h4 class="panel-title">Aspirantes inscritos</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Identificacion</th>
+                                        <th>Aspirante</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inscrito in inscritos %}
+
+                                   
+                                    <tr>
+                                        <td>
+                                            {{ inscrito.inscrito.persona.identificacion }}
+                                        </td>
+                                        <td>
+                                            
+                                            {{ inscrito.inscrito.persona.primer_nombre }}
+                                            {{ inscrito.inscrito.persona.segundo_nombre }}
+                                            {{ inscrito.inscrito.persona.primer_apellido }}
+                                            {{ inscrito.inscrito.persona.segundo_apellido }}
+
+                                        </td>
+                                        <td>
+                                            <input name="{{ inscrito.inscrito.persona.identificacion }}" type="checkbox" />
+
+                                        </td>
+                               
+                                    </tr>
+
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+</div>
+
+
+
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Crear Cohorte</button>
+</p>
+
+</form>
+
+{% else %}
+No hay aspirante pendientes para inscribir a este curso
+{% endif %}
+
+{% endif %}
+{% endblock %}
+
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->

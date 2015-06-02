@@ -1,4 +1,5 @@
 {% extends "registro.html" %}
+
 <!-- Contenido -->
 <!--META-->
 <head>
@@ -19,11 +20,13 @@ Registro Master Teacher
 {% if mensaje %}
 {{ mensaje }}
 {% else %}
-<form  method='post' action=''>{% csrf_token %}
+
+
+<form  id="contactform" method='post' action=''>{% csrf_token %}
 
 
 <!-- Parte User -->
-<strong><h3>Usuario </h3></strong>
+<strong><h3>Datos de usuario </h3></strong>
 {% include "division.html" %}
 {% for field in form_user %}
 <div class="row">
@@ -41,8 +44,6 @@ Registro Master Teacher
 	{% endif %}
 </div>
 {% endfor %}
-
-
 
 <!-- Parte informacion personal -->
 <strong><h3>Informacion Personal</h3></strong>
