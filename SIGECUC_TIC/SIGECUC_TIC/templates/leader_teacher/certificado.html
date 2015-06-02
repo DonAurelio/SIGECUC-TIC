@@ -8,33 +8,62 @@
 {% endblock %}
 
 {% block primer_contenido %}
+<form>
+<div id="imprimeme">
+      
+	 <div style="background: url({% static "leader_teacher/certificado.jpg" %}) no-repeat;width:800px;height:600px" >	
 
+	  	<div style="position: absolute;  top:  80px; left: 130px">
+		<center>
+			<p>Centro de Innovación Educativa Regional de la Región Sur de Colombia</p>
+			<p>{{ tipo_certificado }}</p>
+			<p>Hace constar que </p>
+			<p>
+			{{ leader_teacher.inscrito.persona.primer_nombre }}
+			{{ leader_teacher.inscrito.persona.segundo_nombre }}
+			{{ leader_teacher.inscrito.persona.primer_apellido }}
+			{{ leader_teacher.inscrito.persona.segundo_apellido }}
+			</p>
+			<p>Indentificado con la CC</p>
+			<p>
+			{{ leader_teacher.inscrito.persona.identificacion }}
+			</p>
+			<p>
+				{{ mensaje }}
 
-<div style="background: url({% static "leader_teacher/certificado.jpg" %}) no-repeat;width:800px;height:600px" >
+			</p>
+			<p>
+				{{ curso }}
 
-<div style="position: absolute;  top:  80px; left: 130px">
-	<center>Centro de Innovación Educativa Regional de la Región Sur de Colombia</center>
-</div>
-<div style="position: absolute;  top:  110px; left: 250px">
-	Certificado de Asistencia
-</div>
-<div style="position: absolute;  top:  140px; left: 270px">
-	Hace constar que
-</div>
-<div style="position: absolute;  top:  170px; left: 240px">
-	Aurelio Antonio Vivas Meza
-</div>
-<div style="position: absolute;  top:  200px; left: 235px">
-	Asistió al curso de formación
-</div>
-<div style="position: absolute;  top:  230px; left: 250px">
-	Matematicas Discretas
-</div>
-<div style="position: absolute;  top:  280px; left: 210px">
-	Con un promedio acumulado de 4.7
+			</p>
+			<p>
+				{{ promedio }}
+
+			</p>
+				
+				
+
+		</center>
+		</div>
+		
+	</div>
 </div>
 
-</div>
-<input type="button" name="imprimir" value="Imprimir" onclick="window.print();">
+</form>
+ 
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit" onclick="imprimir();">Imprimir Certificado</button>
+</p>
+
+<script type="text/javascript">
+function imprimir(){
+  var objeto=document.getElementById('imprimeme');  //obtenemos el objeto a imprimir
+  var ventana=window.open('','_blank');  //abrimos una ventana vacía nueva
+  ventana.document.write(objeto.innerHTML);  //imprimimos el HTML del objeto en la nueva ventana
+  ventana.document.close();  //cerramos el documento
+ 
+  
+}
+</script>
 
 {% endblock %}

@@ -58,7 +58,7 @@
 </div>
 <p>
 {% if aprobo %}
-<a href="{% url "leaderTeacher:certificado" %}">Generar certificado</a>
+<a href="{% url "leaderTeacher:certificado" cohorte_id %}">Generar certificado</a>
 {% else %}
 <span class="pull-right margintop20">* Usted no aprobo el curso de {{ curso_inscrito.curso.nombre }}</span>
 {% endif %}

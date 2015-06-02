@@ -112,7 +112,13 @@ class CalificacionesTask:
 		#usa fiuncion para calcular la nota_final
 		nota_final = self.calcular_nota_final_curso(calificaciones)
 		aprobo = self.validar_aprobacion(nota_final)
-		contexto = {'user':user, 'curso_inscrito': curso_inscrito, 'calificaciones': calificaciones, 'nota_final': nota_final, 'aprobo':aprobo }
+		contexto = {
+		'user':user,
+		'curso_inscrito': curso_inscrito, 
+		'cohorte_id':cohorte_id,
+		'calificaciones': calificaciones, 
+		'nota_final': nota_final, 
+		'aprobo':aprobo }
 		return render_to_response('leader_teacher_descripcion_calificacion.html',contexto, context_instance= RequestContext(request))
 
 
