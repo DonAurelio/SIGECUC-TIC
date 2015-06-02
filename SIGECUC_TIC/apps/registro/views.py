@@ -67,10 +67,10 @@ def pagina_crear_cohorte_curso(request, curso_id):
 
 		#Pasamos la fecha de fin al formato deseado de fechas
 		fecha_fin = request.POST.get('id_datepicker')
-		return HttpResponse(fecha_fin)
+		#return HttpResponse(fecha_fin)
 		fecha_fin = fecha_fin.split('/')
-		fecha_fin.reverse()
-		fecha_fin = '-'.join(fecha_fin)
+		fecha_final = str(fecha_fin[2]+'-'+fecha_fin[1]+'-'+fecha_fin[0])
+		data_time_field = datetime.datetime.strptime(fecha_final, '%Y-%m-%d')
 
 
 
@@ -78,7 +78,7 @@ def pagina_crear_cohorte_curso(request, curso_id):
 		master_teacher_id = request.POST.get('id_master_teacher')
 
 		#Creamos la nueva cohorte en la cual estaran los leader teacher
-		cohorte = Cohorte(fecha_inicio=hoy,fecha_fin=fecha_fin,curso_id=curso_id,master_teacher_id=master_teacher_id)
+		cohorte = Cohorte(fecha_inicio=hoy,fecha_fin=data_time_field,curso_id=curso_id,master_teacher_id=master_teacher_id)
 		cohorte.save()
 
 		cursos_inscrito = Cursos_Inscrito.objects.filter(curso_id=curso_id,estado='Pendiente')
@@ -99,7 +99,7 @@ def pagina_crear_cohorte_curso(request, curso_id):
 
 				#Cambiamos el estado para el curso del inscrito 
 				curso_inscrito.estado = 'Aceptado'
-				cursos_inscrito.save()
+				curso_inscrito.save()
 				
 				#Enviamos un correo para indicar al inscrito que fue aceptado
 				email = curso_inscrito.inscrito.persona.email
