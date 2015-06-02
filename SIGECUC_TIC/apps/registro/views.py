@@ -54,9 +54,19 @@ def pagina_seleccionar_curso_cohorte(request):
 
 def pagina_crear_cohorte_curso(request, curso_id):
 
-	if request.method = "POST":
-		return HttpResponse('en construccion')
-	else:	
+	if request.method == "POST":
+		master_teacher = request.POST.get('id_master_teacher')
+		curso_id = request.POST.get('curso_id')
+		return HttpResponse(str(curso_id))
+		inscritos_curso = Cursos_Inscrito.objects.filter(curso_id=curso_id,estado='Pendiente')
+		for inscrito in inscritos_curso:
+			registro_inscrito = request.POST.get(''+inscrito.inscrito.persona.identificacion)
+			if(not registro_inscrito is None):
+				pass
+			#codigo
+
+
+	else:
 		inscritos_curso = Cursos_Inscrito.objects.filter(curso_id=curso_id,estado='Pendiente')
 		curso = Curso.objects.get(id=curso_id)
 		master_teachers = MasterTeacher.objects.all()

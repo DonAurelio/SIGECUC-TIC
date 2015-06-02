@@ -30,7 +30,7 @@
 
 <label>Por favor seleccione el Master Teacher para esta cohorte</label>
 
-<select name="id_curso">
+<select name="id_master_teacher">
 {% for master_teacher in master_teachers %}
   <option value="{{ master_teacher.persona.identificacion }}">
   {{ master_teacher.persona.identificacion }}
@@ -114,8 +114,6 @@
 <p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Crear Cohorte</button>
 </p>
-
-
 
 
 </form>
