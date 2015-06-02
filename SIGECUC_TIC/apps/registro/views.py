@@ -7,18 +7,40 @@ from apps.cursos.models import MasterTeacher
 from apps.cursos.models import Curso
 from apps.cursos.models import Cursos_Inscrito
 from apps.cursos.models import Cohorte
+from apps.cursos.models import Persona
 from apps.cursos.models import LeaderTeacher
 from django.contrib.auth.models import User
 
 from .forms import UserForm
 from .forms import PersonaForm
 from .forms import LeaderTeacherForm
+from .forms import RegistroUserForm
+
+from .models import RegistroUser
 
 import datetime 
 
 
 def pagina_registro(request):
 	return render_to_response('registro.html')
+
+def pagina_registro_informacion_personal(request):
+	
+	user = request.user
+	user_id = user.id
+		
+	registro_user = RegistroUser.objects.get(user_id=user_id)
+	persona = registro_user.persona
+	persona_form = PersonaForm(request.POST,instance=persona)
+
+	
+
+	contexto = {'user':user, 'persona_form' : persona_form}
+	return render_to_response('registro_informacion_personal.html',contexto, context_instance= RequestContext(request))
+
+
+def pagina_registro_cambiar_clave(request):
+	return HttpResponse('en contruccion')
 
 def pagina_registrar_master_teacher(request):
 
@@ -43,7 +65,7 @@ def pagina_registrar_master_teacher(request):
 			mensaje = "Su inscripcion se ha realizado con exito" 
 			user = request.user
 			contexto = {'user':user, 'mensaje':mensaje}
-			return render_to_response('registrar_master_teacher.html', contexto)
+			return render_to_response('registro_registrar_master_teacher.html', contexto)
 		else:
 			form_persona = PersonaForm(request.POST)	
 	else:
@@ -51,12 +73,12 @@ def pagina_registrar_master_teacher(request):
 		form_persona = PersonaForm()
 	user = request.user
 	ctx = {'user':user ,'form_persona':form_persona, 'form_user': form_user}
-	return render_to_response('registrar_master_teacher.html', ctx, context_instance= RequestContext(request))
+	return render_to_response('registro_registrar_master_teacher.html', ctx, context_instance= RequestContext(request))
 
 def pagina_seleccionar_curso_cohorte(request):
 	cursos = Curso.objects.all()
 	contexto = {'cursos':cursos}
-	return render_to_response('seleccionar_curso_cohorte.html',contexto,context_instance=RequestContext(request))
+	return render_to_response('registro_seleccionar_curso_cohorte.html',contexto,context_instance=RequestContext(request))
 
 def pagina_crear_cohorte_curso(request, curso_id):
 
@@ -106,7 +128,7 @@ def pagina_crear_cohorte_curso(request, curso_id):
 
 		mensaje = "Se ha creado con exito una nueva cohorte para el curso " + cohorte.curso.nombre
 		contexto = {'mensaje':mensaje}
-		return render_to_response("crear_cohorte.html",contexto,context_instance=RequestContext(request))
+		return render_to_response("registro_crear_cohorte.html",contexto,context_instance=RequestContext(request))
 
 
 	else:
@@ -117,4 +139,4 @@ def pagina_crear_cohorte_curso(request, curso_id):
 		'curso':curso,
 		'master_teachers':master_teachers,
 		'inscritos':inscritos_curso}
-		return render_to_response("crear_cohorte.html",contexto,context_instance=RequestContext(request))
+		return render_to_response("registro_crear_cohorte.html",contexto,context_instance=RequestContext(request))

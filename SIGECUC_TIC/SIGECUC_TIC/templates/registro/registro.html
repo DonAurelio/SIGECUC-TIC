@@ -5,20 +5,22 @@
 {% else %}
 
 {% block primer_menu_titulo %}
-Matricula
+Datos de usuario
 {% endblock %}
 {% block primer_menu_item %}
 <li><i class="icon-angle-right"></i>
-<a href="#">Matricular Leader Teacher</a><span></span></li>
+<a href="{% url "registro:informacion_personal_registro" %}">Informacion personal</a><span></span></li>
+<a href="{% url "registro:cambiar_clave" %}">Cambiar contraseña</a><span></span></li>
 {% endblock %}
 
 {% block segundo_menu_titulo %}
-Registro
+Registro academico
 {% endblock %}
 {% block segundo_menu_item  %}
 <li><i class="icon-angle-right"></i>
-<a href="{% url "registro:registrar_master_teacher" %}">Registrar Master Teacher</a><span></span></li>
 <li><i class="icon-angle-right"></i><a href="{% url "registro:cohorte" %}">Crear cohorte</a><span></span></li>
+<a href="{% url "registro:registrar_master_teacher" %}">Registrar Master Teacher</a><span></span></li>
+
 {% endblock %}
 
 <!-- Contenido -->
@@ -29,7 +31,11 @@ Registro
 {% endblock %}
 
 {% block primer_contenido %}
+<p>
+<strong>
 {{ mensaje }}
+</strong>
+<p>
 {% endblock %}
 
 {% block primer_boton %}

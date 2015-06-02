@@ -88,11 +88,13 @@ class RegistroHtml(PerfilHtml):
 		user_id = user.id
 		
 		registro_user = RegistroUser.objects.get(user_id=user_id)
-		#mensaje = RegistroUser.persona.primer_nombre
-		mensaje = " Bienvenid@ al modulo de registro,"
-		mensaje += " por favor seleccione ona opcion del menu"
+		titulo = " Bienvenid@ al modulo de registro academico , " + registro_user.persona.primer_nombre
+		mensaje = """
+		Aqui en tu pagina podras ver tu informacion personal, cambiar tu clave de usuario.
+		registrar master teachers, crear nuevas cohortes en las cueles podras asignar nuevos
+		aspirantes."""""
 		
-		contexto = {'user':self.user, 'mensaje':mensaje}
+		contexto = {'user':self.user,'titulo':titulo,'mensaje':mensaje}
 		return render_to_response('registro.html',contexto)
 
 

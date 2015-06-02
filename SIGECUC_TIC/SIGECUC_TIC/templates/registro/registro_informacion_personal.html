@@ -1,0 +1,53 @@
+{% extends "registro.html" %}
+
+<!-- Contenido -->
+<!--META-->
+<head>
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="vanadium.js"></script>
+
+</head>
+
+
+
+<!-- Primer bloque -->
+{% block primer_titulo %}
+Informacion personal
+{% endblock %}
+
+{% block primer_contenido %}
+
+{% include "division.html" %}
+<form id='contactform' method='post' action=''>{% csrf_token %}
+
+{% for field in persona_form %}
+<div class="row">
+    <div class="col-lg-4 field">
+        {{ field.label_tag }} 
+        {{ field }}
+        <div class="validation">
+        </div>
+    </div>
+    {% if field.errors %}
+    <div class="col-lg-4 field">
+            <br><br>
+            {{ field.errors }}
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+
+
+{% include "division.html" %}
+<p>
+<button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
+</p>
+</form>
+{% endblock %}
+
+
+
+<!-- Fin Primer bloque -->
+
+<!-- Fin Contenido -->
