@@ -53,11 +53,15 @@ def pagina_seleccionar_curso_cohorte(request):
 	return render_to_response('seleccionar_curso_cohorte.html',contexto,context_instance=RequestContext(request))
 
 def pagina_crear_cohorte_curso(request, curso_id):
-	inscritos_curso = Cursos_Inscrito.objects.filter(curso_id=curso_id,estado='Pendiente')
-	curso = Curso.objects.get(id=curso_id)
-	master_teachers = MasterTeacher.objects.all()
-	contexto = {
-	'curso':curso,
-	'master_teachers':master_teachers,
-	'inscritos':inscritos_curso}
-	return render_to_response("crear_cohorte.html",contexto,context_instance=RequestContext(request))
+
+	if request.method = "POST":
+		return HttpResponse('en construccion')
+	else:	
+		inscritos_curso = Cursos_Inscrito.objects.filter(curso_id=curso_id,estado='Pendiente')
+		curso = Curso.objects.get(id=curso_id)
+		master_teachers = MasterTeacher.objects.all()
+		contexto = {
+		'curso':curso,
+		'master_teachers':master_teachers,
+		'inscritos':inscritos_curso}
+		return render_to_response("crear_cohorte.html",contexto,context_instance=RequestContext(request))
