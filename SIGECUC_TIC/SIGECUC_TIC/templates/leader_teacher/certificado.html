@@ -8,23 +8,25 @@
 {% endblock %}
 
 {% block primer_contenido %}
+
 <form>
 <div id="imprimeme">
       
-	 <div style="background: url({% static "leader_teacher/certificado.jpg" %}) no-repeat;width:800px;height:600px" >	
+	 <div style="background: url({% static "leader_teacher/certificado.jpg" %}) no-repeat; width:700px;height:600px; text-align:center;" >	
 
-	  	<div style="position: absolute;  top:  80px; left: 130px">
-		<center>
-			<p>Centro de Innovación Educativa Regional de la Región Sur de Colombia</p>
-			<p>{{ tipo_certificado }}</p>
+	  	<div style="position: absolute; top: 80px; left: 80px; width:600px;">
+			<p><h3>Centro de Innovación Educativa Regional de la Región Sur de Colombia</h3></p>
+			<p><h4>{{ tipo_certificado }}</h4></p>
 			<p>Hace constar que </p>
+			<h5>
 			<p>
 			{{ leader_teacher.inscrito.persona.primer_nombre }}
 			{{ leader_teacher.inscrito.persona.segundo_nombre }}
 			{{ leader_teacher.inscrito.persona.primer_apellido }}
 			{{ leader_teacher.inscrito.persona.segundo_apellido }}
 			</p>
-			<p>Indentificado con la CC</p>
+			</h5>
+			<p>Indentificado(a) con la cedula de ciudadania número</p>
 			<p>
 			{{ leader_teacher.inscrito.persona.identificacion }}
 			</p>
@@ -32,19 +34,20 @@
 				{{ mensaje }}
 
 			</p>
+			<h6>
 			<p>
 				{{ curso }}
 
 			</p>
+			</h6>
 			<p>
 				{{ promedio }}
 
 			</p>
-				
+		</div>	
 				
 
-		</center>
-		</div>
+		
 		
 	</div>
 </div>

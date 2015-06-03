@@ -31,6 +31,7 @@ INSTALLED_APPS = (
 'apps.LeaderTeacher',
 'apps.registro',
 'apps.reportes',
+'easy_pdf',
 )
 MIDDLEWARE_CLASSES = (
 'django.contrib.sessions.middleware.SessionMiddleware', #Middleware Django para el inicio de sesion

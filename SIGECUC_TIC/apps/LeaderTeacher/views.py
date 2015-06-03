@@ -12,6 +12,8 @@ from django.http import HttpResponse
 
 from logica.leader_teacher_mediator import LeaderTeacherMediator
 
+from easy_pdf.rendering import render_to_pdf_response
+
 def pagina_leader_teacher_informacion_personal(request):
 	
 	leader_teacher_mediator = LeaderTeacherMediator()
@@ -71,7 +73,7 @@ def pagina_generar_certificado(request , cohorte_id):
 		tipo_certificado = "Certificado de Participacion"
 	else:
 		mensaje = "Aprobo en el curso"
-		tipo_certificado = "Certificado de Exelencia"
+		tipo_certificado = "Certificado de Excelencia"
 
 	contexto = {
 	'tipo_certificado':tipo_certificado,
@@ -79,7 +81,31 @@ def pagina_generar_certificado(request , cohorte_id):
 	'leader_teacher':leader_teacher,
 	'curso':curso_inscrito.curso.nombre}
 	
-	
+	return render_to_response('certificado.html',contexto, context_instance=RequestContext(request))
 
-	return render_to_response('certificado.html',context_instance=RequestContext(request))
+def imprimir_certificado(request, cohorte_id):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
 
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawCentredString(0, 0, "Centro de Innovacion Educativa Regional de la Region Sur de Colombia")
+    p.drawCentredString(100, 100, "Certificado de Asistencia")
+    p.drawCentredString(100, 100, "Hace constar que")
+    p.drawCentredString(100, 100, "Aurelio Antonio Vivas Meza")
+    p.drawCentredString(100, 100, "identificado con la Cedula de Ciudadania")
+    p.drawCentredString(100, 100, "1008989089089")
+    p.drawCentredString(100, 100, "Asistio al Curso")
+    p.drawCentredString(100, 100, "Matematicas Discretas II")
+    p.drawCentredString(100, 100, "obteniendo un promedio de ")
+    p.drawCentredString(100, 100, "3.5")
+    
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
