@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from apps.cursos.models import LeaderTeacher, Curso, Cohorte, Asistencia, Inscrito
+from apps.cursos.models import LeaderTeacher, Curso, Cohorte, Asistencia, Inscrito, Persona
 from logica.estudiante import Estudiante
 from django.db.models import Count
 
@@ -16,12 +16,16 @@ from logica.report_template import GraphTemplate
 #@login_required(login_url='login/')	
 def principal(request):
 	user = request.user
-	mensaje = " bienvenid@ al modulo de reportes,"
-	mensaje += " por favor seleccione el reporte que "
-	mensaje += "desea visualzar."
+	
+	titulo = "Bienvenid@ al modulo de reportes, " + user.username
+	mensaje = """ Aqui podras visualizar Tablas y Graficos estadisticos hacerca 
+	de la informacion mas relevante del sistema SIGECUC-TIC, relacionado con cursos
+	y estudiantes"""
 		
-	contexto = {'user':user, 'mensaje':mensaje}
-	return render_to_response('principal.html',contexto)
+	contexto = {
+	'titulo':titulo,
+	'mensaje':mensaje}
+	return render_to_response('principal.html',contexto, context_instance=RequestContext(request))
 
 #=================================================================================================
 

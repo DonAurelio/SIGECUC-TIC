@@ -50,8 +50,16 @@ class MasterTeacherHtml(PerfilHtml):
 			titulo = "Bienvenida a tu cuenta de Master Teacher, "
 
 		titulo += master_teacher.persona.primer_nombre
+		mensaje = """
+		Aqui en tu pagina podras ver tu informacion personal, cambiar tu clave de usuario.
+		Registrar calificaciones de las cohortes a las que estas asignado, como tambien
+		registrar asistencia de las mismas."""""
 		
-		contexto = {'user':self.user, 'titulo':titulo,'cohortes':cohortes}
+		contexto = {
+		'user':self.user, 
+		'titulo':titulo,
+		'mensaje':mensaje,
+		'cohortes':cohortes}
 
 		return render_to_response('master_teacher.html',contexto)
 
@@ -65,7 +73,7 @@ class LeaderTeacherHtml(PerfilHtml):
 		user_id = user.id
 		
 		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
-		titulo = "Bienvenido a tu cuenta de Leader Teacher, "
+		titulo = "Bienvenid@ a tu cuenta de Leader Teacher, "
 		sexo = leader_teacher.inscrito.persona.sexo
 		if sexo == "FEMENINO":
 			titulo = "Bienvenida a u cuenta de Leader Teacher, "

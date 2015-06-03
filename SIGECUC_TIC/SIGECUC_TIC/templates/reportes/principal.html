@@ -22,8 +22,12 @@ Graficos
 {% endblock %}
 
 
-{% block primer_titulo %}{% endblock %}
-{% block primer_contenido %}{% endblock %} 
+{% block primer_titulo %}
+{{ titulo }}
+{% endblock %}
+{% block primer_contenido %}
+{{ mensaje }}
+{% endblock %} 
 {% block segundo_titulo %}{% endblock %}
 {% block segundo_contenido %}{% endblock %}
 
