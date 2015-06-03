@@ -3,10 +3,14 @@ from django.shortcuts import render_to_response
 
 #from .forms import Persona_MasterTeacherForm
 from apps.cursos.forms import Informacion_personalForm
+from apps.LeaderTeacher.forms import LeaderTeacherForm
+
 from apps.cursos.models import LeaderTeacher
 from apps.cursos.models import Cursos_Inscrito
 from apps.cursos.models import Calificacion
 from apps.cursos.models import Cohorte
+
+
 
 #Esta clase representa una tarea, que envuelve todas las acciones 
 #necesarias para llevar a cabo la tarea
@@ -27,7 +31,25 @@ class InformacionPersonalTask:
 			'direccion' : leader_teacher.inscrito.persona.direccion
 
 			})
-		contexto = {'user':user, 'form_personaLeaderTeacher' : form_personaLeaderTeacher}
+
+		leader_teacher_form = LeaderTeacherForm(request.POST, instance=leader_teacher)
+
+		leader_teacher_form = LeaderTeacherForm(initial = {
+			'fecha_nacimiento' : leader_teacher.fecha_nacimiento, 
+			'ciudad_nacimiento': leader_teacher.ciudad_nacimiento,
+			'pais_nacimiento': leader_teacher.pais_nacimiento,
+			'ciudad_residencia':leader_teacher.ciudad_residencia,
+			'pais_residencia':leader_teacher.pais_residencia,
+			'ciudad_labora':leader_teacher.ciudad_labora,
+			'departamento_labora':leader_teacher.departamento_labora
+
+			})
+
+		contexto = {
+		'user':user, 
+		'form_personaLeaderTeacher' : form_personaLeaderTeacher,
+		'form_leader_teacher':leader_teacher_form,
+		}
 		return render_to_response('leader_teacher_informacion_personal.html',contexto, context_instance= RequestContext(request))
 		
 				
@@ -47,16 +69,22 @@ class InformacionPersonalTask:
 		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
 		#se instancia el master_teacher para que pase la validez y sea un formulario para modificar
 		form_personaLeaderTeacher = Informacion_personalForm(request.POST, instance=leader_teacher)
-		return form_personaLeaderTeacher.is_valid()
+		leader_teacher_form = LeaderTeacherForm(request.POST, instance=leader_teacher)
+		return form_personaLeaderTeacher.is_valid() and leader_teacher_form.is_valid()
 
 	#En caso de que el formulario de informacion personal no sea valido
 	#Se muestra el formulario con los errores
 	def get_informacion_personal_form_invalid(self,request):
-		form_personaLeaderTeacher = Informacion_personalForm(request.POST)
+		user = request.user
+		user_id = user.id
+		leader_teacher = LeaderTeacher.objects.get(user_id=user_id)
+		form_personaLeaderTeacher = Informacion_personalForm(request.POST,instance=leader_teacher)
+		leader_teacher_form = LeaderTeacherForm(request.POST,instance=leader_teacher)
 		contexto = {
+		'form_leader_teacher': leader_teacher_form,
 		'form_personaLeaderTeacher':form_personaLeaderTeacher,
-		'user':user }
-		return render_to_response('leader_teacher.html',contexto)
+		}
+		return render_to_response('leader_teacher_informacion_personal.html',contexto,context_instance=RequestContext(request))
 
 	#Si el formulario es valido , entonces se actualiza la informacion en la base de datos
 	def save_informacion_personal_form(self,request):
@@ -66,6 +94,7 @@ class InformacionPersonalTask:
 		#se instancia el master_teacher para que pase la validez y sea un formulario para modificar
 		form_personaLeaderTeacher = Informacion_personalForm(request.POST, instance=leader_teacher)
 		form_personaLeaderTeacher.is_valid()
+
 		email = form_personaLeaderTeacher.cleaned_data["email"]
 		leader_teacher.inscrito.persona.email = email
 		telefono = form_personaLeaderTeacher.cleaned_data["telefono"]
@@ -73,6 +102,28 @@ class InformacionPersonalTask:
 		direccion = form_personaLeaderTeacher.cleaned_data["direccion"]
 		leader_teacher.inscrito.persona.direccion = direccion
 		leader_teacher.inscrito.persona.save()
+
+		leader_teacher_form = LeaderTeacherForm(request.POST, instance=leader_teacher)
+		leader_teacher_form.is_valid()
+
+		
+		fecha_nacimiento = leader_teacher_form.cleaned_data["fecha_nacimiento"]
+		leader_teacher.fecha_nacimiento = fecha_nacimiento
+		ciudad_nacimiento = leader_teacher_form.cleaned_data["ciudad_nacimiento"]
+		leader_teacher.ciudad_nacimiento = ciudad_nacimiento
+		pais_nacimiento = leader_teacher_form.cleaned_data["pais_nacimiento"]
+		leader_teacher.pais_nacimiento = pais_nacimiento
+		ciudad_residencia = leader_teacher_form.cleaned_data["ciudad_residencia"]
+		leader_teacher.ciudad_residencia = ciudad_residencia
+		pais_residencia = leader_teacher_form.cleaned_data["pais_residencia"]
+		leader_teacher.pais_residencia = pais_residencia
+		ciudad_labora = leader_teacher_form.cleaned_data["ciudad_labora"]
+		leader_teacher.ciudad_labora = ciudad_labora
+		departamento_labora = leader_teacher_form.cleaned_data["departamento_labora"]
+		leader_teacher.departamento_labora = departamento_labora
+		leader_teacher.save()
+					
+
 		titulo = "Su informacion personal ha sido modificada correctamente"
 		
 		contexto = {

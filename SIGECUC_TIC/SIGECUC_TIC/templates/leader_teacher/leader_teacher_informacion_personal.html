@@ -30,6 +30,27 @@ Informacion personal
 {% endfor %}
 
 
+<h3>Informacion de Leader Teacher</h3>
+{% include "division.html" %}
+
+{% for field in form_leader_teacher %}
+<div class="row">
+	<div class="col-lg-4 field">
+		{{ field.label_tag }} 
+		{{ field }}
+		<div class="validation">
+		</div>
+	</div>
+	{% if field.errors %}
+	<div class="col-lg-4 field">
+			<br><br>
+			{{ field.errors }}
+	</div>
+	{% endif %}
+</div>
+{% endfor %}
+
+
 {% include "division.html" %}
 <p>
 <button class="btn btn-theme margintop10 pull-left" type="submit">Continuar</button>
