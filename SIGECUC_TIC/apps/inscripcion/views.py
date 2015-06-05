@@ -20,7 +20,7 @@ from logica.inscription_builder import InscriptionDirector
 # Create your views here.
 	
 def inscripcion(request):
-	return render_to_response('inscripcion.html')
+	return render_to_response('inscripcion.html',context_instance= RequestContext(request))
 
 
 
@@ -44,7 +44,7 @@ def pagina_incripcion_consulta(request):
 				email = inscrito.persona.email
 				mensaje = "Su inscripcion se ha realizado con exito, se ha enviado una notificacion al correo %s" %email 
 				contexto = {'mensaje':mensaje}
-				return render_to_response('inscripcion.html',contexto)
+				return render_to_response('inscripcion.html',contexto,context_instance= RequestContext(request))
 
 			except ObjectDoesNotExist:
 				

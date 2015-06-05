@@ -124,12 +124,14 @@ def pagina_crear_cohorte_curso(request, curso_id):
 		fecha = datetime.date.today()
 		hoy = fecha.strftime("%Y-%m-%d") 
 
+
 		#Pasamos la fecha de fin al formato deseado de fechas
 		fecha_fin = request.POST.get('id_datepicker')
 		#return HttpResponse(fecha_fin)
 		fecha_fin = fecha_fin.split('/')
-		fecha_final = str(fecha_fin[2]+'-'+fecha_fin[1]+'-'+fecha_fin[0])
+		fecha_final = str(fecha_fin[2]+'-'+fecha_fin[0]+'-'+fecha_fin[1])
 		data_time_field = datetime.datetime.strptime(fecha_final, '%Y-%m-%d')
+
 
 
 
