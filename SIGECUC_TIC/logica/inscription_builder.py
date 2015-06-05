@@ -85,7 +85,7 @@ class InscriptionBuilder(AbstractBuilder):
 		EmailSender(email, name_course)
 		mensaje = "Su inscripcion se ha realizado con exito, se ha enviado una notificacion al correo %s" %email 
 		contexto = {'mensaje':mensaje}
-		self.result = render_to_response('inscripcion.html',contexto)
+		self.result = render_to_response('inscripcion.html',contexto,context_instance=RequestContext(request))
 
 
 	#Verifica si todos los formularios de la inscripcion son validos
