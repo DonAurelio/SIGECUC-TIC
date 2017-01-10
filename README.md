@@ -25,21 +25,21 @@ Sistema de Gestión de Cursos en Competencias TIC (SIGECUC-TIC) es una aplicaci�
 
 * **Generación de Reportes**
 
-- Cursos con mayor número de asistentes en el mes (Top 10).
+[x] Cursos con mayor número de asistentes en el mes (Top 10).
 
-- Número de estudiantes que han llegado en el mes de cada departamento de la región.
+[x] Número de estudiantes que han llegado en el mes de cada departamento de la región.
 
-- Curso con menos potencial de avance (5 cursos). Qué criterios se usan para medir el potencial de avance de un grupo.
+[x] Curso con menos potencial de avance (5 cursos). Qué criterios se usan para medir el potencial de avance de un grupo.
 
-- Porcentaje de estudiantes que aprobaron los cursos de un semestre por departamento.
+[x] Porcentaje de estudiantes que aprobaron los cursos de un semestre por departamento.
 
-- Porcentaje de estudiantes que reprobaron los cursos de un semestre por departamento. 
+[x] Porcentaje de estudiantes que reprobaron los cursos de un semestre por departamento. 
 
-- Detalle de notas por estudiantes.
+[x] Detalle de notas por estudiantes.
 
-- Histórico de estudiantes que hayan ganado un curso.
+[x] Histórico de estudiantes que hayan ganado un curso.
 
-- Detalle de estudiantes en un curso por departamentos.
+[x] Detalle de estudiantes en un curso por departamentos.
 
 ## Requerimientos
 python 2.7.3, Django 1.7
