@@ -44,15 +44,9 @@ Sistema de Gestión de Cursos en Competencias TIC (SIGECUC-TIC) es una aplicaci�
 ## Requerimientos
 python 2.7.3, Django 1.7
 
-#Instalar Django 
-sudo apt-get install python-pip
-sudo pip install Django==1.7
-
-#Instalar Base de datos postgress
-sudo apt-get install postgresql postgresql-contrib
-
-#Instalar el controlador de python para postgres
-sudo apt-get install python-psycopg2
+## Admin
+Usuario: Admin
+Contraseña: Admin
 
 
 
