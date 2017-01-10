@@ -25,9 +25,9 @@ Sistema de Gestión de Cursos en Competencias TIC (SIGECUC-TIC) es una aplicaci�
 
 * **Generación de Reportes**
 
-[x] Cursos con mayor número de asistentes en el mes (Top 10).
+-[x] Cursos con mayor número de asistentes en el mes (Top 10).
 
-[x] Número de estudiantes que han llegado en el mes de cada departamento de la región.
+-[x] Número de estudiantes que han llegado en el mes de cada departamento de la región.
 
 [x] Curso con menos potencial de avance (5 cursos). Qué criterios se usan para medir el potencial de avance de un grupo.
 
